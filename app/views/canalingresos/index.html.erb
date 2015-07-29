@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Canalingresos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cin titulo</th>
+      <th>Cin desc</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @canalingresos.each do |canalingreso| %>
+      <tr>
+        <td><%= canalingreso.cin_titulo %></td>
+        <td><%= canalingreso.cin_desc %></td>
+        <td><%= link_to 'Show', canalingreso %></td>
+        <td><%= link_to 'Edit', edit_canalingreso_path(canalingreso) %></td>
+        <td><%= link_to 'Destroy', canalingreso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Canalingreso', new_canalingreso_path %>

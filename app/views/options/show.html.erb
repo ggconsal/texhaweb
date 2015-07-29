@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Opt titulo:</strong>
+  <%= @option.opt_titulo %>
+</p>
+
+<p>
+  <strong>Opt desc:</strong>
+  <%= @option.opt_desc %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @option.area %>
+</p>
+
+<%= link_to 'Edit', edit_option_path(@option) %> |
+<%= link_to 'Back', options_path %>

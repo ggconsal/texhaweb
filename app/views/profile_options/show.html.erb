@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @profile_option.profile %>
+</p>
+
+<p>
+  <strong>Option:</strong>
+  <%= @profile_option.option %>
+</p>
+
+<p>
+  <strong>Poc fecha:</strong>
+  <%= @profile_option.poc_fecha %>
+</p>
+
+<%= link_to 'Edit', edit_profile_option_path(@profile_option) %> |
+<%= link_to 'Back', profile_options_path %>

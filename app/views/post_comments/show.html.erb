@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pco titulo:</strong>
+  <%= @post_comment.pco_titulo %>
+</p>
+
+<p>
+  <strong>Pco texto:</strong>
+  <%= @post_comment.pco_texto %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @post_comment.post %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @post_comment.contact %>
+</p>
+
+<%= link_to 'Edit', edit_post_comment_path(@post_comment) %> |
+<%= link_to 'Back', post_comments_path %>

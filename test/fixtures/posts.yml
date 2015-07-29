@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pos_titulo: MyString
+  pos_intro: MyText
+  pos_conclusion: MyText
+  pos_imagen_tmp: MyString
+  contact_id: 
+
+two:
+  pos_titulo: MyString
+  pos_intro: MyText
+  pos_conclusion: MyText
+  pos_imagen_tmp: MyString
+  contact_id: 

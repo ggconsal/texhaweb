@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  par_titulo: MyString
+  par_texto: MyText
+  post_id: 
+  par_imagen_tmp: MyString
+
+two:
+  par_titulo: MyString
+  par_texto: MyText
+  post_id: 
+  par_imagen_tmp: MyString

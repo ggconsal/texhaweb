@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *            You can use Sass (SCSS) here: http://sass-lang.com/
+*= require bootstrap
+*= require_self
+*/
+
+.menu-ppal {
+	background-color: white;
+	opacity: .8;
+}
+
+.navbar-brand {
+	padding-top: 5px;
+}
+
+.div-ppal {
+	padding: 0px;
+}
+
+#div-blog-ppal {
+	background: url('page-background.png');
+}
+
+/*
+-----------------------------------------
+--  POSTS START controller
+-----------------------------------------
+*/
+
+.div-row-posts {
+	padding-left: 8%;
+}
+
+.blog-title h1, .blog-title p {
+	margin-left: 5%;
+	padding-top: 40px;
+	/*text-shadow: 6px 0px 6px #555;*/
+}
+
+.post-img {
+	border-radius: 10px;
+	margin: 20px auto;
+	width: 90%;
+}
+
+.div-cada-post {
+	background-color: white;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.div-cada-post:hover {
+	-webkit-box-shadow: 10px -5px 20px #8F8F8F;
+	-moz-box-shadow: 10px -5px 20px #8F8F8F;
+	box-shadow: 2px 2px 35px #8F8F8F, -2px -2px 35px #8F8F8F;
+}
+
+.post-info {
+  background: #000;
+  background: rgba(0, 0, 0, 0.6);
+  color: #FFF;
+  line-height: 1.2;
+  position: absolute;
+  padding: 5px;
+  right: 10%;
+  top: 18%;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+}
+
+.post-title h3 {
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #828282;
+	margin: 20px;
+	padding-top: 10px;
+}
+.post-title h3 a {
+	color: #535b60;
+}
+
+.post-summary {
+  margin: 10px 20px;
+}
+
+.post-summary p {
+  color: #828282;
+  text-align: justify;
+}
+
+.post-more {
+  text-align: right;
+  padding: 0 20px 20px 0;
+}
+

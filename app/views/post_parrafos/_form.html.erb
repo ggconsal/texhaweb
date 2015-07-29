@@ -1,0 +1,33 @@
+<%= form_for(@post_parrafo) do |f| %>
+  <% if @post_parrafo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_parrafo.errors.count, "error") %> prohibited this post_parrafo from being saved:</h2>
+
+      <ul>
+      <% @post_parrafo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :par_titulo %><br>
+    <%= f.text_field :par_titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :par_texto %><br>
+    <%= f.text_area :par_texto %>
+  </div>
+  <div class="field">
+    <%= f.label :post_id %><br>
+    <%= f.text_field :post_id %>
+  </div>
+  <div class="field">
+    <%= f.label :par_imagen_tmp %><br>
+    <%= f.text_field :par_imagen_tmp %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

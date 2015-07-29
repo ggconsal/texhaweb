@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Post Parrafo Bullets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ppb titulo</th>
+      <th>Ppb texto</th>
+      <th>Post parrafo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_parrafo_bullets.each do |post_parrafo_bullet| %>
+      <tr>
+        <td><%= post_parrafo_bullet.ppb_titulo %></td>
+        <td><%= post_parrafo_bullet.ppb_texto %></td>
+        <td><%= post_parrafo_bullet.post_parrafo %></td>
+        <td><%= link_to 'Show', post_parrafo_bullet %></td>
+        <td><%= link_to 'Edit', edit_post_parrafo_bullet_path(post_parrafo_bullet) %></td>
+        <td><%= link_to 'Destroy', post_parrafo_bullet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post parrafo bullet', new_post_parrafo_bullet_path %>

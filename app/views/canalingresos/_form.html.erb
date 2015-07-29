@@ -1,0 +1,25 @@
+<%= form_for(@canalingreso) do |f| %>
+  <% if @canalingreso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@canalingreso.errors.count, "error") %> prohibited this canalingreso from being saved:</h2>
+
+      <ul>
+      <% @canalingreso.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cin_titulo %><br>
+    <%= f.text_field :cin_titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :cin_desc %><br>
+    <%= f.text_area :cin_desc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

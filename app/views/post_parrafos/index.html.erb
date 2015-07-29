@@ -1,0 +1,56 @@
+<div id="div-blog-ppal">
+
+  <p id="notice"><%= notice %></p>
+
+  <div class="col-sm-10 col-xs-12 div-cada-post">
+
+    <div class="blog-title">
+      <h1><%= @post.pos_titulo %></h1>
+      <p>
+        <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
+         <%== @post.pos_intro %> <br/>
+        <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+      </p>
+    </div>
+
+
+    <!-- Parrafos -->
+    <% if @post_parrafos.any? %>
+      <% @post_parrafos.each do |post_parrafo| %>
+        <div  class="container-fluid">
+          <div class="col-sm-5 col-xs-12" >
+            <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive post-img") %>
+          </div>
+          <div class="post-summary col-sm-6 col-xs-12">
+            <!-- Texto del Parrafo -->
+            <div class="post-title">
+              <h3><%== post_parrafo.par_titulo %></h3>
+            </div>
+            <p>
+              <%== post_parrafo.par_texto %> <br/><br/>
+            </p>
+            <!-- Viñetas del Parrafo, si hay -->
+
+            <% if post_parrafo.post_parrafo_bullets.any? %>
+            
+              <ul>
+                <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
+                  <li>
+                    <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+            <div class="post-more">
+              <%= link_to 'Mostrar', post_parrafo %>
+              <%= link_to 'Editar', edit_post_parrafo_path(post_parrafo) %>
+              <%= link_to 'Borrar', post_parrafo, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h1>Articulo no definido aun</h1>
+    <% end %>
+  </div>
+</div>

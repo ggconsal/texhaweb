@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pre_titulo: MyString
+  pli_url: MyString
+  pli_desc: MyText
+  post_id: 
+
+two:
+  pre_titulo: MyString
+  pli_url: MyString
+  pli_desc: MyText
+  post_id: 

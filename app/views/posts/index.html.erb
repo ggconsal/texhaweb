@@ -1,0 +1,56 @@
+<div id="div-blog-ppal">
+
+  <p id="notice"><%= notice %></p>
+
+  <% @cant_post = 0 %>
+
+  <div class="blog-title">
+    <h1>Consejos Utiles y Preguntas Frecuentes</h1>
+  </div>
+
+    <!-- Posts -->
+    <% @posts.each do |post| %>
+    
+      <% if @cant_post % 2 == 0 %>
+        <div class="row div-row-posts">
+      <% end %>
+
+          <% @cant_post = @cant_post + 1 %>
+  
+          <div class="col-sm-5 col-xs-12 div-cada-post">
+            <div class="post-title">
+              <h3><%= post.pos_titulo %></h3>
+            </div>
+            <div class="post-info">
+              <div class="post-date">
+                <div class="date">26 ABR, 2015</div>
+              </div>
+              <div class="post-comments-count">
+                <i class="glyphicon glyphicon-comment icon-white"></i> 57
+              </div>
+            </div>
+            <div>
+              <%= image_tag(post.pos_imagen_tmp, class: "img-responsive post-img") %>
+            </div>
+            <div class="post-summary">
+              <p>
+                <%== post.pos_intro %> <br/><br/>
+                <b>Autor:</b> <%= post.contact.con_nya %>
+              </p>
+            </div>
+            <div class="post-more">
+              <%= link_to 'Show', post %>
+              <%= link_to 'Edit', edit_post_path(post) %>
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: "btn btn-info" %>
+            </div>
+          </div>
+
+      <% if @cant_post % 2 == 0 %>
+        </div>
+        <% @cant_post = 0 %>
+      <% end %>
+
+    <% end %>
+</div>
+

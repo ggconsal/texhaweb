@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pre titulo:</strong>
+  <%= @post_rel.pre_titulo %>
+</p>
+
+<p>
+  <strong>Pli url:</strong>
+  <%= @post_rel.pli_url %>
+</p>
+
+<p>
+  <strong>Pli desc:</strong>
+  <%= @post_rel.pli_desc %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @post_rel.post %>
+</p>
+
+<%= link_to 'Edit', edit_post_rel_path(@post_rel) %> |
+<%= link_to 'Back', post_rels_path %>

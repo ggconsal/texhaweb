@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  opt_titulo: MyString
+  opt_desc: MyText
+  area_id: 
+
+two:
+  opt_titulo: MyString
+  opt_desc: MyText
+  area_id: 

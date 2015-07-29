@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  con_nya: MyString
+  con_nombre: MyString
+  con_apellido: MyString
+  profile_id: 
+  con_telefono: MyString
+  con_obs: MyText
+  con_boton_sitio: MyString
+  con_telefono_sn: false
+  con_mail: MyString
+  con_password: MyString
+  con_password2: MyString
+  con_subscribir: false
+  con_confirmado: false
+  con_password_confirmacion: MyString
+  option_id: 
+  canalingreso_id: 
+
+two:
+  con_nya: MyString
+  con_nombre: MyString
+  con_apellido: MyString
+  profile_id: 
+  con_telefono: MyString
+  con_obs: MyText
+  con_boton_sitio: MyString
+  con_telefono_sn: false
+  con_mail: MyString
+  con_password: MyString
+  con_password2: MyString
+  con_subscribir: false
+  con_confirmado: false
+  con_password_confirmacion: MyString
+  option_id: 
+  canalingreso_id: 

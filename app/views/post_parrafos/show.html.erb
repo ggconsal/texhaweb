@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<br/><br/><br/><br/>
+<p>
+  <strong>Par titulo:</strong>
+  <%= @post_parrafo.par_titulo %>
+</p>
+
+<p>
+  <strong>Par texto:</strong>
+  <%= @post_parrafo.par_texto %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @post_parrafo.post %>
+</p>
+
+<p>
+  <strong>Par imagen tmp:</strong>
+  <%= @post_parrafo.par_imagen_tmp %>
+</p>
+
+<%= link_to 'Edit', edit_post_parrafo_path(@post_parrafo) %> |
+<%= link_to 'Back', post_parrafos_path %>

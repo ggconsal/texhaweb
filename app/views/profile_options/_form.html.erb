@@ -1,0 +1,29 @@
+<%= form_for(@profile_option) do |f| %>
+  <% if @profile_option.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile_option.errors.count, "error") %> prohibited this profile_option from being saved:</h2>
+
+      <ul>
+      <% @profile_option.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :profile_id %><br>
+    <%= f.text_field :profile_id %>
+  </div>
+  <div class="field">
+    <%= f.label :option_id %><br>
+    <%= f.text_field :option_id %>
+  </div>
+  <div class="field">
+    <%= f.label :poc_fecha %><br>
+    <%= f.datetime_select :poc_fecha %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

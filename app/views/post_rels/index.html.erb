@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Post Rels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pre titulo</th>
+      <th>Pli url</th>
+      <th>Pli desc</th>
+      <th>Post</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_rels.each do |post_rel| %>
+      <tr>
+        <td><%= post_rel.pre_titulo %></td>
+        <td><%= post_rel.pli_url %></td>
+        <td><%= post_rel.pli_desc %></td>
+        <td><%= post_rel.post %></td>
+        <td><%= link_to 'Show', post_rel %></td>
+        <td><%= link_to 'Edit', edit_post_rel_path(post_rel) %></td>
+        <td><%= link_to 'Destroy', post_rel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post rel', new_post_rel_path %>
