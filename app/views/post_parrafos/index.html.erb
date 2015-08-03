@@ -4,19 +4,19 @@
 
   <div class="col-sm-10 col-xs-12 div-cada-post">
 
-    <div class="blog-title">
+    <div class="blog-title col-sm-10">
       <h1><%= @post.pos_titulo %></h1>
+      <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
+      <%== @post.pos_intro %> <br/>
+      <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive post-img") %>
       <p>
-        <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
-         <%== @post.pos_intro %> <br/>
         <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
       </p>
     </div>
 
 
-    <!-- Parrafos -->
-    <% if @post_parrafos.any? %>
-      <% @post_parrafos.each do |post_parrafo| %>
+    <% if @post_parrafos.any? %> 
+      <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
         <div  class="container-fluid">
           <div class="col-sm-5 col-xs-12" >
             <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive post-img") %>
@@ -42,15 +42,31 @@
               </ul>
             <% end %>
             <div class="post-more">
-              <%= link_to 'Mostrar', post_parrafo %>
+              <!-- <%= link_to 'Mostrar', post_parrafo %> -->
               <%= link_to 'Editar', edit_post_parrafo_path(post_parrafo) %>
               <%= link_to 'Borrar', post_parrafo, method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
           </div>
-        </div>
-      <% end %>
-    <% else %>
+        </div> <!-- END container-fluid -->
+      <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
+    
+      <% if @post.post_comments.any? %> 
+        <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
+          <div class="post-summary col-sm-6 col-xs-12">
+            <!-- Texto del Comentario -->
+            <div class="post-title">
+              <h3><%== post_comment.pco_titulo %></h3>
+              <h3><%== post_comment.pco_texto %></h3>
+            </div>
+          </div>
+        <% end %> <!-- END Impresion de todos los Cometarios -->
+      <% else %> <!-- ELSE @post_comments.any? -->
+        <h1>Articulo sin Comentarios aun</h1>
+      <% end %> <!-- END @post_comments.any? -->
+
+
+    <% else %> <!-- ELSE @post_parrafos.any? -->
       <h1>Articulo no definido aun</h1>
-    <% end %>
-  </div>
-</div>
+    <% end %> <!-- END @post_parrafos.any? -->
+  </div>  <!-- END div-cada-post -->
+</div>  <!-- END div-blog-ppal -->

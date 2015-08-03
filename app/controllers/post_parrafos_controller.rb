@@ -7,6 +7,7 @@ class PostParrafosController < ApplicationController
     #@post_parrafos = PostParrafo.all
     @post = Post.find(params[:post])
     @post_parrafos = PostParrafo.where("post_id = ?", params[:post])
+    @post_comments = PostComment.where("post_id = ?", params[:post])
   end
 
   # GET /post_parrafos/1
