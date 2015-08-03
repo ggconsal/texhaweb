@@ -58,6 +58,18 @@
               <h3><%== post_comment.pco_titulo %></h3>
               <h3><%== post_comment.pco_texto %></h3>
             </div>
+
+            <% if post_comment.post_comment_answers.any? %> 
+              <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
+                <div class="post-title">
+                  <h3><%== post_answer.pca_titulo %></h3>
+                  <h3><%== post_answer.pca_texto %></h3>
+                </div>
+              <% end %> <!-- END Impresion de las Respuestas-->
+            <% else %> <!-- ELSE post_comment.post_comment_answers.any? -->
+              <h1>Comentario sin Respuestas aun</h1>
+            <% end %> <!-- END post_comment.post_comment_answers.any? -->
+
           </div>
         <% end %> <!-- END Impresion de todos los Cometarios -->
       <% else %> <!-- ELSE @post_comments.any? -->
