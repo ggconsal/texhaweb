@@ -6496,7 +6496,7 @@ button.close {
     display: inline-block !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 649px) {
   .hidden-xs {
     display: none !important;
   }
