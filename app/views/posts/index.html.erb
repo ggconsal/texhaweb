@@ -1,9 +1,15 @@
+
 <div id="blog-div-ppal" class="container-fluid" >
   <% @cant_post = 0 %>
+  <% @cant_row = 0 %>
 
   <!-- Titulo del Blog -->
   <div class="blog-div-title col-sm-8 col-xs-11">
     <h1>Consejos Útiles y Preguntas Frecuentes</h1>
+  </div>
+
+  <div class="visible-xs-block">
+    <%= render "form_categorias" %>
   </div>
 
   <% @posts.each do |post| %>
@@ -40,16 +46,23 @@
     <% if @cant_post % 2 == 0 %>
       </div>
       <% @cant_post = 0 %>
+      <% @cant_row = @cant_row + 1 %>
+
+      <% if @cant_row == 1 %>
+        <div class="visible-xs-block">
+          <%= render "form_cta" %>
+        </div>
+      <% end %>
     <% end %>
 
   <% end %>
 
-  <div class="blog-div-cta col-md-3 col-sm-4 hidden-xs">
-    <div class="">
-      <h2><br/>Acá va el Call to Action</h2><br/><br/><br/>
+  <div class="blog-div-col-der col-md-3 col-sm-4">
+    <div class="hidden-xs">
+      <%= render "form_cta" %>
     </div>
-    <div class="">
-      <h2><br/>Acá van las soluciones</h2><br/><br/><br/><br/><br/>
+    <div class="hidden-xs">
+      <%= render "form_categorias" %>
     </div>
   </div>
 

@@ -6391,7 +6391,7 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 649px) {
   .visible-xs-block {
     display: block !important;
   }

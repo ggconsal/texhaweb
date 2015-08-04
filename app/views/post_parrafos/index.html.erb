@@ -1,33 +1,37 @@
-<div id="div-blog-ppal">
 
-  <p id="notice"><%= notice %></p>
+<div id="blog-div-ppal" class="container-fluid" >
 
-  <div class="col-sm-10 col-xs-12 div-cada-post">
+  <div class="blog-div-post col-sm-8 col-xs-11">
 
-    <div class="blog-title col-sm-10">
-      <h1><%= @post.pos_titulo %></h1>
-      <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
-      <%== @post.pos_intro %> <br/>
-      <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive post-img") %>
-      <p>
-        <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
-      </p>
-    </div>
+    <% if @post_parrafos.any? %>
+      <div class="blog-div-title col-xs-11">
+        <h1><%= @post.pos_titulo %></h1>
+        <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
+        <div class="blog-div-foto">
+          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
+        </div>
+        <div id="introduccion" class="blog-div-texto">
+          <p>
+            <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+          </p>
+          <h3>Introducción: </h3>
+          <p>
+            <%== @post.pos_intro %> <br/>
+          </p>
+        </div>
+      </div>
 
-
-    <% if @post_parrafos.any? %> 
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-        <div  class="container-fluid">
-          <div class="col-sm-5 col-xs-12" >
-            <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive post-img") %>
-          </div>
-          <div class="post-summary col-sm-6 col-xs-12">
+        <div class="row blog-div-row col-xs-11">
+
+          <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto col-sm-6 col-xs-11">
             <!-- Texto del Parrafo -->
-            <div class="post-title">
-              <h3><%== post_parrafo.par_titulo %></h3>
-            </div>
+            <h3><%== post_parrafo.par_titulo %></h3>
             <p>
-              <%== post_parrafo.par_texto %> <br/><br/>
+              <%== post_parrafo.par_texto %> <br/>
+              <!-- <%= link_to 'Mostrar', post_parrafo %> -->
+              <%= link_to 'Editar', edit_post_parrafo_path(post_parrafo) %>
+              <%= link_to 'Borrar', post_parrafo, method: :delete, data: { confirm: 'Are you sure?' } %>
             </p>
             <!-- Viñetas del Parrafo, si hay -->
 
@@ -41,29 +45,37 @@
                 <% end %>
               </ul>
             <% end %>
-            <div class="post-more">
-              <!-- <%= link_to 'Mostrar', post_parrafo %> -->
-              <%= link_to 'Editar', edit_post_parrafo_path(post_parrafo) %>
-              <%= link_to 'Borrar', post_parrafo, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
+          </div>
+          <div class="col-sm-6 col-xs-11" >
+            <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive post-img") %>
           </div>
         </div> <!-- END container-fluid -->
       <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
     
+      <div id="conclusion" class="blog-div-title col-xs-11">
+        <div class="blog-div-texto">
+          <h3>Conclusión: </h3>
+          <p>
+            <%== @post.pos_conclusion %> <br/>
+          </p>
+        </div>
+      </div>
+
       <% if @post.post_comments.any? %> 
+        <div class="blog-div-texto col-xs-11">
+          <h3>Cometarios del Artículo:</h3>
+        </div>
         <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
-          <div class="post-summary col-sm-6 col-xs-12">
-            <!-- Texto del Comentario -->
-            <div class="post-title">
-              <h3><%== post_comment.pco_titulo %></h3>
-              <h3><%== post_comment.pco_texto %></h3>
-            </div>
+          <div class="blog-div-texto col-xs-11">
+            <!-- Texto del Comentario --> 
+            <p><%== post_comment.pco_titulo %> - <%= post_comment.contact.con_nya %></p>
+            <p><%== post_comment.pco_texto %></p>
 
             <% if post_comment.post_comment_answers.any? %> 
               <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
-                <div class="post-title">
-                  <h3><%== post_answer.pca_titulo %></h3>
-                  <h3><%== post_answer.pca_texto %></h3>
+                <div class="blog-div-texto col-md-offset-1">
+                  <p><%== post_answer.pca_titulo %> - <%= post_answer.contact.con_nya %></p>
+                  <p><%== post_answer.pca_texto %></p>
                 </div>
               <% end %> <!-- END Impresion de las Respuestas-->
             <% else %> <!-- ELSE post_comment.post_comment_answers.any? -->
@@ -73,12 +85,43 @@
           </div>
         <% end %> <!-- END Impresion de todos los Cometarios -->
       <% else %> <!-- ELSE @post_comments.any? -->
-        <h1>Articulo sin Comentarios aun</h1>
+        <div class="blog-div-title col-xs-11">
+          <h1>Articulo sin Comentarios aun</h1><br/><br/><br/>
+        </div>
       <% end %> <!-- END @post_comments.any? -->
 
 
     <% else %> <!-- ELSE @post_parrafos.any? -->
-      <h1>Articulo no definido aun</h1>
+      <div class="blog-div-title col-xs-11">
+        <h1>Articulo no definido aun</h1><br/><br/><br/>
+      </div>
     <% end %> <!-- END @post_parrafos.any? -->
   </div>  <!-- END div-cada-post -->
-</div>  <!-- END div-blog-ppal -->
+
+  <div class="blog-div-col-der col-md-4 col-sm-4">
+    <div class="hidden-xs">
+      <%= render "form_cta" %>
+    </div>
+    <div class="hidden-xs">
+      <div class="blog-div-categorias col-xs-12">
+        <h3>Accesos Rápidos del Artículo:</h3>
+        <h4>
+          <% if @post_parrafos.any? %>
+            <%= link_to "Introducción", {:action => "index", :controller => "post_parrafos", :anchor => "introduccion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+            <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
+              <%= link_to post_parrafo.par_titulo, {:action => "index", :controller => "post_parrafos", :anchor => post_parrafo.par_titulo.delete(' ')} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+            <% end %> <!-- END Impresion de todos los Cometarios -->
+            <%= link_to "Conclusión", {:action => "index", :controller => "post_parrafos", :anchor => "conclusion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+          <% end %> <!-- END Impresion de todos los Cometarios -->
+          <br/><br/>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+</div>  <!-- END post-div-ppal -->
+
+
+
+<!--  <p id="notice"><%= notice %></p> -->
+
