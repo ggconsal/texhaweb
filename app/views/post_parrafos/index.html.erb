@@ -21,12 +21,25 @@
         </div>
       </div>
 
+      <% if @post.post_rels.any? %> 
+        <div id="relacionados" class="blog-div-texto col-xs-11">
+          <h3>Artículos Relacionados:</h3>
+
+          <% @post.post_rels.each do |post_rel| %>
+            <p>
+              <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
         <div class="row blog-div-row col-xs-11">
 
-          <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto col-sm-6 col-xs-11">
+          <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto col-sm-11 col-xs-11">
             <!-- Texto del Parrafo -->
             <h3><%== post_parrafo.par_titulo %></h3>
+            <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive blog-pic-post") %>
             <p>
               <%== post_parrafo.par_texto %> <br/>
               <!-- <%= link_to 'Mostrar', post_parrafo %> -->
@@ -46,13 +59,22 @@
               </ul>
             <% end %>
           </div>
-          <div class="col-sm-6 col-xs-11" >
-            <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive post-img") %>
-          </div>
         </div> <!-- END container-fluid -->
       <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
     
-      <div id="conclusion" class="blog-div-title col-xs-11">
+      <% if @post.post_links.any? %> 
+        <div id="links" class="blog-div-texto col-xs-11">
+          <h3>Links Externos de Utilidad:</h3>
+
+          <% @post.post_links.each do |post_link| %>
+            <p>
+              <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div id="conclusion" class="blog-div-texto col-xs-11">
         <div class="blog-div-texto">
           <h3>Conclusión: </h3>
           <p>
@@ -85,14 +107,14 @@
           </div>
         <% end %> <!-- END Impresion de todos los Cometarios -->
       <% else %> <!-- ELSE @post_comments.any? -->
-        <div class="blog-div-title col-xs-11">
+        <div class="blog-div-texto col-xs-11">
           <h1>Articulo sin Comentarios aun</h1><br/><br/><br/>
         </div>
       <% end %> <!-- END @post_comments.any? -->
 
 
     <% else %> <!-- ELSE @post_parrafos.any? -->
-      <div class="blog-div-title col-xs-11">
+      <div class="blog-div-texto col-xs-11">
         <h1>Articulo no definido aun</h1><br/><br/><br/>
       </div>
     <% end %> <!-- END @post_parrafos.any? -->
@@ -108,9 +130,13 @@
         <h4>
           <% if @post_parrafos.any? %>
             <%= link_to "Introducción", {:action => "index", :controller => "post_parrafos", :anchor => "introduccion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+            <%= link_to "Artículos Relacionados", {:action => "index", :controller => "post_parrafos", :anchor => "relacionados"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+            
             <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
               <%= link_to post_parrafo.par_titulo, {:action => "index", :controller => "post_parrafos", :anchor => post_parrafo.par_titulo.delete(' ')} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
             <% end %> <!-- END Impresion de todos los Cometarios -->
+            
+            <%= link_to "Links del Artículo", {:action => "index", :controller => "post_parrafos", :anchor => "links"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
             <%= link_to "Conclusión", {:action => "index", :controller => "post_parrafos", :anchor => "conclusion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
           <% end %> <!-- END Impresion de todos los Cometarios -->
           <br/><br/>
