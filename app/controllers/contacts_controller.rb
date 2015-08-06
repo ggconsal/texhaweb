@@ -15,10 +15,18 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.con_boton_sitio = params[:motivo]
   end
 
   # GET /contacts/1/edit
   def edit
+
+    if @contact.con_nombre == "" && @contact.con_nya != ""
+        @contact.con_nombre = @contact.con_nya
+    end
+
+    @tipo = params[:tipo]
+
   end
 
   # POST /contacts
@@ -28,7 +36,9 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        ContactMailer.contact_email(@contact).deliver_now
+        
+        format.html { redirect_to @contact, notice: 'Contacto Creado.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -61,6 +71,15 @@ class ContactsController < ApplicationController
     end
   end
 
+  def mail_confirmation
+
+    #@contact = Contact.find_by  con_mail: params[:mail]
+    @contact = Contact.find(params[:id_usuario])
+    @contact.con_confirmado = true
+    @contact.save
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
@@ -69,6 +88,6 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:con_nya, :con_nombre, :con_apellido, :profile_id, :con_telefono, :con_obs, :con_boton_sitio, :con_telefono_sn, :con_mail, :con_password, :con_password2, :con_subscribir, :con_confirmado, :con_password_confirmacion, :option_id, :canalingreso_id)
+      params.require(:contact).permit(:con_nya, :con_nombre, :con_apellido, :profile_id, :con_telefono, :con_obs, :con_boton_sitio, :con_telefono_sn, :con_mail, :con_password, :con_password2, :con_subscribir, :con_confirmado, :con_password_confirmacion, :option_id, :canalingreso_id, :password, :password_confirmation)
     end
 end

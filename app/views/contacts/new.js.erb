@@ -1,0 +1,5 @@
+$("#product-modal").html("<%= escape_javascript(render partial: 'new') %>" );
+$("#product-modal").modal("show");
+$('#product-modal').on('shown.bs.modal', function () {
+/*	$('#contact_con_nombre').focus() */
+});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728181559) do
+ActiveRecord::Schema.define(version: 20150806192806) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150728181559) do
     t.integer  "canalingreso_id",           limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.string   "password_digest",           limit: 255
   end
 
   add_index "contacts", ["canalingreso_id"], name: "index_contacts_on_canalingreso_id", using: :btree

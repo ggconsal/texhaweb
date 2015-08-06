@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  get 'contacts/mail_confirmation'
+  get 'contacts/mail_explanation'
+
   resources :contacts
 
   resources :profile_options
@@ -24,6 +27,10 @@ Rails.application.routes.draw do
   resources :areas
 
   resources :canalingresos
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
