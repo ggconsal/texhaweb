@@ -15,10 +15,14 @@ class PostParrafoBulletsController < ApplicationController
   # GET /post_parrafo_bullets/new
   def new
     @post_parrafo_bullet = PostParrafoBullet.new
+    @post_parrafo_bullet.post_parrafo_id = params[:parrafo]
+    @post_parrafo = PostParrafo.find(params[:parrafo])
   end
 
   # GET /post_parrafo_bullets/1/edit
   def edit
+    @post_parrafo_bullet.post_parrafo_id = params[:parrafo]
+    @post_parrafo = PostParrafo.find(params[:parrafo])
   end
 
   # POST /post_parrafo_bullets
@@ -56,7 +60,7 @@ class PostParrafoBulletsController < ApplicationController
   def destroy
     @post_parrafo_bullet.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafo_bullets_url, notice: 'Post parrafo bullet was successfully destroyed.' }
+      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post parrafo bullet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

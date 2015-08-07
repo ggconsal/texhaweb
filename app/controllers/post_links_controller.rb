@@ -15,10 +15,14 @@ class PostLinksController < ApplicationController
   # GET /post_links/new
   def new
     @post_link = PostLink.new
+    @post_link.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # GET /post_links/1/edit
   def edit
+    @post_link.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # POST /post_links
@@ -56,7 +60,7 @@ class PostLinksController < ApplicationController
   def destroy
     @post_link.destroy
     respond_to do |format|
-      format.html { redirect_to post_links_url, notice: 'Post link was successfully destroyed.' }
+      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post link was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

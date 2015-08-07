@@ -8,18 +8,18 @@
         <h1>
           <%= @post.pos_titulo %>
         </h1>
-        <div class="righter">
+        <div class="righter col-sm-11">
           <h4>
             <%= link_to 'Crear un Nuevo Parrafo', new_post_parrafo_path(post: @post.id) %><br/>
           </h4>
         </div>
-        <div class="blog-div-foto">
-          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
+        <div class="blog-div-foto col-sm-10">
+          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive col-sm-offset-1") %>
           <div class="righter">
             <%= link_to 'Modificar Imágen', edit_post_path(@post) %>
           </div>
         </div>
-        <div id="introduccion" class="blog-div-texto">
+        <div id="introduccion" class="blog-div-texto col-sm-10">
           <p>
             <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
           </p>
@@ -61,21 +61,20 @@
             <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive blog-pic-post") %>
             <p>
               <%== post_parrafo.par_texto %> <br/>
-              <!-- <%= link_to 'Mostrar', post_parrafo %> -->
               <%= link_to 'Modificar', edit_post_parrafo_path(post_parrafo, post: @post.id) %>
               <%= link_to 'Borrar', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' } %>
             </p>
             <!-- Viñetas del Parrafo, si hay -->
 
             <div class="righter">
-              <%= link_to 'Crear Viñetas', new_post_parrafo_bullet_path(post: @post.id) %><br/>
+              <%= link_to 'Crear Viñetas', new_post_parrafo_bullet_path(parrafo: post_parrafo.id) %><br/>
             </div>
             <% if post_parrafo.post_parrafo_bullets.any? %>
               <ul>
                 <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
                   <li>
                     <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
-                    ¨ <%= link_to 'Modificar', edit_post_parrafo_bullet_path(post_parrafo_bullet, post: @post.id) %>
+                    [ <%= link_to 'Modificar', edit_post_parrafo_bullet_path(bullet, parrafo: post_parrafo.id) %>
                     <%= link_to 'Borrar', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?' } %> ]
                   </li>
                 <% end %>
@@ -85,17 +84,23 @@
         </div> <!-- END container-fluid -->
       <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
     
-      <% if @post.post_links.any? %> 
-        <div id="links" class="blog-div-texto col-xs-11">
-          <h3>Links Externos de Utilidad:</h3>
-
+      <div id="links" class="blog-div-texto col-xs-11">
+        <h3>Links Externos:</h3>
+        <div class="righter">
+          <%= link_to 'Crear un Nuevo Link', new_post_link_path(post: @post.id) %><br/>
+        </div>
+        <% if @post.post_links.any? %> 
           <% @post.post_links.each do |post_link| %>
             <p>
               <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
+              [ <%= link_to 'Modificar', edit_post_link_path(post_link, post: @post.id) %>
+              <%= link_to 'Borrar', post_link_path(id: post_link.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Link?' } %> ]
             </p>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <h4>No tiene Links Externos</h4>
+        <% end %>
+      </div>
 
       <div id="conclusion" class="blog-div-texto col-xs-11">
         <div class="blog-div-texto">

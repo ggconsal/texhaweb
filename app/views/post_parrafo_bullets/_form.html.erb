@@ -11,6 +11,17 @@
     </div>
   <% end %>
 
+
+  <div class="blog-div-title">
+    <h3>
+      <u>Título del Párrafo</u>: <%= @post_parrafo.par_titulo %> (Id: <%= @post_parrafo_bullet.post_parrafo_id %>)
+    </h3>
+  </div>
+
+  <div class="field hide">
+    <%= f.text_field :post_parrafo_id, value: @post_parrafo_bullet.post_parrafo_id %>
+  </div>
+
   <div class="field">
     <%= f.label :ppb_titulo %><br>
     <%= f.text_field :ppb_titulo %>
@@ -19,11 +30,7 @@
     <%= f.label :ppb_texto %><br>
     <%= f.text_area :ppb_texto %>
   </div>
-  <div class="field">
-    <%= f.label :post_parrafo_id %><br>
-    <%= f.text_field :post_parrafo_id %>
-  </div>
-  <div class="actions">
+  <br/><div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
