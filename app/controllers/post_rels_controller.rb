@@ -15,10 +15,14 @@ class PostRelsController < ApplicationController
   # GET /post_rels/new
   def new
     @post_rel = PostRel.new
+    @post_rel.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # GET /post_rels/1/edit
   def edit
+    @post_rel.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # POST /post_rels
@@ -56,7 +60,8 @@ class PostRelsController < ApplicationController
   def destroy
     @post_rel.destroy
     respond_to do |format|
-      format.html { redirect_to post_rels_url, notice: 'Post rel was successfully destroyed.' }
+      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
+      #format.html { redirect_to post_rels_url, notice: 'Post rel was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

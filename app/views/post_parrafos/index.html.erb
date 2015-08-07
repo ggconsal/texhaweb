@@ -5,10 +5,19 @@
 
     <% if @post_parrafos.any? %>
       <div class="blog-div-title col-xs-11">
-        <h1><%= @post.pos_titulo %></h1>
-        <%= link_to 'Nuevo Parrafo', new_post_parrafo_path %><br/>
+        <h1>
+          <%= @post.pos_titulo %>
+        </h1>
+        <div class="righter">
+          <h4>
+            <%= link_to 'Crear un Nuevo Parrafo', new_post_parrafo_path(post: @post.id) %><br/>
+          </h4>
+        </div>
         <div class="blog-div-foto">
           <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
+          <div class="righter">
+            <%= link_to 'Modificar Imágen', edit_post_path(@post) %>
+          </div>
         </div>
         <div id="introduccion" class="blog-div-texto">
           <p>
@@ -17,21 +26,31 @@
           <h3>Introducción: </h3>
           <p>
             <%== @post.pos_intro %> <br/>
+            <div class="righter">
+              <%= link_to 'Modificar Introducción', edit_post_path(@post) %>
+            </div>
           </p>
         </div>
       </div>
 
-      <% if @post.post_rels.any? %> 
-        <div id="relacionados" class="blog-div-texto col-xs-11">
-          <h3>Artículos Relacionados:</h3>
+      <div id="relacionados" class="blog-div-texto col-xs-11">
+        <h3>Artículos Relacionados:</h3>
+        <div class="righter">
+          <%= link_to 'Crear una Nueva Relación', new_post_rel_path(post: @post.id) %><br/>
+        </div>
+        <% if @post.post_rels.any? %> 
 
           <% @post.post_rels.each do |post_rel| %>
             <p>
-              <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %>
+              <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %> 
+               [ <%= link_to 'Modificar', edit_post_rel_path(post_rel, post: @post.id) %>
+              <%= link_to 'Borrar', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' } %> ]
             </p>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <h4>No tiene Artículos Relacionados</h4>
+        <% end %>
+      </div>
 
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
         <div class="row blog-div-row col-xs-11">
@@ -43,17 +62,21 @@
             <p>
               <%== post_parrafo.par_texto %> <br/>
               <!-- <%= link_to 'Mostrar', post_parrafo %> -->
-              <%= link_to 'Editar', edit_post_parrafo_path(post_parrafo) %>
-              <%= link_to 'Borrar', post_parrafo, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Modificar', edit_post_parrafo_path(post_parrafo, post: @post.id) %>
+              <%= link_to 'Borrar', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' } %>
             </p>
             <!-- Viñetas del Parrafo, si hay -->
 
+            <div class="righter">
+              <%= link_to 'Crear Viñetas', new_post_parrafo_bullet_path(post: @post.id) %><br/>
+            </div>
             <% if post_parrafo.post_parrafo_bullets.any? %>
-            
               <ul>
                 <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
                   <li>
                     <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
+                    ¨ <%= link_to 'Modificar', edit_post_parrafo_bullet_path(post_parrafo_bullet, post: @post.id) %>
+                    <%= link_to 'Borrar', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?' } %> ]
                   </li>
                 <% end %>
               </ul>
@@ -79,6 +102,9 @@
           <h3>Conclusión: </h3>
           <p>
             <%== @post.pos_conclusion %> <br/>
+            <div class="righter">
+              <%= link_to 'Modificar Conclusión', edit_post_path(@post) %>
+            </div>
           </p>
         </div>
       </div>
@@ -107,15 +133,15 @@
           </div>
         <% end %> <!-- END Impresion de todos los Cometarios -->
       <% else %> <!-- ELSE @post_comments.any? -->
-        <div class="blog-div-texto col-xs-11">
-          <h1>Articulo sin Comentarios aun</h1><br/><br/><br/>
+        <div class="blog-div-titulo col-xs-11">
+          <h3>Articulo sin Comentarios aun</h3><br/><br/><br/>
         </div>
       <% end %> <!-- END @post_comments.any? -->
 
 
     <% else %> <!-- ELSE @post_parrafos.any? -->
-      <div class="blog-div-texto col-xs-11">
-        <h1>Articulo no definido aun</h1><br/><br/><br/>
+      <div class="blog-div-titulo col-xs-11">
+        <h3>Articulo no definido aun</h3><br/><br/><br/>
       </div>
     <% end %> <!-- END @post_parrafos.any? -->
   </div>  <!-- END div-cada-post -->

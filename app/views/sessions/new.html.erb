@@ -1,0 +1,33 @@
+<% provide(:title, "Ingresar al Sistema |") %>
+  <div id="ingresar" class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-9 confirm">
+
+    <h1>Ingresar al Sistema</h1>
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <% if flash[:danger] %>
+        <div class="alert alert-warning alert-dismissible">
+          <p><b>Mensajes: </b> <%= flash[:danger] %></p>
+        </div>
+      <% end %>
+
+      <div class="col-md-10 col-md-offset-1">
+        <div class="field">
+          <br/><%= f.email_field :email, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+        </div><br/>
+
+        <div class="field">
+          <%= f.password_field :password, :required => true, :placeholder => "Ingrese su Clave...", :class=>"form-control" %>
+        </div><br/><br/>
+      </div>
+
+      <div class="col-xs-12 col-xs-offset-2 col-sm-offset-4">
+        <p style="color:green;"><%= f.submit "Ingresar al Sistema", :class=>"btn btn-outline-inverse btn-md btn-idx3" %>
+        <div>
+          <p style="color:red;">¿Todavia no es Usuario? <br/></p>
+        </div>
+        <%= link_to 'Registrese ya!', new_contact_path(:motivo => "Blog - Post"), remote: true, :class=>"btn btn-outline-inverse btn-md btn-idx3" %><br/>
+        <p style="color:green;">En un simple paso y gratis!</p>
+      </div><br/><br/>
+    <% end %>
+
+  </div>

@@ -1,6 +1,6 @@
 <div id="modif-datos" class="col-md-5 col-md-offset-4 confirm">
 	<%= form_for(@contact) do |f| %>
-		<div class="confirm-header" >
+		<div class="blog-div-title confirm-header" >
 			<h1>Modificar mis Datos</h1>
 
 			<h4> <b><%= @contact.con_nya %> (<%= @contact.con_mail %>)</b></h4>
@@ -44,7 +44,7 @@
 				<div class="field">
 					<p>
 						<b>¿Desea Suscribirse al newsleter? </b>
-						<span style="margin-left: 20px;"> <%= f.check_box :con_suscribir %></span>
+						<span style="margin-left: 20px;"> <%= f.check_box :con_subscribir %></span>
 					</p>
 				</div>
 				<div class="field">
@@ -80,23 +80,3 @@
 		</div><br/><br/>
 	<% end %>
 </div>
-
-<!--
-<%= link_to 'Show', @contact %> |
-<%= link_to 'Back', contacts_path %>
-
-
--->
-
-
-
-<!--
-
-<h1>Editing Contact</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @contact %> |
-<%= link_to 'Back', contacts_path %>
-
--->

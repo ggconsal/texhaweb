@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+  <div class="blog-div-title">
+    <h3>
+      <u>Título del Post</u>: <%= @post.pos_titulo %> (Id: <%= @post_rel.post_id %>)
+    </h3>
+  </div>
+
+  <div class="field hide">
+    <%= f.text_field :post_id, value: @post_rel.post_id %>
+  </div>
+
   <div class="field">
     <%= f.label :pre_titulo %><br>
     <%= f.text_field :pre_titulo %>
@@ -22,10 +32,6 @@
   <div class="field">
     <%= f.label :pli_desc %><br>
     <%= f.text_area :pli_desc %>
-  </div>
-  <div class="field">
-    <%= f.label :post_id %><br>
-    <%= f.text_field :post_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

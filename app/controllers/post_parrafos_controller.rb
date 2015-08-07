@@ -19,10 +19,14 @@ class PostParrafosController < ApplicationController
   # GET /post_parrafos/new
   def new
     @post_parrafo = PostParrafo.new
+    @post_parrafo.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # GET /post_parrafos/1/edit
   def edit
+    @post_parrafo.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # POST /post_parrafos
@@ -60,7 +64,7 @@ class PostParrafosController < ApplicationController
   def destroy
     @post_parrafo.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafos_url, notice: 'Post parrafo was successfully destroyed.' }
+      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post parrafo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
