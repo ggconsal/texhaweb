@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if contact && contact.authenticate(params[:session][:password])
       if contact.con_confirmado
         log_in contact
-        redirect_to contacts_url
+        redirect_to posts_url
       else
         flash.now[:danger] = 'No está Registrado.  Por favor revise su casilla de email y siga los instrucciones.'
         render 'new'

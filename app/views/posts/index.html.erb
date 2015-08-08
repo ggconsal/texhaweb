@@ -33,12 +33,10 @@
             </p>
             <p>
               <%== post.pos_intro %>
-              <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             </p>
 
             <div class="blog-div-post-pie col-xs-11">
-              <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: "btn btn-info" %>
+              <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: "btn btn-info blog-bot-cta" %>
             </div>
           </div>
         </div>
@@ -67,3 +65,5 @@
   </div>
 
 </div>
+
+
