@@ -4,42 +4,43 @@
   <div class="blog-div-post2 col-sm-8 col-xs-11">
 
     <% if @post_parrafos.any? %>
-      <div class="blog-div-title col-xs-11">
+      <div class="blog-div-title col-xs-10 col-sm-offset-1">
         <h1>
           <%= @post.pos_titulo %>
         </h1>
         <% if logged_in? && current_contact = @post.id %>
-          <div class="righter col-sm-11">
+          <div class="righter">
             <h4>
               <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
             </h4>
           </div>
         <% end %>
-        <div class="blog-div-foto col-sm-10">
-          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive col-sm-offset-1") %>
+        <div class="blog-div-foto">
+          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
           <% if logged_in? && current_contact = @post.id %>
             <div class="righter">
               <br/><%= link_to ' Imagen', edit_post_path(@post), class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
             </div>
           <% end %>
         </div>
-        <div id="introduccion" class="blog-div-texto col-sm-10">
-          <p>
-            <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
-          </p>
-          <h3>Introducción: </h3>
-          <p>
-            <%== @post.pos_intro %>
-            <% if logged_in? && current_contact = @post.id %>
-              <div class="righter">
-                <h4> <%= link_to " Intro", edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
-              </div>
-            <% end %>
-          </p>
-        </div>
       </div>
 
-      <div id="relacionados" class="blog-div-texto col-xs-11">
+      <div id="introduccion" class="blog-div-texto col-sm-10 col-sm-offset-1">
+        <p>
+          <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+        </p>
+        <h3>Introducción: </h3>
+        <p>
+          <%== @post.pos_intro %>
+          <% if logged_in? && current_contact = @post.id %>
+            <div class="righter">
+              <h4> <%= link_to " Intro", edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
+            </div>
+          <% end %>
+        </p>
+      </div>
+
+      <div id="relacionados" class="blog-div-texto col-sm-10 col-sm-offset-1">
         <h3>Artículos Relacionados:</h3>
         <% if logged_in? && current_contact = @post.id %>
           <div class="righter">
@@ -63,7 +64,7 @@
       </div>
 
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-        <div class="row blog-div-row col-xs-11">
+        <div class="row blog-div-row col-sm-11 col-sm-offset-1">
 
           <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto col-sm-11 col-xs-11">
             <!-- Texto del Parrafo -->
@@ -102,7 +103,7 @@
         </div> <!-- END container-fluid -->
       <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
     
-      <div id="links" class="blog-div-texto col-xs-11">
+      <div id="links" class="blog-div-texto col-sm-10 col-sm-offset-1">
         <h3>Links Externos:</h3>
         <% if logged_in? && current_contact = @post.id %>
           <div class="righter">
@@ -124,7 +125,7 @@
         <% end %>
       </div>
 
-      <div id="conclusion" class="blog-div-texto col-xs-11">
+      <div id="conclusion" class="blog-div-texto col-sm-10 col-sm-offset-1">
         <div class="blog-div-texto">
           <h3>Conclusión: </h3>
           <p>
@@ -139,16 +140,16 @@
       </div>
 
       <% if @post.post_comments.any? %> 
-        <div class="blog-div-texto col-xs-11">
+        <div class="blog-div-texto col-sm-10 col-sm-offset-1">
           <h3>Cometarios del Artículo:</h3>
           <div class="righter">
-            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), class: "glyphicon glyphicon-comment btn btn-md btn-info" %></h4>
+            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), class: "glyphicon glyphicon-comment btn btn-lg btn-info" %></h4>
           </div>
 
         </div>
 
         <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
-          <div class="blog-div-texto col-xs-11">
+          <div class="blog-div-texto col-sm-10 col-sm-offset-1">
             <!-- Texto del Comentario --> 
             <p><%== post_comment.pco_titulo %> - <%= post_comment.contact.con_nya %></p>
             <p>
