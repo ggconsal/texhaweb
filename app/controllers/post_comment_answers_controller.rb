@@ -15,10 +15,14 @@ class PostCommentAnswersController < ApplicationController
   # GET /post_comment_answers/new
   def new
     @post_comment_answer = PostCommentAnswer.new
+    @post_comment_answer.post_comment_id = params[:comment]
+    @post_comment = PostComment.find(params[:comment])
   end
 
   # GET /post_comment_answers/1/edit
   def edit
+    @post_comment_answer.post_comment_id = params[:comment]
+    @post_comment = PostComment.find(params[:comment])
   end
 
   # POST /post_comment_answers

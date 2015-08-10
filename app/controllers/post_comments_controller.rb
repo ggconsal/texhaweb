@@ -15,10 +15,14 @@ class PostCommentsController < ApplicationController
   # GET /post_comments/new
   def new
     @post_comment = PostComment.new
+    @post_comment.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # GET /post_comments/1/edit
   def edit
+    @post_comment.post_id = params[:post]
+    @post = Post.find(params[:post])
   end
 
   # POST /post_comments
@@ -56,7 +60,8 @@ class PostCommentsController < ApplicationController
   def destroy
     @post_comment.destroy
     respond_to do |format|
-      format.html { redirect_to post_comments_url, notice: 'Post comment was successfully destroyed.' }
+      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
+      #format.html { redirect_to post_comments_url, notice: 'Post comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

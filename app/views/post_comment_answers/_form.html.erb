@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <div class="field hide">
+    <%= f.text_field :post_comment_id, value: @post_comment_answer.post_comment_id %>
+  </div>
+
   <div class="field">
     <%= f.label :pca_titulo %><br>
     <%= f.text_field :pca_titulo %>
@@ -18,10 +22,6 @@
   <div class="field">
     <%= f.label :pca_texto %><br>
     <%= f.text_area :pca_texto %>
-  </div>
-  <div class="field">
-    <%= f.label :post_comment_id %><br>
-    <%= f.text_field :post_comment_id %>
   </div>
   <div class="field">
     <%= f.label :contact_id %><br>

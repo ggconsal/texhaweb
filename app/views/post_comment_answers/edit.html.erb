@@ -1,6 +1,12 @@
-<h1>Editing Post Comment Answer</h1>
+<div class="blog-div-title">
+	<h3>
+	  <u>Comentario</u>: <%= @post_comment.pti_texto %> (Id: <%= @post_comment_answer.post_comment_id %>)
+	</h3>
 
-<%= render 'form' %>
+	<%= render 'form' %>
+</div>
 
+<!--
 <%= link_to 'Show', @post_comment_answer %> |
 <%= link_to 'Back', post_comment_answers_path %>
+-->
