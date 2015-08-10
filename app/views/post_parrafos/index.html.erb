@@ -8,7 +8,7 @@
         <h1>
           <%= @post.pos_titulo %>
         </h1>
-        <% if logged_in? && current_contact = @post.id %>
+        <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
             <h4>
               <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
@@ -17,7 +17,7 @@
         <% end %>
         <div class="blog-div-foto">
           <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
-          <% if logged_in? && current_contact = @post.id %>
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
               <br/><%= link_to ' Imagen', edit_post_path(@post), class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
             </div>
@@ -32,7 +32,7 @@
         <h3>Introducción: </h3>
         <p>
           <%== @post.pos_intro %>
-          <% if logged_in? && current_contact = @post.id %>
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
               <h4> <%= link_to " Intro", edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
             </div>
@@ -42,7 +42,7 @@
 
       <div id="relacionados" class="blog-div-texto col-sm-10 col-sm-offset-1">
         <h3>Artículos Relacionados:</h3>
-        <% if logged_in? && current_contact = @post.id %>
+        <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
             <h4> <%= link_to ' Relación', new_post_rel_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
           </div>
@@ -52,7 +52,7 @@
           <% @post.post_rels.each do |post_rel| %>
             <p>
               <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %> 
-              <% if logged_in? && current_contact = @post.id %>
+              <% if logged_in? && session[:user_id] == @post.contact_id %>
                 [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
@@ -74,14 +74,14 @@
             <% end %>
             <p>
               <%== post_parrafo.par_texto %>
-              <% if logged_in? && current_contact = @post.id %>
+              <% if logged_in? && session[:user_id] == @post.contact_id %>
                 [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
             </p>
             <!-- Viñetas del Parrafo, si hay -->
 
-            <% if logged_in? && current_contact = @post.id %>
+            <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">
                 <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
               </div>
@@ -91,7 +91,7 @@
                 <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
                   <li>
                     <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
-                    <% if logged_in? && current_contact = @post.id %>
+                    <% if logged_in? && session[:user_id] == @post.contact_id %>
                       [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: post_parrafo.id), class: "glyphicon glyphicon-edit" %> - 
                       <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
                     <% end %>
@@ -105,7 +105,7 @@
     
       <div id="links" class="blog-div-texto col-sm-10 col-sm-offset-1">
         <h3>Links Externos:</h3>
-        <% if logged_in? && current_contact = @post.id %>
+        <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
             <h4> <%= link_to ' Link', new_post_link_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
           </div>
@@ -114,7 +114,7 @@
           <% @post.post_links.each do |post_link| %>
             <p>
               > <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
-              <% if logged_in? && current_contact = @post.id %>
+              <% if logged_in? && session[:user_id] == @post.contact_id %>
                 [ <%= link_to ' ', edit_post_link_path(post_link, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_link_path(id: post_link.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Link?'}, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
@@ -130,7 +130,7 @@
           <h3>Conclusión: </h3>
           <p>
             <%== @post.pos_conclusion %> <br/>
-            <% if logged_in? && current_contact = @post.id %>
+            <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">
                 <h4> <%= link_to ' Conclusión', edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
               </div>
