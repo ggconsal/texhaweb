@@ -13,7 +13,7 @@
 				En el mail le enviamos una "Clave Provisoria"...<br/><br/>
 				Si desea modificarla (Recomendable), por favor ingrese desde aquí <br/><br/>
 				<div class="centered">
-                	<%= link_to "Cambiar la Clave", edit_contact_path(:id => current_contact.id, :tipo => "clave"), class: "btn btn-warning" %><br/><br/>
+                	<%= link_to "Cambiar la Clave", edit_contact_path(:id => @contact.id, :tipo => "clave"), class: "btn btn-warning" %><br/><br/>
                 </div>
 			</h4>
 			<p>
