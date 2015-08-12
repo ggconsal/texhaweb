@@ -1,39 +1,68 @@
-<%= form_for(@post_rel) do |f| %>
-  <% if @post_rel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_rel.errors.count, "error") %> prohibited this post_rel from being saved:</h2>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for(@post_rel, remote: true) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-      <ul>
-      <% @post_rel.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class="centered">
+          <% if @post_rel.id %>
+            <h3>Modificar Artículo Relacionado:</h3>
+          <% else %>
+            <h3>Agregar un Artículo Relacionado</h3>
+          <% end %>
+          <h4>
+            "<%= @post.pos_titulo %>" (Id: <%= @post_rel.post_id %>)
+          </h4>
+        </div>
+        
+        <% if @post_rel.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post_rel.errors.count, "error") %> prohibited this post_rel from being saved:</h2>
 
-  <div class="blog-div-title">
-    <h3>
-      <u>Título del Post</u>: <%= @post.pos_titulo %> (Id: <%= @post_rel.post_id %>)
-    </h3>
-  </div>
+            <ul>
+            <% @post_rel.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
 
-  <div class="field hide">
-    <%= f.text_field :post_id, value: @post_rel.post_id %>
-  </div>
+      <div id="div-modal-body" class="modal-body">
+        <div class="field hide">
+          <%= f.text_field :post_id, value: @post_rel.post_id %>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pre_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="righter">
+            <div class="field col-xs-12 col-sm-6 ">
+              <%= f.text_field :pli_url, :placeholder => "Ingrese ID del Artículo...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :pre_titulo %><br>
-    <%= f.text_field :pre_titulo %>
+        <div class="row">
+          <div class="field col-xs-12">
+            <%= f.text_area :pli_desc, required: true, :placeholder => "Ingrese la Descripción...", rows: "6",:class=>"form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="col-xs-6 lefter">
+          <%= image_tag("texhablanco100x40.jpg") %>
+        </div>
+        <div id="divMeAnoto" class="col-xs-6 righter">
+          <%= f.submit 'Guardar', :class=>"btn btn-md btn-info", :id=>"gc-aceptar" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :pli_url %><br>
-    <%= f.text_field :pli_url %>
-  </div>
-  <div class="field">
-    <%= f.label :pli_desc %><br>
-    <%= f.text_area :pli_desc %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+

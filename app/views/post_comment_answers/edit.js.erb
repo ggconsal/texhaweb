@@ -1,0 +1,4 @@
+$("#product-modal").html("<%= escape_javascript(render partial: 'form', locals: {comment: @post_comment.id}) %>" );
+$("#product-modal").modal("show");
+
+

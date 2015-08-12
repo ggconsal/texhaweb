@@ -1,0 +1,13 @@
+$("#product-modal").html("<%= escape_javascript(render partial: 'form', locals: {post: @post.id}) %>" );
+$("#product-modal").modal("show");
+
+/*
+
+<%= render 'form' %>
+
+<!--
+
+<%= link_to 'Back', post_rels_path %>
+-->
+
+*/

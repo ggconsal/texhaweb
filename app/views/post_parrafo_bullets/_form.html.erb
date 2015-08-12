@@ -1,35 +1,63 @@
-<%= form_for(@post_parrafo_bullet) do |f| %>
-  <% if @post_parrafo_bullet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_parrafo_bullet.errors.count, "error") %> prohibited this post_parrafo_bullet from being saved:</h2>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for(@post_parrafo_bullet, remote: true) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-      <ul>
-      <% @post_parrafo_bullet.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class="centered">
+          <% if @post_parrafo_bullet.id %>
+            <h3>Modificar Viñeta:</h3>
+          <% else %>
+            <h3>Agregar una Viñeta</h3>
+          <% end %>
+          <h4>
+            "<%= @post_parrafo.par_titulo %>" (Id: <%= @post_parrafo_bullet.post_parrafo_id %>)
+          </h4>
+        </div>
+        
+        <% if @post_parrafo_bullet.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post_parrafo_bullet.errors.count, "error") %> prohibited this post_parrafo_bullet from being saved:</h2>
 
-  <div class="blog-div-title">
-    <h3>
-      <u>Título del Párrafo</u>: <%= @post_parrafo.par_titulo %> (Id: <%= @post_parrafo_bullet.post_parrafo_id %>)
-    </h3>
-  </div>
+            <ul>
+            <% @post_parrafo_bullet.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
 
-  <div class="field hide">
-    <%= f.text_field :post_parrafo_id, value: @post_parrafo_bullet.post_parrafo_id %>
-  </div>
+      <div id="div-modal-body" class="modal-body">
+        <div class="field hide">
+          <%= f.text_field :post_parrafo_id, value: @post_parrafo_bullet.post_parrafo_id %>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :ppb_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :ppb_titulo %><br>
-    <%= f.text_field :ppb_titulo %>
+        <div class="row">
+          <div class="field col-xs-12">
+            <%= f.text_area :ppb_texto, required: true, :placeholder => "Ingrese la Descripción...", rows: "6",:class=>"form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="col-xs-6 lefter">
+          <%= image_tag("texhablanco100x40.jpg") %>
+        </div>
+        <div id="divMeAnoto" class="col-xs-6 righter">
+          <%= f.submit 'Guardar', :class=>"btn btn-md btn-info", :id=>"gc-aceptar" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :ppb_texto %><br>
-    <%= f.text_area :ppb_texto %>
-  </div>
-  <br/><div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+

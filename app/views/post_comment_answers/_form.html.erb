@@ -1,33 +1,74 @@
-<%= form_for(@post_comment_answer) do |f| %>
-  <% if @post_comment_answer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_comment_answer.errors.count, "error") %> prohibited this post_comment_answer from being saved:</h2>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for(@post_comment_answer, remote: true) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-      <ul>
-      <% @post_comment_answer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class="centered">
+          <% if @post_comment_answer.id %>
+            <h3>Modificar Opinión:</h3>
+          <% else %>
+            <h3>Opinar sobre el Comentario</h3>
+          <% end %>
+          <h4>
+            "<%= @post_comment.pco_texto %>" (Id: <%= @post_comment_answer.post_comment_id %>)
+          </h4>
+        </div>
+        
+        <% if @post_comment_answer.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post_comment_answer.errors.count, "error") %> prohibited this post_comment_answer from being saved:</h2>
 
-  <div class="field hide">
-    <%= f.text_field :post_comment_id, value: @post_comment_answer.post_comment_id %>
-  </div>
+            <ul>
+            <% @post_comment_answer.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :pca_titulo %><br>
-    <%= f.text_field :pca_titulo %>
+      <div id="div-modal-body" class="modal-body">
+        <div class="field hide">
+          <%= f.text_field :post_comment_id, value: @post_comment_answer.post_comment_id %>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pca_titulo, :placeholder => "Ingrese el título...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field col-xs-12">
+            <%= f.text_area :pca_texto, required: true, :placeholder => "Ingrese la Descripción...", rows: "6",:class=>"form-control" %>
+          </div>
+        </div>
+
+        <div class="row hide">
+          <div class="field col-xs-12">
+            <%= f.text_field :contact_id, value: session[:user_id], :class=>"form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="col-xs-6 lefter">
+          <%= image_tag("texhablanco100x40.jpg") %>
+        </div>
+        <div id="divMeAnoto" class="col-xs-6 righter">
+          <% if logged_in? %>
+            <%= f.submit 'Opinar', :class=>"btn btn-md btn-info", :id=>"gc-aceptar" %>
+          <% else %>
+            Para Poder opinar o comentar:
+            <%= link_to '¡Forme parte de nuestra comunidad!', new_contact_path(:motivo => "Opinar" +  @post_comment.post.pos_titulo), remote: true, class: "btn btn-success blog-bot-cta" %><br/><br/>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :pca_texto %><br>
-    <%= f.text_area :pca_texto %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_id %><br>
-    <%= f.text_field :contact_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+

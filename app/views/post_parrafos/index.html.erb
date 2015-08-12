@@ -1,17 +1,17 @@
 
 <div id="blog-div-ppal" class="container-fluid" >
 
-  <div class="blog-div-post2 col-sm-8 col-xs-11">
+  <div class="blog-div-post2 col-xs-11 col-sm-8">
 
     <% if @post_parrafos.any? %>
-      <div class="blog-div-title col-xs-10 col-sm-offset-1">
+      <div class="blog-div-title col-xs-12 col-sm-10 col-sm-offset-1">
         <h1>
           <%= @post.pos_titulo %>
         </h1>
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
             <h4>
-              <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
+              <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
             </h4>
           </div>
         <% end %>
@@ -19,32 +19,36 @@
           <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
-              <br/><%= link_to ' Imagen', edit_post_path(@post), class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
+              <br/><%= link_to ' Imagen', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
             </div>
           <% end %>
         </div>
       </div>
 
-      <div id="introduccion" class="blog-div-texto col-sm-10 col-sm-offset-1">
+      <div id="introduccion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
         <p>
-          <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+          <% if @post.contact.con_nya %>
+            <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+          <% else %>
+            <b>Autor:</b> Sin Nombre<br/><br/>
+          <% end %>
         </p>
         <h3>Introducción: </h3>
         <p>
           <%== @post.pos_intro %>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
-              <h4> <%= link_to " Intro", edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
+              <h4> <%= link_to " Intro", edit_post_path(@post), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
             </div>
           <% end %>
         </p>
       </div>
 
-      <div id="relacionados" class="blog-div-texto col-sm-10 col-sm-offset-1">
+      <div id="relacionados" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
         <h3>Artículos Relacionados:</h3>
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
-            <h4> <%= link_to ' Relación', new_post_rel_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
+            <h4> <%= link_to ' Relación', new_post_rel_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
           </div>
         <% end %>
         <% if @post.post_rels.any? %> 
@@ -53,7 +57,7 @@
             <p>
               <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %> 
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
+                [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
             </p>
@@ -64,9 +68,9 @@
       </div>
 
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-        <div class="row blog-div-row col-sm-11 col-sm-offset-1">
+        <div class="row blog-div-row blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
 
-          <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto col-sm-11 col-xs-11">
+          <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto">
             <!-- Texto del Parrafo -->
             <h3><%== post_parrafo.par_titulo %></h3>
             <% if post_parrafo.par_imagen_tmp != "" %>
@@ -75,7 +79,7 @@
             <p>
               <%== post_parrafo.par_texto %>
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
+                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
             </p>
@@ -83,7 +87,7 @@
 
             <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">
-                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
+                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
               </div>
             <% end %>
             <% if post_parrafo.post_parrafo_bullets.any? %>
@@ -92,7 +96,7 @@
                   <li>
                     <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
                     <% if logged_in? && session[:user_id] == @post.contact_id %>
-                      [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: post_parrafo.id), class: "glyphicon glyphicon-edit" %> - 
+                      [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit" %> - 
                       <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
                     <% end %>
                   </li>
@@ -103,11 +107,11 @@
         </div> <!-- END container-fluid -->
       <% end %> <!-- END Impresion de todos los Parrafos Comunes -->
     
-      <div id="links" class="blog-div-texto col-sm-10 col-sm-offset-1">
+      <div id="links" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
         <h3>Links Externos:</h3>
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
-            <h4> <%= link_to ' Link', new_post_link_path(post: @post.id), class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
+            <h4> <%= link_to ' Link', new_post_link_path(post: @post.id),remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
           </div>
         <% end %>
         <% if @post.post_links.any? %> 
@@ -115,7 +119,7 @@
             <p>
               > <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                [ <%= link_to ' ', edit_post_link_path(post_link, post: @post.id), class: "glyphicon glyphicon-edit" %> - 
+                [ <%= link_to ' ', edit_post_link_path(post_link, post: @post.id),remote: true, class: "glyphicon glyphicon-edit" %> - 
                 <%= link_to ' ', post_link_path(id: post_link.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Link?'}, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
             </p>
@@ -125,14 +129,14 @@
         <% end %>
       </div>
 
-      <div id="conclusion" class="blog-div-texto col-sm-10 col-sm-offset-1">
+      <div id="conclusion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
         <div class="blog-div-texto">
           <h3>Conclusión: </h3>
           <p>
             <%== @post.pos_conclusion %> <br/>
             <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">
-                <h4> <%= link_to ' Conclusión', edit_post_path(@post), class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
+                <h4> <%= link_to ' Conclusión', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
               </div>
             <% end %>
           </p>
@@ -140,16 +144,16 @@
       </div>
 
       <% if @post.post_comments.any? %> 
-        <div class="blog-div-texto col-sm-10 col-sm-offset-1">
+        <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
           <h3>Cometarios del Artículo:</h3>
           <div class="righter">
-            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), class: "glyphicon glyphicon-comment btn btn-lg btn-info" %></h4>
+            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), remote: true, class: "glyphicon glyphicon-comment btn btn-lg btn-info" %></h4>
           </div>
 
         </div>
 
         <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
-          <div class="blog-div-texto col-sm-10 col-sm-offset-1">
+          <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
             <!-- Texto del Comentario --> 
             <p><%== post_comment.pco_titulo %> - <%= post_comment.contact.con_nya %></p>
             <p>
@@ -157,12 +161,18 @@
             </p>
 
             <div class="righter">
-              <%= link_to ' Responder', new_post_comment_answer_path(comment: post_comment.id), class: "glyphicon glyphicon-comment btn btn-md btn-info" %>
+              <%= link_to ' Opinar sobre el Comentario', new_post_comment_answer_path(comment: post_comment.id), remote: true, class: "glyphicon glyphicon-comment btn btn-md btn-info" %>
             </div>
             <% if post_comment.post_comment_answers.any? %> 
               <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
                 <div class="blog-div-texto col-md-offset-1">
-                  <p><%== post_answer.pca_titulo %> - <%= post_answer.contact.con_nya %></p>
+                  <p>
+                    <% if post_answer.contact.con_nya? %>
+                      <%== post_answer.pca_titulo %> - <%= post_answer.contact.con_nya %>
+                    <% else %>
+                      <%== post_answer.pca_titulo %> - Sin Nombre
+                    <% end %>
+                  </p>
                   <p id="p-comment"><%== post_answer.pca_texto %></p>
                 </div>
               <% end %> <!-- END Impresion de las Respuestas-->

@@ -1,5 +1,3 @@
-
-
 <div class="modal-dialog">
   <div class="modal-content">
     <%= form_for(@contact, remote: true) do |f| %>
@@ -9,72 +7,86 @@
           <span aria-hidden="true">&times;</span>
         </button>
 
-<!--
--->
-        <% if @contact.con_boton_sitio.include? "txaShop" %>
-          <h3>¿Quieres aumentar tus Ventas?</h3>
-          <% elsif @contact.con_boton_sitio.include? "txaVentas" %>
-            <h3>¿Quieres aumentar tus Ventas?</h3>
-            <% elsif @contact.con_boton_sitio.include? "txaVision" %>
-              <h3>¿Quieres aumentar tus Ventas?</h3>
-              <% elsif @contact.con_boton_sitio.include? "menu - ventas" %>
-                <h3>¿Quieres aumentar tus Ventas?</h3>
+        <div class="centered">
+          <% if (@contact.con_boton_sitio.include? "txaShop") || 
+                (@contact.con_boton_sitio.include? "txaVentas") ||
+                (@contact.con_boton_sitio.include? "CTA Vtas - ") ||
+                (@contact.con_boton_sitio.include? "txaVision") ||
+                (@contact.con_boton_sitio.include? "menu - Ventas") %>
+                <h3>¡Aumente sus Ventas!</h3>
+                <h4>¡Déjenos su email!<br/>Nos Contactaremos hoy mismo</h4>
 
-        <% elsif @contact.con_boton_sitio.include? "txaCostos" %>
-          <h3>¿Quieres reducir los Costos?</h3>
-          <% elsif @contact.con_boton_sitio.include? "menu - costos" %>
-            <h3>¿Quieres reducir los Costos?</h3>
+          <% elsif (@contact.con_boton_sitio.include? "txaCostos") ||
+                   (@contact.con_boton_sitio.include? "menu - Costos") %>
+                   <h3>¡Reduzca los Costos de su Empresa!</h3>
+                   <h4>¡Déjenos su email <br/>Nos Contactaremos hoy mismo!</h4>
 
-        <% elsif @contact.con_boton_sitio.include? "redes" %>
-          <h3>¿Quieres Aumentar tu Rentabilidad?</h3>
-          <% elsif @contact.con_boton_sitio.include? "quienes somos" %>
-            <h3>¿Quieres Aumentar tu Rentabilidad?</h3>
-              <% elsif @contact.con_boton_sitio.include? "Blog" %>
-                <h3>¿Quieres Aumentar tu Rentabilidad?</h3>
+          <% elsif (@contact.con_boton_sitio.include? "menu - Contacto") ||
+                   (@contact.con_boton_sitio.include? "quienes somos") || 
+                   (@contact.con_boton_sitio.include? "Post - ") ||
+                   (@contact.con_boton_sitio.include? "Blog") %>
+                   <h3>¡Aumente su Rentabilidad!</h3>
+                   <h4>¡Anótese Gratis y le enviaremos<br/>Información útil para su Negocio!</h4>
+          <% elsif (@contact.con_boton_sitio.include? "Comentar") ||
+                   (@contact.con_boton_sitio.include? "Opinar") %>
+                   <h3>¡Participe de nuestra Comunidad!</h3>
+                   <h4>¡Es completamente Gratis y podrá <br/>recibir grandes beneficios!</h4>
+          <% end %>
+        </div>
+        
+        <% if @contact.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
 
+            <ul>
+            <% @contact.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
         <% end %>
-
       </div>
 
       <div id="div-modal-body" class="modal-body">
 
-        <ul class="errors"></ul>
-
-        <% if @contact.con_boton_sitio.include? "Blog" %>
-          <h4 class="modal-header-h4">¡Anótate Gratis y te enviaremos<br/>Información útil para tu Pyme!</h4>
-        <% else %>
-          <h4 class="modal-header-h4">¡Déjanos tu email <br/>Nos Contactaremos hoy mismo!</h4>
-        <% end %>
-
         <% @clave = Time.now.year.to_s + Time.now.month.to_s + rand(10000..99999).to_s %>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 confirm-body">
-          <div class="field">
-            <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
-          </div>
-          <div class="field">
-            <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
-          </div>
-
-          <% if @contact.con_boton_sitio.include? "redes" %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
             <div class="field">
+              <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <% if @contact.con_boton_sitio.include? "redes" %>
+              <div class="field">
+            <% else %>
+              <div class="field hide">
+            <% end %>
               <%= f.text_area :con_obs, :placeholder => "Déjenos su Comentario...", :class=>"form-control" %>
             </div>
-          <% else %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
             <div class="field hide">
-              <%= f.text_area :con_obs, :placeholder => "Déjenos su Comentario...", :class=>"form-control" %>
+              <%= f.password_field :password, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
             </div>
-          <% end %>
-
-          <div class="field hide">
-            <%= f.password_field :password, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
+            <div class="field hide">
+              <%= f.password_field :password_confirmation, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
+            </div>
+            <div class="field hide">
+              <%= f.text_area :con_boton_sitio, :class=>"form-control" %>
+            </div>
           </div>
-          <div class="field hide">
-            <%= f.password_field :password_confirmation, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
-          </div>
-          <div class="field hide">
-            <%= f.text_area :con_boton_sitio, :class=>"form-control" %>
-          </div>
-
         </div>
       </div>
 
@@ -82,18 +94,16 @@
       </div>
 
       <div class="modal-footer">
-        <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 col-md-offset-1">
+        <div class="col-xs-6 lefter">
           <%= image_tag("texhablanco100x40.jpg") %>
         </div>
-        <div id="divMeAnoto" class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-          <% if @contact.con_boton_sitio.include? "redes" %>
-            <%= f.submit '¡Enviar!', :class=>"btn btn-outline-inverse btn-md btn-idx3", :id=>"gc-aceptar" %>
-            <% elsif @contact.con_boton_sitio.include? "menu" %>
-              <%= f.submit '¡Enviar!', :class=>"btn btn-outline-inverse btn-md btn-idx3", :id=>"gc-aceptar" %>
-              <% elsif @contact.con_boton_sitio.include? "quienes" %>
-                <%= f.submit '¡Enviar!', :class=>"btn btn-outline-inverse btn-md btn-idx3", :id=>"gc-aceptar" %>
+        <div id="divMeAnoto" class="col-xs-6 righter">
+          <% if (@contact.con_boton_sitio.include? "redes") ||
+                (@contact.con_boton_sitio.include? "menu") ||
+                (@contact.con_boton_sitio.include? "quienes") %>
+            <%= f.submit '¡Enviar!', :class=>"btn btn-succes btn-lg", :id=>"gc-aceptar" %>
           <% else %>
-            <%= f.submit '¡Me Anoto!', :class=>"btn btn-outline-inverse btn-md btn-idx3", :id=>"gc-aceptar" %>
+            <%= f.submit '¡Me Anoto!', :class=>"btn btn-success btn-lg", :id=>"gc-aceptar" %>
           <% end %>
         </div>
       </div>

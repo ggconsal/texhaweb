@@ -71,7 +71,7 @@
             <li class="divider"></li>
           <li>
           <li>
-            <%= link_to 'Comunicarse con Nosotros', new_contact_path(:motivo => "menu ppal"), remote: true %>
+            <%= link_to 'Comunicarse con Nosotros', new_contact_path(:motivo => "menu - Contacto"), remote: true %>
           </li>
           </ul>
         </li>
@@ -83,7 +83,7 @@
           <ul class="dropdown-menu" role="menu">
             <% if logged_in? %>
     	        <li>
-        			  <%= link_to 'Nuevo Post', new_post_path %>
+        			  <%= link_to 'Nuevo Post', new_post_path, remote: true %>
     	        </li>
     	        <li>
     	          <%= link_to 'Comentar', post_comments_path %>
