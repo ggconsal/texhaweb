@@ -23,14 +23,14 @@
         <div class="blog-div-post col-md-5 col-sm-10 col-xs-12">
            
           <div class="blog-div-foto col-xs-12">
-            <%= image_tag(post.pos_imagen_tmp, class: "img-responsive post-img") %>
+            <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
           </div>
 
           <div class="blog-div-texto col-xs-11">
             <h3><%== post.pos_titulo %></h3>
-            <p>
-              <b>Autor:</b> <%= post.contact.con_nya %> - 26 ABR, 2015
-            </p>
+              <p>
+                <%= post.imagen_big.url %>
+              </p>
             <p>
               <%== post.pos_intro %>
             </p>
@@ -41,7 +41,7 @@
           </div>
         </div>
 
-    <% if @cant_post % 2 == 0 %>
+    <% if (@cant_post % 2 == 0) || ((post.id == @ultimo) && (@cant_post < 2)) %>
       </div>
       <% @cant_post = 0 %>
       <% @cant_row = @cant_row + 1 %>
@@ -52,7 +52,6 @@
         </div>
       <% end %>
     <% end %>
-
   <% end %>
 
   <div class="blog-div-col-der col-md-3 col-sm-4">

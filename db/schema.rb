@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806192806) do
+ActiveRecord::Schema.define(version: 20150814185004) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -141,13 +141,17 @@ ActiveRecord::Schema.define(version: 20150806192806) do
   add_index "post_rels", ["post_id"], name: "index_post_rels_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "pos_titulo",     limit: 255
-    t.text     "pos_intro",      limit: 65535
-    t.text     "pos_conclusion", limit: 65535
-    t.string   "pos_imagen_tmp", limit: 255
-    t.integer  "contact_id",     limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "pos_titulo",              limit: 255
+    t.text     "pos_intro",               limit: 65535
+    t.text     "pos_conclusion",          limit: 65535
+    t.string   "pos_imagen_tmp",          limit: 255
+    t.integer  "contact_id",              limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "imagen_big_file_name",    limit: 255
+    t.string   "imagen_big_content_type", limit: 255
+    t.integer  "imagen_big_file_size",    limit: 4
+    t.datetime "imagen_big_updated_at"
   end
 
   add_index "posts", ["contact_id"], name: "index_posts_on_contact_id", using: :btree

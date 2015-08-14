@@ -16,7 +16,7 @@
           </div>
         <% end %>
         <div class="blog-div-foto">
-          <%= image_tag(@post.pos_imagen_tmp, class: "img-responsive") %>
+          <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
               <br/><%= link_to ' Imagen', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
@@ -192,8 +192,16 @@
 
     <% else %> <!-- ELSE @post_parrafos.any? -->
       <div class="blog-div-titulo col-xs-11">
-        <h3>Articulo no definido aun</h3><br/><br/><br/>
+        <br/><br/><br/><h3>Articulo no definido aun</h3>
       </div>
+      <% if logged_in?  %> <!-- && session[:user_id] == @post.contact_id -->
+        <div class="blog-div-titulo righter">
+          <h4>
+            <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
+          </h4>
+          <br/><%= link_to ' Cabecera', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-edit btn btn-md btn-info" %>
+        </div>
+      <% end %>
     <% end %> <!-- END @post_parrafos.any? -->
   </div>  <!-- END div-cada-post -->
 
