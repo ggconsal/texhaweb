@@ -6,7 +6,7 @@
     <% if @post_parrafos.any? %>
       <div class="blog-div-title col-xs-12 col-sm-10 col-sm-offset-1">
         <h1>
-          <%= @post.pos_titulo %>
+          <%== @post.pos_titulo %>
         </h1>
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
@@ -73,8 +73,8 @@
           <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto">
             <!-- Texto del Parrafo -->
             <h3><%== post_parrafo.par_titulo %></h3>
-            <% if post_parrafo.par_imagen_tmp != "" %>
-              <%= image_tag(post_parrafo.par_imagen_tmp, class: "img-responsive blog-pic-post") %>
+            <% if post_parrafo.imagen_small.url != "Missing.png" %>
+              <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
             <% end %>
             <p>
               <%== post_parrafo.par_texto %>
@@ -94,7 +94,10 @@
               <ul class="blog-ul">
                 <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
                   <li>
-                    <%== bullet.ppb_titulo %>: <%== bullet.ppb_texto %>
+                    <% if bullet.ppb_titulo != "" %>
+                      <%== bullet.ppb_titulo %>: 
+                    <% end %>
+                    <%== bullet.ppb_texto %>
                     <% if logged_in? && session[:user_id] == @post.contact_id %>
                       [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit" %> - 
                       <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
@@ -143,51 +146,53 @@
         </div>
       </div>
 
-      <% if @post.post_comments.any? %> 
-        <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <h3>Cometarios del Artículo:</h3>
+      <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+        <h3>Cometarios del Artículo:</h3>
+        <% if @post.post_comments.any? %> 
           <div class="righter">
-            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), remote: true, class: "glyphicon glyphicon-comment btn btn-lg btn-info" %></h4>
+            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), remote: true, class: "glyphicon glyphicon-comment btn btn-md btn-info" %></h4>
           </div>
 
-        </div>
 
-        <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
-          <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-            <!-- Texto del Comentario --> 
-            <p><%== post_comment.pco_titulo %> - <%= post_comment.contact.con_nya %></p>
-            <p>
-              <%== post_comment.pco_texto %>
-            </p>
+          <% @post.post_comments.each do |post_comment| %> <!-- BEGIN Impresion de todos los Comentrios -->
+              <!-- Texto del Comentario --> 
+              <p>
+                <% if post_comment.pco_titulo != "" %>
+                  <%== post_comment.pco_titulo %> - 
+                <% end %>
+                <%= post_comment.contact.con_nya %>
+              </p>
+              <p id="p-comment" >
+                <%== post_comment.pco_texto %>
+                 [ <%= link_to ' Opinar', new_post_comment_answer_path(comment: post_comment.id), remote: true, class: "glyphicon glyphicon-comment" %> ]
+              </p>
 
-            <div class="righter">
-              <%= link_to ' Opinar sobre el Comentario', new_post_comment_answer_path(comment: post_comment.id), remote: true, class: "glyphicon glyphicon-comment btn btn-md btn-info" %>
-            </div>
-            <% if post_comment.post_comment_answers.any? %> 
-              <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
-                <div class="blog-div-texto col-md-offset-1">
-                  <p>
-                    <% if post_answer.contact.con_nya? %>
-                      <%== post_answer.pca_titulo %> - <%= post_answer.contact.con_nya %>
-                    <% else %>
-                      <%== post_answer.pca_titulo %> - Sin Nombre
-                    <% end %>
-                  </p>
-                  <p id="p-comment"><%== post_answer.pca_texto %></p>
+              <% if post_comment.post_comment_answers.any? %> 
+                <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
+                  <div class="blog-div-texto col-md-offset-1">
+                    <p>
+                      <% if post_answer.contact.con_nya? %>
+                        <% if post_answer.pca_titulo != "" %>
+                          <%== post_answer.pca_titulo %> - 
+                        <% end %>
+                        <%= post_answer.contact.con_nya %>
+                      <% else %>
+                        <%== post_answer.pca_titulo %> - Sin Nombre
+                      <% end %>
+                    </p>
+                    <p id="p-answer"><%== post_answer.pca_texto %></p>
+                  </div>
+                <% end %> <!-- END Impresion de las Respuestas-->
+              <% else %> <!-- ELSE post_comment.post_comment_answers.any? -->
+                <div class="righter">
+                  <h5>Comentario sin Respuestas aun</h5>
                 </div>
-              <% end %> <!-- END Impresion de las Respuestas-->
-            <% else %> <!-- ELSE post_comment.post_comment_answers.any? -->
-              <div class="righter">
-                <h5>Comentario sin Respuestas aun</h5>
-              </div>
-            <% end %> <!-- END post_comment.post_comment_answers.any? -->
-          </div>
-        <% end %> <!-- END Impresion de todos los Cometarios -->
-      <% else %> <!-- ELSE @post_comments.any? -->
-        <div class="blog-div-titulo col-xs-11">
-          <h3>Articulo sin Comentarios aun</h3><br/><br/><br/>
-        </div>
-      <% end %> <!-- END @post_comments.any? -->
+              <% end %> <!-- END post_comment.post_comment_answers.any? -->
+          <% end %> <!-- END Impresion de todos los Cometarios -->
+        <% else %> <!-- ELSE @post_comments.any? -->
+          <h4>Articulo sin Comentarios aun</h4><br/><br/><br/>
+        <% end %> <!-- END @post_comments.any? -->
+      </div>
 
 
     <% else %> <!-- ELSE @post_parrafos.any? -->

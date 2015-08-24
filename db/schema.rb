@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814185004) do
+ActiveRecord::Schema.define(version: 20150824203305) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -119,12 +119,16 @@ ActiveRecord::Schema.define(version: 20150814185004) do
   add_index "post_parrafo_vineta", ["postparrafo_id"], name: "index_post_parrafo_vineta_on_postparrafo_id", using: :btree
 
   create_table "post_parrafos", force: :cascade do |t|
-    t.string   "par_titulo",     limit: 255
-    t.text     "par_texto",      limit: 65535
-    t.integer  "post_id",        limit: 4
-    t.string   "par_imagen_tmp", limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "par_titulo",                limit: 255
+    t.text     "par_texto",                 limit: 65535
+    t.integer  "post_id",                   limit: 4
+    t.string   "par_imagen_tmp",            limit: 255
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "imagen_small_file_name",    limit: 255
+    t.string   "imagen_small_content_type", limit: 255
+    t.integer  "imagen_small_file_size",    limit: 4
+    t.datetime "imagen_small_updated_at"
   end
 
   add_index "post_parrafos", ["post_id"], name: "index_post_parrafos_on_post_id", using: :btree

@@ -40,12 +40,19 @@
             <%= f.text_field :contact_id %> -->
           </div>
         <% end %>
+
         <div class="row">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pos_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
             </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <%= image_tag @post.imagen_big.url, style: "width:100%" %>
           </div><br/><br/><br/>
+        </div>
+
+        <div class="row">
           <div class="righter">
             <div class="field col-xs-12 col-sm-6 ">
               <%= f.file_field :imagen_big, required: true %>

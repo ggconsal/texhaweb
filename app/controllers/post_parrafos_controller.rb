@@ -36,13 +36,20 @@ class PostParrafosController < ApplicationController
 
     respond_to do |format|
       if @post_parrafo.save
-        format.html { redirect_to @post_parrafo, notice: 'Post parrafo was successfully created.' }
+        format.html { redirect_to :back, notice: 'Post parrafo was successfully created.' }
         format.json { render :show, status: :created, location: @post_parrafo }
-      else
-        format.html { render :new }
-        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
       end
     end
+
+#    respond_to do |format|
+#      if @post_parrafo.save
+#        format.html { redirect_to :back, notice: 'Post parrafo was successfully created.' }
+#        format.json { render :show, status: :created, location: @post_parrafo }
+#      else
+#        format.html { render :new }
+#        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
   # PATCH/PUT /post_parrafos/1
@@ -50,13 +57,21 @@ class PostParrafosController < ApplicationController
   def update
     respond_to do |format|
       if @post_parrafo.update(post_parrafo_params)
-        format.html { redirect_to @post_parrafo, notice: 'Post parrafo was successfully updated.' }
+        format.html { redirect_to @post_parrafo, notice: 'Post was successfully destroyed.' }
         format.json { render :show, status: :ok, location: @post_parrafo }
-      else
-        format.html { render :edit }
-        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
+        #format.json { head :no_content }
       end
     end
+
+#    respond_to do |format|
+#      if @post_parrafo.update(post_parrafo_params)
+#        format.html { redirect_to @post_parrafo, notice: 'Post parrafo was successfully updated.' }
+#        format.json { render :show, status: :ok, location: @post_parrafo }
+#      else
+#        format.html { render :edit }
+#        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
   # DELETE /post_parrafos/1
@@ -77,6 +92,6 @@ class PostParrafosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_parrafo_params
-      params.require(:post_parrafo).permit(:par_titulo, :par_texto, :post_id, :par_imagen_tmp)
+      params.require(:post_parrafo).permit(:imagen_small, :par_titulo, :par_texto, :post_id, :par_imagen_tmp)
     end
 end
