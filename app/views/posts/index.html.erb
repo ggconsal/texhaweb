@@ -24,6 +24,7 @@
           <div class="blog-div-post col-md-5 col-sm-10 col-xs-12">
              
             <div class="blog-div-foto col-xs-12">
+              <%= post.imagen_big_file_name %>
               <% if ENV["herokuapp"] == "NO" %>
                 <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
               <% else %>
