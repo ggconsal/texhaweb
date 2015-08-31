@@ -37,7 +37,8 @@ class PostParrafosController < ApplicationController
     respond_to do |format|
       if @post_parrafo.save
         format.html { redirect_to :back, notice: 'Post parrafo was successfully created.' }
-        format.json { render :show, status: :created, location: @post_parrafo }
+        format.json { head :no_content }
+#       format.json { render :show, status: :created, location: @post_parrafo }
       end
     end
 
