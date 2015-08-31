@@ -16,7 +16,11 @@
           </div>
         <% end %>
         <div class="blog-div-foto">
-          <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
+          <% if ENV["herokuapp"] == "NO" %>
+            <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
+          <% else %>
+            <%= image_tag(@post.imagen_big_file_name, class: "img-responsive") %>
+          <% end %>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
               <br/><%= link_to ' Imagen', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
@@ -74,7 +78,11 @@
             <!-- Texto del Parrafo -->
             <h3><%== post_parrafo.par_titulo %></h3>
             <% if post_parrafo.imagen_small.url != "Missing.png" %>
-              <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
+              <% if ENV["herokuapp"] == "NO" %>
+                <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
+              <% else %>
+                <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
+              <% end %>
             <% end %>
             <p>
               <%== post_parrafo.par_texto %>
