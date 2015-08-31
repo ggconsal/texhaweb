@@ -5,7 +5,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-    @ultimo = Post.last.id
+    if @posts
+      @ultimo = Post.last.id
+    end
   end
 
   # GET /posts/1
