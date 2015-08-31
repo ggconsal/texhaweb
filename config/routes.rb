@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
+  get 'static_pages/quien'
+
+  get 'static_pages/prod'
+
+  get 'static_pages/costo'
+
+  get 'static_pages/venta'
+
+  get 'static_pages/contacto'
+
   resources :post_comment_answers
 
   resources :post_comments

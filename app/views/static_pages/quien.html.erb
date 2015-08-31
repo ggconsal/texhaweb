@@ -1,0 +1,157 @@
+<% provide(:title, "Quienes Somos |") %>
+
+<section id="about">
+    <div class="container">
+        <div class="section-heading scrollpoint sp-effect3 active animated fadeInDown sin-marg-bot">
+            <h1>Somos Texha<br/>Argentina</h1>
+            <div class="divider"></div>
+            <p>Soluciones Simples a Problemas Complejos</p>
+        </div>
+
+		<div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 sin-padd-r">
+	        <div class="bs-callout">
+		        <p></p>
+	        </div>
+	        <div id="tit00" class="bs-callout bs-callout-info sin-marg-bot" >
+	        	<h4>¿Quiénes Somos?</h4>
+	        	<p>Somos un grupo de profesionales, con especialización en las áreas de Tecnología, Ingeniería, Ventas y Marketing. <br/>Con <%= link_to "Experiencia", "#tit03", class: "mov-suave-post" %> y conocimiento en Empresas Nacionales e Internacionales, de primer nivel.
+	        </div>
+	        <div class="bs-callout bs-callout-red sin-marg-bot" >
+	        	<h4>¿En que lo podemos Ayudar?</h4>
+	        	<p>En aumentar sus ganancias, teniendo más <%= link_to "Ventas", {:action => "index", :controller => "contacts", :anchor => "pp"}, :class=>"mov-suave" %> y reduciendo los <%= link_to "Costos", {:action => "index", :controller => "contacts", :anchor => "ppp"}, :class=>"mov-suave" %> de su Negocio. 
+	        	<p/>
+	        	<p>
+	        	Puede ingresar a nuestro "<%= link_to 'Blog', posts_path %>" en forma Gratuita y encontrará diversos artículos muy interesantes, que lo ayudarán en la gestión de su Negocio. Sobre como aumentar sus ventas, como lograr confianza en los compradores, como mejorar las imágenes de su Página Web, etc.
+				</p>
+	        </div>
+	        <div class="bs-callout bs-callout-info" >
+	        	<h4>¿Cómo lo hacemos?</h4>
+	        	<p>Con mucha pasión facilitamos la Tecnología y la ponemos a su disposición, como medio para aumentar la rentabilidad de su Negocio. 
+	        	<br/>Invirtiendo y aportando toda nuestra experiencia y conocimiento, en el armado de productos flexibles, que se adaptan fácilmente a sus necesidades.
+				</p>
+	        </div>
+	        <div id="tit01" class="bs-callout bs-callout-green" >
+	        	<h4>¿Por qué Elegirnos a Nosotros?</h4>
+	        	<p>Porque somos una empresa experimentada, ágil y práctica. <br/>Con Soluciones Rápidas, de alta Calidad y a un costo Accesible.</p>
+	        </div>
+	        <div id="tit02" class="bs-callout bs-callout-info" >
+	        	<h4>¿Cómo se logran Soluciones Rápidas, de Alta Calidad y a un Costo Accesible?</h4>
+	        	<p>Porque nos basamos en el principio de las “Soluciones Standard”, que expresa que más del 70% de los problemas de una empresa, son similares al resto de las Compañías.  
+				<p/>
+				<p>
+				Construimos productos para solucionar rápidamente ese gran porcentaje, dejando la minoría de problemas para resolverlo con tiempo y con una solución a medida (en el caso de ser necesario).
+				<p/>
+				<p>
+				Si su empresa se identifica con esta definición, lo cual es muy probable, podremos implementar nuestras soluciones, y así aumentar sus ventas y reducir sus gastos, a un costo que pueda afrontar y en muy poco tiempo.
+				</p>
+	        </div>
+	        <div class="bs-callout bs-callout-info" >
+	        	<h4>¿Qué es “Alta Calidad” para Texha?</h4>
+	        	<p>Alta calidad significa que cada producto o servicio se basa en la Tecnología más avanzada y en las últimas y más probadas técnicas de marketing (en el caso de ventas) y de ingeniería (en el caso de costos).</p>
+	        </div>
+	        <div class="bs-callout">
+		        <p></p>
+	        </div>
+			<div id="tit03" class="blog-post transp">
+				<div id="tit01" class="post-summary">
+					<h3><span></span>Experiencia</h3>
+					<%= link_to image_tag("experiencia.png", class: "img-responsive quienes-image"), new_contact_path(:motivo => "Quienes somos - Experiencia"), remote: true %>
+				<!-- PRIMER subtitulo  -->
+
+					<!-- PRIMER subtitulo >>> PRIMER texto  -->
+					<h4><br/><br/>Proyectos Internacionales</h4>
+			      	<p><br/></p>
+				    <ul type="circle">
+				      <li>
+						<p>Proyecto SAP (EE.UU.-NY, Mexico y Europa: Ventas, Call Center y Contabilidad)</p>
+				      </li>
+				      <li>
+						<p>Proyecto Cobranzas (Brasil: Gestion de Cobranzas)</p>
+				      </li>
+				      <li>
+						<p>Proyecto Avaya (Mexico: Automatiacion de Llamadas)</p>
+				      </li>
+				      <li>
+						<p>Proyecto Fiserv (EE.UU.-Orlando: Reemplazo del Sistema Bancario)</p>
+				      </li>
+				    </ul>
+					<h4><br/><br/><br/>Proyectos Nacionales</h4>
+			      	<p><br/></p>
+				    <ul type="circle">
+				      <li>
+						<p>Proyecto Siebel (Ventas en 100 Sucursales y 1200 puntos en todo el Pais)</p>
+				      </li>
+				      <li>
+						<p>Proyecto MercadoLibre (Conciliador de Medios de Cobro)</p>
+				      </li>
+				      <li>
+						<p>Proyecto Meta4 (Sistema de RRHH)</p>
+				      </li>
+				      <li>
+						<p>Proyecto Exprian (Ventas en 950 Comercios)</p>
+				      </li>
+				      <li>
+						<p>Proyecto NQN (Neuquen: Reemplazo del Sistema Bancario)</p>
+				      </li>
+				    </ul>
+				</div>
+				<div class="post-summary"> 	
+				</div>
+			</div>
+	        <div class="bs-callout">
+		        <p><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
+	        </div>
+        </div>
+		<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12 sin-padd-r">
+			<div class="quien-div-der transp">
+				<div class="blog-div-texto">
+					<h3>Titulos</h3>
+				</div>
+				<div class="post-title">
+					<ul class="list-group categorias">
+					  <li class="list-group-item">
+					    <span class="badge"><%= @post_badge %></span>
+						<%= link_to "¿Quiénes Somos?", "#tit00", class: "mov-suave-post" %>
+					  </li>
+					  <li class="list-group-item">
+					    <%= link_to "¿Por qué Elegirnos?", "#tit01", class: "mov-suave-post" %>
+					  </li>
+					  <li class="list-group-item">
+					    <%= link_to "¿Soluciones Rápidas, de Alta Calidad y a un Costo Accesible?", "#tit02", class: "mov-suave-post" %>
+					  </li>
+					  <li class="list-group-item">
+					    <%= link_to "Nuestra Experiencia", "#tit03", class: "mov-suave-post" %>
+					  </li>
+					  <li class="list-group-item active">
+				        <%= link_to 'Contactarse con Nosotros', new_contact_path(:motivo => "quienes somos"), remote: true, style: "color: white;" %>
+					  </li>
+					</ul>
+				</div>
+			</div>
+			<div class="quien-div-der transp">
+				<div class="blog-div-texto">
+					<h3>Nuestras Soluciones</h3>
+				</div>
+				<div class="post-title">
+					<ul class="list-group categorias">
+					  <li class="list-group-item">
+			              <%= link_to "Aumente sus Ventas", {:action => "index", :controller => "contacts", :anchor => "pp"}, :class=>"mov-suave" %>
+					  </li>
+					  <li class="list-group-item">
+			              <%= link_to "Reduzca los Costos", {:action => "index", :controller => "contacts", :anchor => "ppp"}, :class=>"mov-suave" %>
+					  </li>
+					  <li class="list-group-item">
+			              <%= link_to "Unifique su Informacion de Ventas-Inventario-Gastos", {:action => "index", :controller => "contacts", :anchor => "ppp"}, :class=>"mov-suave" %>
+					  </li>
+					  <li class="list-group-item active">
+				        <%= link_to 'Contactarse con Nosotros', new_contact_path(:motivo => "quienes somos"), remote: true, style: "color: white;" %>
+					  </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    </div>
+</section>
+
+
+

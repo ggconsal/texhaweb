@@ -11,9 +11,10 @@
  * file per style scope.
  *
  *            You can use Sass (SCSS) here: http://sass-lang.com/
-*= require bootstrap
-*= require_self
-*/
+ *= require bootstrap
+ *= require animate
+ *= require_self
+ */
 
 .menu-ppal {
 	background-color: white;
@@ -28,18 +29,6 @@
 
 .div-ppal {
 	padding: 0px;
-}
-
-.centered {
-	text-align:center;
-}
-
-.lefter {
-	text-align:left;
-}
-
-.righter {
-	text-align:right;
 }
 
 @media (min-width: 650px) {
@@ -223,48 +212,178 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-/*--------------------------------------------------------------------------*/
-
 /*
-.post-info {
-  background: #000;
-  background: rgba(0, 0, 0, 0.6);
-  color: #FFF;
-  line-height: 1.2;
-  position: absolute;
-  padding: 5px;
-  right: 10%;
-  top: 18%;
+-----------------------------------------
+--  QUIENES
+-----------------------------------------
+*/
+
+section#about {
+	position: relative;
+	padding-bottom: 0px;
+}
+
+#div-blog, #about, #modif-datos, #ingresar {
+  background: url('page-background.png');
+}
+
+.quienes-image {
+	height: auto;
+	width: 100%;
+	border-radius: 4%;
+}
+
+.section-heading {
+    margin: 90px 0px 40px;
+	text-align: center;
+}
+.section-heading h1 {
+	display: inline-block;
+	font-size: 55px;
+	margin-bottom: 0;
+	font-weight: bold;
+	font-style: italic;
+}
+.section-heading p {
+	font-size: 25px;
+	color: #999999;
+	font-weight: 300;
+	line-height: 35px;
+}
+.section-heading .divider:after {
+  content: "";
+  position: relative;
+  height: 6px;
+  width: 80px;
+  display: block;
+  text-align: center;
+  margin: 13px auto;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+section .section-heading .divider:after {
+  background: #cc6698;
+}
+.section-heading.inverse h1,
+.section-heading.inverse p {
+  color: #ffffff;
+}
+.section-heading.inverse .divider:after {
+  background: #ffffff;
+}
+
+.scrollpoint {
+  opacity: 0;
+}
+
+.scrollpoint.active {
+  opacity: 1 \0;
+}
+
+.bs-callout {
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+.bs-callout code {
+  border-radius: 3px;
+}
+
+/* Tighten up space between multiple callouts */
+.bs-callout + .bs-callout {
+  margin-top: -5px;
+}
+
+/* Variations */
+.bs-callout-orange {
+  border-left-color: #E1AA27;
+}
+.bs-callout-orange h4 {
+  color: #E1AA27;
+}
+.bs-callout-red {
+  border-left-color: #C6352A;
+}
+.bs-callout-red h4 {
+  color: #C6352A;
+}
+.bs-callout-info {
+  border-left-color: #1b809e;
+}
+.bs-callout-info h4 {
+  color: #1b809e;
+}
+
+.bs-callout-green {
+  border-left-color: #2C9E1B;
+}
+.bs-callout-green h4 {
+  color: #2C9E1B;
+}
+
+.quien-div-der {
+  background: #FFF;
+  position: relative;
+  margin: 20px 0;
+  border: 7px solid #FFF;
   -webkit-border-radius: 5px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 5px;
   -moz-background-clip: padding;
   border-radius: 5px;
   background-clip: padding-box;
+  -webkit-box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
+  -moz-box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
+  box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
+  color: inset 0 1px #fff,0 0 8px #c8cfe6;
 }
 
-.post-summary {
-  margin: 10px 20px;
-}
-
-.post-summary p {
-  color: #828282;
-  text-align: justify;
-}
-
-.post-more {
-  text-align: right;
-  padding: 0 20px 20px 0;
-}
-
+/*
+-----------------------------------------
+--  CONFIGURACIONES GENERALES
+-----------------------------------------
 */
+
+.transp {
+    background-color: transparent;
+    border: 0px;
+    padding: 10px;
+}
+
+.sin-marg-bot {
+	margin-bottom: 0px;
+}
+
+.centered {
+	text-align:center;
+}
+
+.lefter {
+	text-align:left;
+}
+
+.righter {
+	text-align:right;
+}
+
+.sin-marg-top {
+	margin-top: 0px;
+}
+
+.sin-padd-r {
+	padding-right: 5px;
+}
+
