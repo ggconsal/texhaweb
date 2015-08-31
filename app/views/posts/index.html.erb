@@ -24,6 +24,8 @@
           <div class="blog-div-post col-md-5 col-sm-10 col-xs-12">
              
             <div class="blog-div-foto col-xs-12">
+              <%= post.imagen_big %>
+              <%= post.imagen_big.url %>
               <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
             </div>
 
