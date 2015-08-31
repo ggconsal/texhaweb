@@ -12,41 +12,43 @@
     <%= render "form_categorias" %>
   </div>
 
-  <% @posts.each do |post| %>
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
   
-    <% if @cant_post % 2 == 0 %>
-      <div class="row blog-div-row col-md-10 col-sm-8 col-xs-11">
-    <% end %>
+      <% if @cant_post % 2 == 0 %>
+        <div class="row blog-div-row col-md-10 col-sm-8 col-xs-11">
+      <% end %>
 
-        <% @cant_post = @cant_post + 1 %>
+          <% @cant_post = @cant_post + 1 %>
 
-        <div class="blog-div-post col-md-5 col-sm-10 col-xs-12">
-           
-          <div class="blog-div-foto col-xs-12">
-            <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
-          </div>
+          <div class="blog-div-post col-md-5 col-sm-10 col-xs-12">
+             
+            <div class="blog-div-foto col-xs-12">
+              <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
+            </div>
 
-          <div class="blog-div-texto col-xs-11">
-            <h3><%== post.pos_titulo %></h3>
-            <p>
-              <%== post.pos_intro %>
-            </p>
+            <div class="blog-div-texto col-xs-11">
+              <h3><%== post.pos_titulo %></h3>
+              <p>
+                <%== post.pos_intro %>
+              </p>
 
-            <div class="blog-div-post-pie col-xs-11">
-              <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: "btn btn-info blog-bot-cta" %>
+              <div class="blog-div-post-pie col-xs-11">
+                <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: "btn btn-info blog-bot-cta" %>
+              </div>
             </div>
           </div>
-        </div>
 
-    <% if (@cant_post % 2 == 0) || ((post.id == @ultimo) && (@cant_post < 2)) %>
-      </div>
-      <% @cant_post = 0 %>
-      <% @cant_row = @cant_row + 1 %>
-
-      <% if @cant_row == 1 %>
-        <div class="visible-xs-block">
-          <%= render "form_cta" %>
+      <% if (@cant_post % 2 == 0) || ((post.id == @ultimo) && (@cant_post < 2)) %>
         </div>
+        <% @cant_post = 0 %>
+        <% @cant_row = @cant_row + 1 %>
+
+        <% if @cant_row == 1 %>
+          <div class="visible-xs-block">
+            <%= render "form_cta" %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
