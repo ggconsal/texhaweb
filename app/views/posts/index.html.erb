@@ -39,7 +39,7 @@
             </div>
           </div>
 
-      <% if (@cant_post % 2 == 0) || ((post.id == @ultimo) && (@cant_post < 2)) %>
+      <% if (@cant_post % 2 == 0) || ((post.id == @ultimo.id) && (@cant_post < 2)) %>
         </div>
         <% @cant_post = 0 %>
         <% @cant_row = @cant_row + 1 %>
