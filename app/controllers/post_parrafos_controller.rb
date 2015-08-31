@@ -36,9 +36,9 @@ class PostParrafosController < ApplicationController
 
     respond_to do |format|
       if @post_parrafo.save
-        format.html { redirect_to :back, notice: 'Post parrafo was successfully created.' }
-        format.json { head :no_content }
-#       format.json { render :show, status: :created, location: @post_parrafo }
+        format.html { redirect_to @post_parrafo, notice: 'Post parrafo was successfully created.' }
+        format.json { render :show, status: :created, location: @post_parrafo }
+#        format.json { head :no_content }
       end
     end
 
@@ -58,7 +58,7 @@ class PostParrafosController < ApplicationController
   def update
     respond_to do |format|
       if @post_parrafo.update(post_parrafo_params)
-        format.html { redirect_to @post_parrafo, notice: 'Post was successfully destroyed.' }
+        format.html { redirect_to @post_parrafo, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_parrafo }
         #format.json { head :no_content }
       end
