@@ -4,4 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+
+  def paginas
+  	#@pages = Page.where(["pag_nombre like ?", "*-demo"]).order(:pos_section)
+  	@pages = Page.all.order(pag_nombre: :desc)
+  end
+
+  helper_method :paginas
+
 end

@@ -16,6 +16,7 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @contact.con_boton_sitio = params[:motivo]
+    @post = Post.find_by pos_tipo: "contacto"
   end
 
   # GET /contacts/1/edit
@@ -38,8 +39,15 @@ class ContactsController < ApplicationController
       if @contact.save
         ContactMailer.contact_email(@contact).deliver_now
         
-        format.html { redirect_to @contact, notice: 'Contacto Creado.' }
-        format.json { render :show, status: :created, location: @contact }
+        if @contact.con_boton_sitio.include? "ubicacion"
+          # Se llama desde la página de "Direcciones", por eso no tiene que ser modal.
+          format.html { redirect_to :back, notice: 'Contacto Creado.' }
+          format.json { head :no_content }
+        else
+          # Tiene que ser modal.
+          format.html { redirect_to @contact, notice: 'Contacto Creado.' }
+          format.json { render :show, status: :created, location: @contact }
+        end
       else
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -78,6 +86,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id_usuario])
     @contact.con_confirmado = true
     @contact.save
+    log_in @contact
 
   end
 

@@ -1,0 +1,72 @@
+<%= form_for(@contact) do |f| %>
+
+<!--
+    <div class="centered">
+      <h2>Déjenos su Consulta.</h2>
+      <h3>¡Evaluaremos su Caso sin Cargo!</h3>
+    </div>
+-->
+    <% if @contact.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+        <ul>
+        <% @contact.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div id="div-modal-body" class="modal-body">
+
+    <% @clave = Time.now.year.to_s + Time.now.month.to_s + rand(10000..99999).to_s %>
+    <div class="row sin-margen-afuera sin-margen">
+      <div class="col-xs-12 sin-margen-afuera sin-margen">
+        <div class="field">
+          <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row sin-margen-afuera sin-margen">
+      <div class="col-xs-12 sin-margen-afuera sin-margen">
+        <div class="field">
+          <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 hide">
+      <div class="field">
+        <%= f.text_field :con_boton_sitio, value: motivo, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="field">
+          <%= f.text_area :con_obs, rows: 4, :placeholder => "Consulta o Comentario...", :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="field hide">
+          <%= f.password_field :password, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
+        </div>
+        <div class="field hide">
+          <%= f.password_field :password_confirmation, :required => true,  :value => @clave, :placeholder => "Ingrese una Clave...", :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="msgOK">
+  </div>
+
+  <div id="divMeAnoto" class="col-xs-12 righter">
+    <%= f.submit 'Enviar Consulta', :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>
+  </div>
+<% end %>

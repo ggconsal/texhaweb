@@ -31,8 +31,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
-        format.json { head :no_content }
+        format.html { redirect_to @post, notice: 'Post was successfully destroyed.' }
+        format.json { render :show, status: :created, location: @post }
+        format.js {render inline: "location.reload();" }
+        #format.json { head :no_content }
       end
     end
 
@@ -53,8 +55,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         #format.html { redirect_to post_parrafos_url, notice: 'Post was successfully destroyed.' }
-        format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
-        format.json { head :no_content }
+        format.html { redirect_to @post, notice: 'Post was successfully destroyed.' }
+        format.json { render :show, status: :ok, location: @post }
+        format.js {render inline: "location.reload();" }
+        #format.json { head :no_content }
       end
     end
 
@@ -69,12 +73,29 @@ class PostsController < ApplicationController
 #    end
   end
 
+  def duplicar
+    @post = Post.find(params[:id])
+    @new_post = @post.dup
+
+    @new_post.pos_intro = ""
+    @new_post.pos_section = 0
+    @new_post.pos_titulo = 'Copia de "' + @new_post.pos_titulo + '"'
+
+    respond_to do |format|
+      if @new_post.save
+        format.html { redirect_to :back, notice: 'Post was successfully duplicated.' }
+        format.json { render :back, status: :created, location: @post }
+        format.js {render inline: "location.reload();" }
+      end
+    end
+  end
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -87,6 +108,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:imagen_big, :pos_titulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id)
+      params.require(:post).permit(:imagen_big, :pos_titulo, :pos_subtitulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id, :pos_page, :pos_section, :pos_estilo, :pos_feature, :pos_boton_desc, :pos_boton_color, :pos_simbolo, :pos_tipo)
     end
 end

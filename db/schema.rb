@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824203305) do
+ActiveRecord::Schema.define(version: 20150926170647) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -63,6 +63,22 @@ ActiveRecord::Schema.define(version: 20150824203305) do
 
   add_index "options", ["area_id"], name: "index_options_on_area_id", using: :btree
 
+  create_table "pages", force: :cascade do |t|
+    t.string   "pag_nombre",               limit: 255
+    t.string   "pag_titulo",               limit: 255
+    t.text     "pag_desc",                 limit: 65535
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "imagen_hori_file_name",    limit: 255
+    t.string   "imagen_hori_content_type", limit: 255
+    t.integer  "imagen_hori_file_size",    limit: 4
+    t.datetime "imagen_hori_updated_at"
+    t.string   "imagen_vert_file_name",    limit: 255
+    t.string   "imagen_vert_content_type", limit: 255
+    t.integer  "imagen_vert_file_size",    limit: 4
+    t.datetime "imagen_vert_updated_at"
+  end
+
   create_table "post_comment_answers", force: :cascade do |t|
     t.string   "pca_titulo",      limit: 255
     t.text     "pca_texto",       limit: 65535
@@ -108,16 +124,6 @@ ActiveRecord::Schema.define(version: 20150824203305) do
 
   add_index "post_parrafo_bullets", ["post_parrafo_id"], name: "index_post_parrafo_bullets_on_post_parrafo_id", using: :btree
 
-  create_table "post_parrafo_vineta", force: :cascade do |t|
-    t.string   "ppv_titulo",     limit: 255
-    t.text     "ppv_texto",      limit: 65535
-    t.integer  "postparrafo_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  add_index "post_parrafo_vineta", ["postparrafo_id"], name: "index_post_parrafo_vineta_on_postparrafo_id", using: :btree
-
   create_table "post_parrafos", force: :cascade do |t|
     t.string   "par_titulo",                limit: 255
     t.text     "par_texto",                 limit: 65535
@@ -146,9 +152,15 @@ ActiveRecord::Schema.define(version: 20150824203305) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "pos_titulo",              limit: 255
+    t.string   "pos_subtitulo",           limit: 255
     t.text     "pos_intro",               limit: 65535
     t.text     "pos_conclusion",          limit: 65535
     t.string   "pos_imagen_tmp",          limit: 255
+    t.string   "pos_boton_desc",          limit: 255
+    t.string   "pos_boton_color",         limit: 255
+    t.text     "pos_feature",             limit: 65535
+    t.string   "pos_simbolo",             limit: 255
+    t.string   "pos_estilo",              limit: 255
     t.integer  "contact_id",              limit: 4
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
@@ -156,6 +168,9 @@ ActiveRecord::Schema.define(version: 20150824203305) do
     t.string   "imagen_big_content_type", limit: 255
     t.integer  "imagen_big_file_size",    limit: 4
     t.datetime "imagen_big_updated_at"
+    t.string   "pos_page",                limit: 255
+    t.integer  "pos_section",             limit: 4
+    t.string   "pos_tipo",                limit: 255
   end
 
   add_index "posts", ["contact_id"], name: "index_posts_on_contact_id", using: :btree

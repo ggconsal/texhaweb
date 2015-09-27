@@ -1,2 +1,89 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="container-fluid div-ppal">
+
+
+<!--
+
+<div class="col-xs-12 div-img-100 div-hori", id="pp0" >
+  <%= image_tag "home01h.jpg", class: "img-responsive img-ppal"%>
+</div>
+
+<div class="col-xs-12 div-img-100 div-vert", id="pp0" >
+  <%= image_tag "home01v.jpg", class: "img-responsive img-ppal"%>
+</div>
+
+-->
+
+	<% if @page %>
+	  <div class="col-xs-12 div-img-100 div-hori", id="pp0" >
+	    <% if ENV["herokuapp"] == "NO" %>
+	      <%= image_tag(@page.imagen_hori.url, class: "img-responsive  img-ppal") %>
+	    <% else %>
+	      <%= image_tag(@page.imagen_hori_file_name, class: "img-responsive img-ppal") %>
+	    <% end %>
+	  </div>
+
+	  <div class="col-xs-12 div-img-100 div-vert", id="pp0" >
+	    <% if ENV["herokuapp"] == "NO" %>
+	      <%= image_tag(@page.imagen_vert.url, class: "img-responsive  img-ppal") %>
+	    <% else %>
+	      <%= image_tag(@page.imagen_vert_file_name, class: "img-responsive img-ppal") %>
+	    <% end %>
+	  </div>
+	  <div class="texto-ppal hidden-xs">
+	    <h1><%= @page.pag_desc %><span></span></h1><br/><br/>
+	  </div>
+
+	  <div class="texto-ppal4 visible-xs">
+	    <h1><%= @page.pag_desc %><span></span></h1><br/><br/>
+	  </div>
+
+	<% else %>
+	  <div class="col-xs-12 div-img-100 div-hori", id="pp0" >
+	    <%= image_tag "home01h.jpg", class: "img-responsive img-ppal"%>
+	  </div>
+
+	  <div class="col-xs-12 div-img-100 div-vert", id="pp0" >
+	    <%= image_tag "home01v.jpg", class: "img-responsive img-ppal"%>
+	  </div>
+
+	  <div class="texto-ppal hidden-xs">
+	    <h1>Solvencia y Seriedad a su Servicio<span></span></h1><br/><br/>
+	  </div>
+
+	  <div class="texto-ppal4 visible-xs">
+	    <h1>Solvencia y Seriedad<br/>a su Servicio<span></span></h1><br/><br/>
+	  </div>
+
+	<% end %>
+
+</div>
+
+<% if logged_in? && @current_contact.con_nombre == "Superuser" %>
+  <div class="righter">
+    <p>
+      <%= link_to new_page_path, remote: true, class: "btn btn-md btn-danger" do %>
+          <span class="glyphicon glyphicon-plus-sign"></span> Crear Página
+      <% end %>
+      <% if @page %>
+        <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
+            <span class="glyphicon glyphicon-retweet"></span> Cambiar Fotos
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<% if logged_in? && @current_contact.con_nombre == "Admin" %>
+  <div class="righter">
+    <h4>
+      <% if @pages.try(:any?) %>
+        <%= link_to 'Cambiar Foto', edit_page_path(id: @page.id), remote: true, class: "glyphicon glyphicon-retweet btn btn-lg btn-info" %><br/>
+      <% end %>
+    </h4>
+  </div>
+<% end %>
+
+
+<!--
+  <%= link_to  'Ver mas...', "#pp", :class=>"btn-idx btn-font mov-suave btn-lg" %>
+-->

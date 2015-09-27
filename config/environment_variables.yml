@@ -1,0 +1,21 @@
+production:
+  ggle_user: "gconsal"
+  ggle_mail: "gconsal@gmail.com"
+  ggle_pass: "sasasa"
+  db_user: "root"
+  db_pass: "lapasswordmaslarga"
+  txa_mail: "gconsal@texhaarg.com"
+  txa_pass: "Pipoto25"
+  herokuapp: "NO" # Para saber si estoy en Heroku o no. Por el manejo de imÃ¡genes.
+  SECRET_KEY_BASE: "c38b0d293e53a7c24217cae6f9bc5a19da1895b4028ee91773748c2665dc5d5760d15f13260d325905336525cf23fda49cc585c95e76e96c8189eb793627821d"
+
+development:
+  ggle_user: "gconsal"
+  ggle_mail: "gconsal@gmail.com"
+  ggle_pass: "sasasa"
+  db_user: "root"
+  db_pass: "lapasswordmaslarga"
+  txa_mail: "gconsal@texhaarg.com"
+  txa_pass: "Pipoto25"
+  herokuapp: "NO" # Para saber si estoy en Heroku o no. Por el manejo de imÃ¡genes.
+  SECRET_KEY_BASE: "c38b0d293e53a7c24217cae6f9bc5a19da1895b4028ee91773748c2665dc5d5760d15f13260d325905336525cf23fda49cc585c95e76e96c8189eb793627821d"

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pag nombre</th>
+      <th>Pag titulo</th>
+      <th>Pag desc</th>
+      <th>Img Horizontal</th>
+      <th>Img Vertical</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.pag_nombre %></td>
+        <td><%= page.pag_titulo %></td>
+        <td><%= page.pag_desc %></td>
+        <td>
+          <%= image_tag page.imagen_hori.url, style: "width:30%" %>
+        </td>
+        <td>
+          <%= image_tag page.imagen_vert.url, style: "width:30%" %>
+        </td>
+        <td><%= link_to 'Show', page %></td>
+        <td><%= link_to 'Edit', edit_page_path(page) %></td>
+        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page', new_page_path %>

@@ -1,0 +1,94 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for(@page, remote: true, authenticity_token: true) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="centered">
+          <% if @page.id %>
+            <h3>Modificar Fotos de la Página:</h3>
+            <h4>
+              "<%= @page.pag_nombre %>" (Id: <%= @page.id %>)
+            </h4>
+          <% else %>
+            <h3>CUIDADO!! Crear un nueva Página</h3>
+            <h4>Ingresó en una zona de Configuración General</h4>
+            <h4>El sistema entero puede dejar de Funcionar.</h4>
+          <% end %>
+        </div>
+        
+        <% if @page.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+            <ul>
+            <% @page.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="div-modal-body" class="modal-body">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_nombre, required: true, :placeholder => "Ingrese el Nombre...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="centered">
+            <div class="field col-xs-12">
+              <% if @page.imagen_hori.exists? %>
+                <%= image_tag @page.imagen_hori.url, style: "width:70%" %>
+              <% end %>
+              Foto Horizontal
+              <%= f.file_field :imagen_hori, :class=>"btn btn-info" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="centered">
+            <div class="field col-xs-12">
+              <% if @page.imagen_vert.exists? %>
+                <%= image_tag @page.imagen_vert.url, style: "width:70%" %>
+              <% end %>
+              Foto Vertical
+              <%= f.file_field :imagen_vert, :class=>"btn btn-info" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field col-xs-12">
+            <%= f.text_area :pag_desc, required: true, :placeholder => "Ingrese la Descripción...", rows: "6",:class=>"form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div id="msgOK">
+      </div>
+
+      <div class="modal-footer">
+        <div class="col-xs-6 lefter">
+          <%= image_tag("logo-google.png", style: "width:35%") %>
+        </div>
+        <div id="divMeAnoto" class="col-xs-6 righter">
+          <%= f.submit 'Guardar', :class=>"btn btn-md btn-info", :id=>"gc-aceptar" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

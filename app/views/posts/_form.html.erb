@@ -48,34 +48,88 @@
             </div>
           </div>
           <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_subtitulo, :placeholder => "Ingrese el Sub-título...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 hide">
             <%= image_tag @post.imagen_big.url, style: "width:100%" %>
           </div><br/><br/><br/>
         </div>
 
-        <div class="row">
+        <div class="row hide">
           <div class="righter">
             <div class="field col-xs-12 col-sm-6 ">
-              <%= f.file_field :imagen_big, required: true %>
+              <!-- <%= f.file_field :imagen_big, required: true %> -->
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="field col-xs-12">
-            <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la introducción...", rows: "6",:class=>"form-control" %>
+            <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la descripción del Item...", rows: "6",:class=>"form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_boton_desc, :placeholder => "Título del Botón...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_simbolo, :placeholder => "Ingrese el Símbolo...", :class=>"form-control" %>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="field col-xs-12">
-            <%= f.text_area :pos_conclusion, required: true, :placeholder => "Ingrese la Conclusión...", rows: "6",:class=>"form-control" %>
+            <%= f.text_area :pos_feature, required: true, :placeholder => "Ingrese especificaciones de Diseño...", rows: "6",:class=>"form-control" %>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_estilo, :placeholder => "Estilo...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_page, :placeholder => "Página...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_tipo, :placeholder => "Tipo de Ítem...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pos_section, :placeholder => "Sección...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row hide">
+          <div class="field col-xs-12">
+            <!-- <%= f.text_area :pos_conclusion, required: true, :placeholder => "Ingrese la Conclusión...", rows: "6",:class=>"form-control" %> -->
+          </div>
+        </div>
+
         <div class="row hide">
           <div class="field col-xs-12">
             <%= f.text_field :contact_id, value: session[:user_id], :class=>"form-control" %>
           </div>
         </div>
+      </div>
+
+      <div id="msgOK">
       </div>
 
       <div class="modal-footer">

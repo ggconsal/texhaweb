@@ -1,0 +1,15 @@
+$("#product-modal").html("<%= escape_javascript(render partial: 'form', locals: {id: @page.id}) %>" );
+$("#product-modal").modal("show");
+
+
+
+/*
+
+<h1>Editing Page</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @page %> |
+<%= link_to 'Back', pages_path %>
+
+*/

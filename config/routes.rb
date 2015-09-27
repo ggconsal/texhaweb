@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
+
+  resources :pages
+
   get 'static_pages/home'
 
   get 'static_pages/quien'
 
-  get 'static_pages/prod'
+  get 'static_pages/otramas'
 
-  get 'static_pages/costo'
+  get 'static_pages/ubicacion'
 
-  get 'static_pages/venta'
+  get 'static_pages/servicios'
 
   get 'static_pages/contacto'
 
@@ -22,6 +25,8 @@ Rails.application.routes.draw do
   resources :post_rels
 
   resources :post_links
+
+  post 'posts/duplicar'
 
   resources :posts
 
@@ -50,7 +55,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'posts#index'
+  #root 'posts#index'
+  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

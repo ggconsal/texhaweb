@@ -1,5 +1,6 @@
 <div class="modal-dialog">
   <div class="modal-content">
+
     <%= form_for(@contact, remote: true) do |f| %>
 
       <div class="modal-header">
@@ -8,30 +9,8 @@
         </button>
 
         <div class="centered">
-          <% if (@contact.con_boton_sitio.include? "txaShop") || 
-                (@contact.con_boton_sitio.include? "txaVentas") ||
-                (@contact.con_boton_sitio.include? "CTA Vtas - ") ||
-                (@contact.con_boton_sitio.include? "txaVision") ||
-                (@contact.con_boton_sitio.include? "menu - Ventas") %>
-                <h3>¡Aumente sus Ventas!</h3>
-                <h4>¡Déjenos su email!<br/>Nos Contactaremos hoy mismo</h4>
-
-          <% elsif (@contact.con_boton_sitio.include? "txaCostos") ||
-                   (@contact.con_boton_sitio.include? "menu - Costos") %>
-                   <h3>¡Reduzca los Costos de su Empresa!</h3>
-                   <h4>¡Déjenos su email <br/>Nos Contactaremos hoy mismo!</h4>
-
-          <% elsif (@contact.con_boton_sitio.include? "menu - Contacto") ||
-                   (@contact.con_boton_sitio.include? "quienes somos") || 
-                   (@contact.con_boton_sitio.include? "Post - ") ||
-                   (@contact.con_boton_sitio.include? "Blog") %>
-                   <h3>¡Aumente su Rentabilidad!</h3>
-                   <h4>¡Anótese Gratis y le enviaremos<br/>Información útil para su Negocio!</h4>
-          <% elsif (@contact.con_boton_sitio.include? "Comentar") ||
-                   (@contact.con_boton_sitio.include? "Opinar") %>
-                   <h3>¡Participe de nuestra Comunidad!</h3>
-                   <h4>¡Es completamente Gratis y podrá <br/>recibir grandes beneficios!</h4>
-          <% end %>
+          <h3><%= @post.pos_titulo %></h3>
+          <h4><%= @post.pos_subtitulo %></h4>
         </div>
         
         <% if @contact.errors.any? %>
@@ -58,19 +37,19 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <div class="field">
-              <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+              <% if (@contact.con_boton_sitio.include? "menu - telefono") %>
+                <%= f.text_field :con_mail, :required => true, :placeholder => "Ingrese su Teléfono...", :class=>"form-control" %>
+              <% else %>
+                <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+              <% end %>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-6">
-            <% if @contact.con_boton_sitio.include? "redes" %>
-              <div class="field">
-            <% else %>
-              <div class="field hide">
-            <% end %>
-              <%= f.text_area :con_obs, :placeholder => "Déjenos su Comentario...", :class=>"form-control" %>
+          <div class="col-xs-12">
+            <div class="field">
+              <%= f.text_area :con_obs, rows: 4, :placeholder => "Consulta o Comentario...", :class=>"form-control" %>
             </div>
           </div>
         </div>
@@ -94,17 +73,11 @@
       </div>
 
       <div class="modal-footer">
-        <div class="col-xs-6 lefter">
-          <%= image_tag("texhablanco100x40.jpg") %>
+        <div class="col-xs-6 lefter navbar-brand">
+          <%= image_tag("") %>
         </div>
         <div id="divMeAnoto" class="col-xs-6 righter">
-          <% if (@contact.con_boton_sitio.include? "redes") ||
-                (@contact.con_boton_sitio.include? "menu") ||
-                (@contact.con_boton_sitio.include? "quienes") %>
-            <%= f.submit '¡Enviar!', :class=>"btn btn-succes btn-lg", :id=>"gc-aceptar" %>
-          <% else %>
-            <%= f.submit '¡Me Anoto!', :class=>"btn btn-success btn-lg", :id=>"gc-aceptar" %>
-          <% end %>
+          <%= f.submit 'Enviar Consulta', :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>
         </div>
       </div>
     <% end %>

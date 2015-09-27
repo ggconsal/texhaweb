@@ -1,0 +1,6 @@
+<% if vanilla == "SI" || ENV["herokuapp"] != "NO" %>
+	<%= image_tag(img_name, class: "img-responsive img-ppal") %>
+<% else %>
+	<%= image_tag(img_url.url, class: "img-responsive  img-ppal") %>
+<% end %>
+

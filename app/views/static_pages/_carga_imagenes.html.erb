@@ -1,0 +1,45 @@
+    <% if @page %>
+      <!-- *************  MOSTRAR IMAGEN PRINCIPAL CLIENTE  ************* -->
+      <div class="col-xs-12 div-img-40 div-hori margen-afuera-inf-3" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
+      </div>
+      <div class="col-xs-12 div-img-25 div-vert sin-padd-r margen-menu margen-afuera-inf-2" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
+      </div>
+    <% else %>
+      <!-- *************  MOSTRAR IMAGEN PRINCIPAL VANILLA  ************* -->
+      <div class="col-xs-12 div-img-40 div-hori margen-afuera-inf-2" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "paginas-h.jpg"} %>
+      </div>
+      <div class="col-xs-12 div-img-25 div-vert sin-padd-r margen-menu margen-afuera-inf-2" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "paginas-v.jpg"} %>
+      </div>
+    <% end %>
+
+    <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER  ************* -->
+    <% if logged_in? && @current_contact.con_nombre == "Superuser" %>
+      <div class="righter">
+        <p>
+          <%= link_to new_page_path, remote: true, class: "btn btn-md btn-danger" do %>
+              <span class="glyphicon glyphicon-plus-sign"></span> Crear Página
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+
+    <!-- *************  MOSTRAR BOTONES PRINCIPALES ADMIN  ************* -->
+    <% if logged_in? && (@current_contact.con_nombre == "Admin" || @current_contact.con_nombre == "Superuser") %>
+      <div class="righter">
+        <h4>
+          <% if @page %>
+            <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
+                <span class="glyphicon glyphicon-retweet"> </span> Cambiar Fotos
+            <% end %>
+          <% end %>
+          <%= link_to new_post_path, remote: true, class: "btn btn-md btn-warning" do %>
+              <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
+          <% end %>
+        </h4>
+      </div>
+    <% end %>
+
