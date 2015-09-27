@@ -26,11 +26,11 @@
         <% end %>
       </div>
 
-      <div id="div-modal-body" class="modal-body">
+      <div id="div-modal-body" class="modal-body margen-afuera-izq-2">
 
         <% @clave = Time.now.year.to_s + Time.now.month.to_s + rand(10000..99999).to_s %>
-        <div class="row">
-          <div class="col-xs-12 col-sm-6">
+        <div class="row margen-der-2 margen-izq-2">
+          <div class="col-xs-12 col-sm-6 sin-margen">
             <div class="field">
               <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
             </div>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-11 texto-centrado">
             <div class="field">
               <%= f.text_area :con_obs, rows: 4, :placeholder => "Consulta o Comentario...", :class=>"form-control" %>
             </div>
