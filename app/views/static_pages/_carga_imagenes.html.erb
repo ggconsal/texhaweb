@@ -1,45 +1,33 @@
     <% if @page %>
       <!-- *************  MOSTRAR IMAGEN PRINCIPAL CLIENTE  ************* -->
-      <div class="col-xs-12 div-img-40 div-hori margen-afuera-inf-3" >
+      <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
         <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
       </div>
-      <div class="col-xs-12 div-img-25 div-vert sin-padd-r margen-menu margen-afuera-inf-2" >
+      <div class="col-xs-12 div-vert sin-padd-r margen-menu <%= @page.pag_estilo_headerv %>" >
         <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
       </div>
     <% else %>
       <!-- *************  MOSTRAR IMAGEN PRINCIPAL VANILLA  ************* -->
-      <div class="col-xs-12 div-img-40 div-hori margen-afuera-inf-2" >
+      <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
         <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "paginas-h.jpg"} %>
       </div>
-      <div class="col-xs-12 div-img-25 div-vert sin-padd-r margen-menu margen-afuera-inf-2" >
+      <div class="col-xs-12 div-vert sin-padd-r margen-menu <%= @page.pag_estilo_headerv %>" >
         <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "paginas-v.jpg"} %>
       </div>
     <% end %>
 
-    <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER  ************* -->
-    <% if logged_in? && @current_contact.con_nombre == "Superuser" %>
-      <div class="righter">
-        <p>
-          <%= link_to new_page_path, remote: true, class: "btn btn-md btn-danger" do %>
-              <span class="glyphicon glyphicon-plus-sign"></span> Crear Página
-          <% end %>
-        </p>
-      </div>
-    <% end %>
+    <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER y ADMIN  ************* -->
 
-    <!-- *************  MOSTRAR BOTONES PRINCIPALES ADMIN  ************* -->
-    <% if logged_in? && (@current_contact.con_nombre == "Admin" || @current_contact.con_nombre == "Superuser") %>
-      <div class="righter">
-        <h4>
-          <% if @page %>
-            <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
-                <span class="glyphicon glyphicon-retweet"> </span> Cambiar Fotos
-            <% end %>
-          <% end %>
-          <%= link_to new_post_path, remote: true, class: "btn btn-md btn-warning" do %>
-              <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
-          <% end %>
-        </h4>
+    <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: @page} %>
+
+    <!-- *************  MOSTRAR EL TEXTO QUE FIGURA SOBRE LA IMAGEN  ************* -->
+    <% if @page.pag_imagen_texto != "nada" %>
+      <div class="texto-ppal hidden-xs">
+        <h1><%= @page.pag_imagen_texto %><span></span></h1><br/><br/>
+      </div>
+
+      <div class="texto-ppal4 visible-xs">
+        <h1><%= @page.pag_imagen_texto %><span></span></h1><br/><br/>
       </div>
     <% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926170647) do
+ActiveRecord::Schema.define(version: 20150928204658) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -77,6 +77,12 @@ ActiveRecord::Schema.define(version: 20150926170647) do
     t.string   "imagen_vert_content_type", limit: 255
     t.integer  "imagen_vert_file_size",    limit: 4
     t.datetime "imagen_vert_updated_at"
+    t.string   "pag_estilo_body",          limit: 255
+    t.string   "pag_estilo_headerh",       limit: 255
+    t.string   "pag_estilo_headerv",       limit: 255
+    t.string   "pag_imagen_texto",         limit: 255
+    t.string   "pag_lati",                 limit: 255
+    t.string   "pag_long",                 limit: 255
   end
 
   create_table "post_comment_answers", force: :cascade do |t|

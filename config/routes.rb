@@ -6,13 +6,13 @@ Rails.application.routes.draw do
 
   get 'static_pages/quien'
 
-  get 'static_pages/otramas'
+  get 'static_pages/pricing'
 
   get 'static_pages/ubicacion'
 
   get 'static_pages/servicios'
 
-  get 'static_pages/contacto'
+  get 'static_pages/pagina1'
 
   resources :post_comment_answers
 

@@ -42,23 +42,78 @@
     <% @menu_home = page.pag_titulo %>
   <% end %>
 
-  <% if page.pag_nombre == "servicios" %>
-    <% @menu_servicios = page.pag_titulo %>
+  <% if page.pag_nombre == "pagina1" %>
+    <% @menu_otramas = page.pag_titulo %>
+  <% end %>
+
+  <% if page.pag_nombre == "pricing" %>
+    <% @menu_otramas = page.pag_titulo %>
   <% end %>
 
   <% if page.pag_nombre == "quien" %>
     <% @menu_quien = page.pag_titulo %>
   <% end %>
 
+  <% if page.pag_nombre == "servicios" %>
+    <% @menu_servicios = page.pag_titulo %>
+  <% end %>
+
   <% if page.pag_nombre == "ubicacion" %>
     <% @menu_ubicacion = page.pag_titulo %>
   <% end %>
 
-  <% if page.pag_nombre == "otramas" %>
-    <% @menu_otramas = page.pag_titulo %>
+  <% if page.pag_nombre == "pie" || page.pag_nombre == "pie-demo" %>
+    <% @page_pie = page %>
   <% end %>
 <% end %>
 
+<script type="text/javascript">
+  function loadScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+        'callback=initialize';
+    document.body.appendChild(script);
+  }
+
+  function initialize() {
+
+    var latitud = <%= @page_pie.pag_lati %>;
+    var longitud = <%= @page_pie.pag_long %>;
+    var direc = new google.maps.LatLng(latitud, longitud);
+
+    /*
+    var direc = new google.maps.LatLng(-34.7098566,-58.3886861);
+    var direc = {lat: -34.7098566, lng: -58.3886861};
+    */
+
+      var mapOptions = {
+        zoom: 14,
+        center: direc
+      };
+      var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: direc,
+      map: map,
+      animation: google.maps.Animation.DROP,
+      title: 'Nuestras Oficinas'
+    });
+
+    /*
+    var infowindow = new google.maps.InfoWindow;
+    infowindow.setContent('Nuestras Oficinas');
+    
+    var marker = new google.maps.Marker({map: map, position: direc});
+    marker.addListener('click', function() {
+    infowindow.open(map, marker);
+    'Nuestras Oficinas'
+    });
+    marker.addListener('click', toggleBounce);
+    */
+  }
+
+</script>
 
 <nav class="navbar navbar-default navbar-fixed-top menu-ppal" role="navigation">
   <div class="container col-md-offset-1 col-xs-12 col-md-10">
@@ -141,14 +196,13 @@
 <%= yield %>
 
 <div class="col-xs-12 pie-pagina">
+
   <p></p>
   <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
-    <h3>Nuestras Oficinas:</h3>
-    <p>
-      Av. H. Irigoyen 5433. Lanus Oeste. (1832) <br/>
-      4555-5555 / 5444-4444 <br/>
-      info@abogados.com.ar / Skype: abogados
-    </p>
+    <% if @page_pie %>
+      <h3><%== @page_pie.pag_titulo %></h3>
+      <p><%== @page_pie.pag_desc %></p>
+    <% end %>
   </div>
   <div class="col-xs-12 col-md-offset-1 col-sm-6 col-md-5">
     <h3>Encuéntranos también en:</h3>
@@ -160,8 +214,10 @@
     </div>
   <p><br/><br/><br/><br/><br/><br/></p>
   </div>
-</div>
 
+  <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: @page_pie} %>
+
+</div>
 
 </body>
 </html>

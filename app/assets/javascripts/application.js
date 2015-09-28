@@ -94,33 +94,6 @@ $(document).ready(function(){
 
 });
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-      'callback=initialize';
-  document.body.appendChild(script);
-}
-
-function initialize() {
-
-	var direc = {lat: -34.7098566, lng: -58.3886861};
-
-    var mapOptions = {
-      zoom: 14,
-      center: direc
-    };
-    var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
-
-	var infowindow = new google.maps.InfoWindow;
-	infowindow.setContent('Nuestras Oficinas');
-
-	var marker = new google.maps.Marker({map: map, position: direc});
-	marker.addListener('click', function() {
-	infowindow.open(map, marker);
-	});
-}
-
 
 
 /*		$('.div-boton').hide();

@@ -1,0 +1,27 @@
+    <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER  ************* -->
+    <% if logged_in? && @current_contact.con_nombre == "Superuser" %>
+      <div class="col-xs-12 righter">
+        <p>
+          <%= link_to new_page_path, remote: true, class: "btn btn-md btn-danger" do %>
+              <span class="glyphicon glyphicon-plus-sign"></span> Crear Página
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+
+    <!-- *************  MOSTRAR BOTONES PRINCIPALES ADMIN  ************* -->
+    <% if logged_in? && (@current_contact.con_nombre == "Admin" || @current_contact.con_nombre == "Superuser") %>
+      <div class="col-xs-12 righter">
+        <h4>
+          <% if pagina %>
+            <%= link_to edit_page_path(id: pagina.id), remote: true, class: "btn btn-md btn-warning" do %>
+                <span class="glyphicon glyphicon-retweet"> </span> Cambiar Fotos
+            <% end %>
+          <% end %>
+          <%= link_to new_post_path, remote: true, class: "btn btn-md btn-warning" do %>
+              <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
+          <% end %>
+        </h4>
+      </div>
+    <% end %>
+
