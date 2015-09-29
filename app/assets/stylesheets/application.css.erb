@@ -718,59 +718,13 @@ section .section-heading .divider:after {
 }
 
 
-@media (orientation: portrait) {
-	.img-ppal {
-		height: 100%;
-	}
-
-	.texto-ppal, .texto-ppal2, .texto-ppal4, .texto-ppal4b {
-		top: 20%;
-	}
-
-	.texto-ppal3 {
-		top: 0%;
-	}
-
-	.div-vert {
-		display: inline-block;
-		visibility: visible;
-	}
-	.div-hori {
-		visibility: hidden;
-		display: none !important;
-	}
-}
-
-@media (orientation: landscape) {
-	.img-ppal {
-		height: 100%;
-	}
-
-	.texto-ppal, .texto-ppal2 {
-		top: 20%;
-	}
-
-	.texto-ppal3 {
-		top: 50px;
-	}
-
-	.div-hori {
-		display: inline-block;
-		visibility: visible;
-	}
-	.div-vert {
-		visibility: hidden;
-		display: none !important;
-	}
-}
-
 
 .sin-margen {
 	padding: 0px;
 }
 
 .margen-der-0 {
-	padding-right: 10px;
+	padding-right: 0px;
 }
 .margen-der-1 {
 	padding-right: 10px;
@@ -971,4 +925,109 @@ section .section-heading .divider:after {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin: 0px;
+}
+
+@media (orientation: portrait) {
+	.img-ppal {
+		height: 100%;
+	}
+
+	.texto-ppal, .texto-ppal2, .texto-ppal4, .texto-ppal4b {
+		top: 20%;
+	}
+
+	.texto-ppal3 {
+		top: 0%;
+	}
+
+	.div-vert {
+		display: inline-block;
+		visibility: visible;
+	}
+	.div-hori {
+		visibility: hidden;
+		display: none !important;
+	}
+}
+
+@media (orientation: landscape) {
+	.img-ppal {
+		height: 100%;
+	}
+
+	.texto-ppal, .texto-ppal2 {
+		top: 20%;
+	}
+
+	.texto-ppal3 {
+		top: 50px;
+	}
+
+	.div-hori {
+		display: inline-block;
+		visibility: visible;
+	}
+	.div-vert {
+		visibility: hidden;
+		display: none !important;
+	}
+}
+
+@media (max-width: 650px) {
+
+	.margen-afuera-der-1 {
+		margin-right: 0px;
+	}
+
+	.margen-afuera-der-2 {
+		margin-right: 0px;
+	}
+
+	.margen-afuera-der-3 {
+		margin-right: 0px;
+	}
+
+	.margen-afuera-izq-1 {
+		margin-left: 0px;
+	}
+
+	.margen-afuera-izq-2 {
+		margin-left: 0px;
+	}
+
+	.margen-afuera-izq-3 {
+		margin-left: 0px;
+	}
+
+	.margen-der-1 {
+		padding-right: 10px;
+	}
+	.margen-der-2 {
+		padding-right: 10px;
+	}
+	.margen-der-3 {
+		padding-right: 10px;
+	}
+	.margen-der-4 {
+		padding-right: 10px;
+	}
+	.margen-der-5 {
+		padding-right: 10px;
+	}
+
+	.margen-izq-1 {
+		padding-left: 10px;
+	}
+	.margen-izq-2 {
+		padding-left: 10px;
+	}
+	.margen-izq-3 {
+		padding-left: 10px;
+	}
+	.margen-izq-4 {
+		padding-left: 10px;
+	}
+	.margen-izq-5 {
+		padding-left: 10px;
+	}
 }

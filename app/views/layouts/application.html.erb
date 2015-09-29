@@ -82,16 +82,11 @@
     var longitud = <%= @page_pie.pag_long %>;
     var direc = new google.maps.LatLng(latitud, longitud);
 
-    /*
-    var direc = new google.maps.LatLng(-34.7098566,-58.3886861);
-    var direc = {lat: -34.7098566, lng: -58.3886861};
-    */
-
-      var mapOptions = {
-        zoom: 14,
-        center: direc
-      };
-      var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
+    var mapOptions = {
+      zoom: 14,
+      center: direc
+    };
+    var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
 
     var marker = new google.maps.Marker({
       position: direc,
@@ -99,18 +94,6 @@
       animation: google.maps.Animation.DROP,
       title: 'Nuestras Oficinas'
     });
-
-    /*
-    var infowindow = new google.maps.InfoWindow;
-    infowindow.setContent('Nuestras Oficinas');
-    
-    var marker = new google.maps.Marker({map: map, position: direc});
-    marker.addListener('click', function() {
-    infowindow.open(map, marker);
-    'Nuestras Oficinas'
-    });
-    marker.addListener('click', toggleBounce);
-    */
   }
 
 </script>
