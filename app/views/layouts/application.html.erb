@@ -35,6 +35,8 @@
 <% @menu_quien = "" %>
 <% @menu_ubicacion = "" %>
 <% @menu_otramas = "" %>
+<% @page_lati = -34.603695 %>
+<% @page_long = -58.381705 %>
 
 <% paginas.each do |page| %>
 
@@ -64,6 +66,8 @@
 
   <% if page.pag_nombre == "pie" || page.pag_nombre == "pie-demo" %>
     <% @page_pie = page %>
+    <% @page_lati = @page_pie.pag_lati %>
+    <% @page_long = @page_pie.pag_long %>
   <% end %>
 <% end %>
 
