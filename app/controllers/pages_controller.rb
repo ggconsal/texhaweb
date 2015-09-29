@@ -44,9 +44,10 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
-        format.json { render :show, status: :ok, location: @page }
+        format.html { redirect_to :back, notice: 'Page was successfully updated.' }
+        format.json { head :no_content }
         format.js {render inline: "location.reload();" }
+        #format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit }
         format.json { render json: @page.errors, status: :unprocessable_entity }
