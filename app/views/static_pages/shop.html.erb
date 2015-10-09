@@ -1,0 +1,11 @@
+<% provide(:title, "Shop |") %>
+
+<div class="container-fluid div-paginas">
+
+	<!-- *************  MOSTRAR LAS IMÁGENES  ************* -->
+	<%= render partial: 'static_pages/carga_imagenes' %>
+
+	<!-- *************  MOSTRAR LOS ITEMS  ************* -->
+	<%= render partial: 'static_pages/carga_items', locals: {post: @post} %>
+
+</div>

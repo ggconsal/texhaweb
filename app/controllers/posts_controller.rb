@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @pagina = params[:pagina]
   end
 
   # POST /posts
@@ -55,22 +56,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         #format.html { redirect_to post_parrafos_url, notice: 'Post was successfully destroyed.' }
-        format.html { redirect_to @post, notice: 'Post was successfully destroyed.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.html { redirect_to :back, notice: 'Post was successfully created.' }
+        format.json { render :back, status: :created, location: @post }
         format.js {render inline: "location.reload();" }
         #format.json { head :no_content }
       end
     end
-
-#    respond_to do |format|
-#      if @post.update(post_params)
-#        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-#        format.json { render :show, status: :ok, location: @post }
-#      else
-#        format.html { render :edit }
-#        format.json { render json: @post.errors, status: :unprocessable_entity }
-#      end
-#    end
   end
 
   def duplicar
@@ -108,6 +99,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:imagen_big, :pos_titulo, :pos_subtitulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id, :pos_page, :pos_section, :pos_estilo, :pos_feature, :pos_boton_desc, :pos_boton_color, :pos_simbolo, :pos_tipo)
+      params.require(:post).permit(:imagen_big, :pos_titulo, :pos_subtitulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id, :pos_page, :pos_section, :pos_estilo, :pos_feature, :pos_boton_desc, :pos_boton_color, :pos_simbolo, :pos_tipo, :pos_tag01, :pos_tag02, :pos_tag03, :pos_tag04, :pos_tag05, :pos_tag06)
     end
 end

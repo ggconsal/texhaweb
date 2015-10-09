@@ -1,6 +1,7 @@
     <% if @posts %>
 
       <% @section_ant = 0 %>
+      <% @section_count = 0 %>
 
       <% @posts.each do |post| %>
 
@@ -8,66 +9,109 @@
           <!-- ABRO CADA ROW CON EL CAMBIO DE CADA SECTION DE LA BD -->
           <% if @section_ant != 0 %>  <!-- para no entrar la primera vez -->
             </div>
+            <% if post.pos_tipo == "blog" %>
+              <% @section_count = @section_count + 1 %>
+              <% if @section_count % 3 == 0 %>
+                <div class="col-xs-12">
+                  <%= render "form_cta" %>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
           <div class="col-xs-12 row margen-afuera-izq-2">
         <% end %>
 
         <% @section_ant = post.pos_section %>
 
+        <!-- ********  "POS_FEATURE" ES PARA TODO EL "DIV"  *********  -->
         <div class="<%= post.pos_feature %>">
+
+          <!-- ********  TIPO DE REGISTRO "BLOG" O "SHOP"  *********  -->
+          <% if post.pos_tipo == "blog" || 
+                post.pos_tipo == "shop" %>
+            <div class="blog-div-foto col-xs-12">
+              <% if ENV["herokuapp"] == "NO" %>
+                <%= image_tag(post.imagen_big.url, class: "img-responsive post-img") %>
+              <% else %>
+                <%= image_tag(post.imagen_big_file_name, class: "img-responsive post-img") %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <!-- ********  "POS_ESTILO" ES "DIV" SIN LA IMAGEN  *********  -->
           <div class="<%= post.pos_estilo %>">
-            <h3>
+            <h3> <!-- ********  TITULO  *********  -->
               <% if post.pos_simbolo != "" %>
                 <i class="fa <%= post.pos_simbolo %>"> </i>
               <% end %>
                 <%== post.pos_titulo %>
             </h3>
-          </div>
-          
-          <% if post.pos_subtitulo != "" %>
-            <h4><%== post.pos_subtitulo %></h4>
-          <% end %>
+            <% if post.pos_subtitulo != "" %>
+              <h4> <!-- ********  SUBTITULO  *********  -->
+                <%== post.pos_subtitulo %>
+              </h4>
+            <% end %>
 
-          <p>
-            <!-- ********  TIPO DE REGISTRO "BASICO"  *********  -->
-            <% if post.pos_tipo == "basico" %>
-              <%== post.pos_intro %>
-              <% if post.pos_boton_desc != "" %>
+            <p> <!-- ********  DESCRIPCION  *********  -->
+              <!-- ********  TIPO DE REGISTRO "BASICO" O "BLOG" O "SHOP"  *********  -->
+              <% if post.pos_tipo == "basico" || 
+                    post.pos_tipo == "blog" || 
+                    post.pos_tipo == "shop" %>
+                <%== post.pos_intro %>
+              <% end %>
+
+              <!-- ********  TIPO DE REGISTRO "BASICO"  *********  -->
+              <% if post.pos_tipo == "basico" && 
+                    post.pos_boton_desc != "" %>
                 <div class="col-xs-12 texto-a-derecha margen-afuera-inf-1">
                   <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - telefono"), remote: true, class: "btn btn-primary" %>
                 </div>
               <% end %>
-            <% end %>
 
-            <!-- ********  TIPO DE REGISTRO "BASICO"  *********  -->
-            <% if post.pos_tipo == "contacto" %>
-              <div class="col-xs-12 margen-afuera-inf-1">
-                <%= render partial: 'contacts/form2', locals: {:motivo => "ubicacion"} %>
-              </div>
-            <% end %>
+              <!-- ********  TIPO DE REGISTRO "BLOG" O "SHOP"  *********  -->
+              <% if post.pos_tipo == "blog" || 
+                    post.pos_tipo == "shop" %>
+                <div class="col-xs-12 texto-a-derecha margen-afuera-inf-1">
+                    <%= link_to post.pos_boton_desc, post_parrafos_path(post: post.id), class: "btn btn-info blog-bot-cta" %>
+                </div>
 
-            <!-- ********  TIPO DE REGISTRO "BASICO"  *********  -->
-            <% if post.pos_tipo == "google" %>
-              <div class="centered">
-                <p></p>
-                  <div id="texha_map"></div>
-                <p><br/></p>
-              </div>
-            <% end %>
+              <% end %>
 
-            <% if logged_in? && (@current_contact.con_nombre == "Admin" || @current_contact.con_nombre == "Superuser") %>
-              <div class="righter">
-                <h5>
-                [ <%= link_to ' ', edit_post_path(post), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                <%= link_to ' ', posts_duplicar_path(id: post.id), method: :post, class: "glyphicon glyphicon-duplicate" %> - 
-                <%= link_to ' ', post_path(id: post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Ítem?' }, class: "glyphicon glyphicon-remove-sign" %> ]
-                </h5>
-              </div>
-            <% end %>
-          </p>
+              <!-- ********  TIPO DE REGISTRO "CONTACTO"  *********  -->
+              <% if post.pos_tipo == "contacto" %>
+                <div class="col-xs-12 margen-afuera-inf-1">
+                  <%= render partial: 'contacts/form2', locals: {:motivo => "ubicacion"} %>
+                </div>
+              <% end %>
+
+              <!-- ********  TIPO DE REGISTRO "GOOGLE"  *********  -->
+              <% if post.pos_tipo == "google" %>
+                <div class="centered">
+                  <p></p>
+                    <div id="texha_map"></div>
+                  <p><br/></p>
+                </div>
+              <% end %>
+
+              <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->
+              <% if logged_in? && 
+                    (@current_contact.con_nya == "Admin" || 
+                     @current_contact.con_nya == "Superuser") %>
+                <div class="righter">
+                  <h5>
+                  [ <%= link_to ' ', edit_post_path(post, pagina: @page.pag_nombre), remote: true, class: "glyphicon glyphicon-edit" %> - 
+                  <%= link_to ' ', posts_duplicar_path(id: post.id), method: :post, class: "glyphicon glyphicon-duplicate" %> - 
+                  <%= link_to ' ', post_path(id: post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Ítem?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                  </h5>
+                </div>
+              <% end %>
+
+            </p>
+          </div>
         </div>
-
       <% end %>
       </div>
-
+      <% if @page.pag_nombre == "blog" %>
+        <%= render "rescate" %> 
+      <% end %>
     <% end %>

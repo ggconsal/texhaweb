@@ -1,0 +1,28 @@
+<% provide(:title, "Blog |") %>
+
+<div class="container-fluid div-paginas">
+
+	<div class="col-xs-12">
+		<!-- *************  MOSTRAR LAS IMÁGENES  ************* -->
+		<%= render partial: 'static_pages/carga_imagenes' %>
+	</div>
+
+	<div class="row blog-div-row col-md-10 col-sm-8 col-xs-12 visible-xs-block">
+		<%= render "form_categorias" %>
+	</div>
+
+	<div class="col-xs-12 col-sm-9 col-md-9">
+		<!-- *************  MOSTRAR LOS ITEMS  ************* -->
+		<%= render partial: 'static_pages/carga_items', locals: {post: @post} %>
+	</div>
+
+	<div class="col-sm-3 col-md-3">
+		<div class="hidden-xs">
+			<%= render "form_cta" %>
+		</div>
+		<div class="hidden-xs">
+			<%= render "form_categorias" %>
+		</div>
+	</div>
+
+</div>

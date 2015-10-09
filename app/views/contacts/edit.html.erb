@@ -1,15 +1,14 @@
-<div id="modif-datos" class="col-md-5 col-md-offset-4 confirm">
+<div id="modif-datos" class="col-md-5 col-md-offset-3 confirm">
 	<%= form_for(@contact) do |f| %>
-		<div class="blog-div-title confirm-header" >
+		<div class="blog-div-title confirm-header centered margen-afuera-sup-3" >
 			<h1>Modificar mis Datos</h1>
 
-			<h4> <b><%= @contact.con_nya %> (<%= @contact.con_mail %>)</b></h4>
+			<h4> <b><%= @contact.con_nya %> (<%= @contact.con_mail %><%= "No se ingresó mail" if @contact.con_mail == "" %>)</b></h4>
 		</div>
 
-		<!--
 		<% if @contact.errors.any? %>
-			<div id="error_explanation">
-				<h2>Hubo <%= pluralize(@contact.errors.count, "error") %>. No se pueden almacenar los Datos porque:</h2>
+			<div class="alert alert-warning alert-dismissible">
+				<h4>Hubo <%= pluralize(@contact.errors.count, "error") %>. No se pueden almacenar los Datos:</h4>
 
 				<ul>
 					<% @contact.errors.full_messages.each do |message| %>
@@ -18,36 +17,23 @@
 				</ul>
 			</div>
 		<% end %>
-		-->
 
-		<% if @contact.errors.any? %>
-			<div class="alert alert-warning alert-dismissible">
-				<p><b>Mensajes: </b> <%= flash[:danger] %></p>
-			</div>
-		<% end %>
-	
-		<% if @tipo == "datos" %>
-			<div class="col-xs-12 col-md-10 col-md-offset-1 confirm-body">
+		<div class="col-xs-12 col-md-10 col-md-offset-1 confirm-body margen-afuera-sup-1">
+			<% if @tipo == "datos" %>
 				<div class="field">
 					<%= f.text_field :con_nombre, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
-				</div><br/>
+				</div>
 				<div class="field">
 					<%= f.text_field :con_apellido, :placeholder => "Ingrese su Apellido...", :class=>"form-control" %>
-				</div><br/>
+				</div>
+				<div class="field">
+					<%= f.text_field :con_password, :placeholder => "Ingrese la Empresa...", :class=>"form-control" %>
+				</div>
 				<div class="field hide">
 					<%= f.label :profile_id %><br>
 					<%= f.text_field :profile_id %>
 				</div>
-				<div class="field">
-					<%= f.text_area :con_obs, :placeholder => "Dejenos su Comentario...", :class=>"form-control" %>
-				</div><br/>
-				<div class="field">
-					<p>
-						<b>¿Desea Suscribirse al newsleter? </b>
-						<span style="margin-left: 20px;"> <%= f.check_box :con_subscribir %></span>
-					</p>
-				</div>
-				<div class="field">
+				<div class="field hide">
 					<p>
 						<b>¿Desea que lo llamemos?</b>
 						<span style="margin-left: 20px;"> <%= f.check_box :con_telefono_sn %></span>
@@ -64,19 +50,31 @@
 					<%= f.label :canalingreso_id %><br>
 					<%= f.text_field :canalingreso_id %>
 				</div>
-			</div>
-		<% else %>
-			<div class="col-xs-12 col-md-10 col-md-offset-1 confirm-body">
+				<% if @contact.con_mail == "" %>
+					<div class="field">
+						<%= f.text_field :con_mail, :placeholder => "Ingrese su Mail...", :class=>"form-control" %>
+					</div>
+				<% end %>
+				<div class="field">
+					<%= f.text_area :con_obs, rows: 4, :placeholder => "Dejenos su Comentario...", :class=>"form-control" %>
+				</div>
+				<div class="field">
+					<p>
+						<b>¿Desea Suscribirse al newsleter? </b>
+						<span style="margin-left: 20px;"> <%= f.check_box :con_subscribir %></span>
+					</p>
+				</div>
+			<% else %>
 				<div class="field">
 					<%= f.password_field :password, :required => true,  :value => @clave, :placeholder => "Ingrese la Nueva Clave...", :class=>"form-control" %>
 				</div>
 				<div class="field">
 					<%= f.password_field :password_confirmation, :required => true,  :value => @clave, :placeholder => "Confirme la clave ingresada...", :class=>"form-control" %>
 				</div>
-			</div>
-		<% end %>
-		<div class="col-md-10 col-xs-offset-4 confirm-footer">
+			<% end %>
+		</div>
+		<div class="col-md-11 confirm-footer margen-afuera-inf-3 margen-afuera-sup-2 righter">
 			<%= f.submit 'Actualizar mis Datos', :class=>"btn btn-outline-inverse btn-md btn-idx3" %>
-		</div><br/><br/>
+		</div>
 	<% end %>
 </div>

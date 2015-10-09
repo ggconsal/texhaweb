@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928204658) do
+ActiveRecord::Schema.define(version: 20151006181412) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -177,6 +177,12 @@ ActiveRecord::Schema.define(version: 20150928204658) do
     t.string   "pos_page",                limit: 255
     t.integer  "pos_section",             limit: 4
     t.string   "pos_tipo",                limit: 255
+    t.string   "pos_tag01",               limit: 255
+    t.string   "pos_tag02",               limit: 255
+    t.string   "pos_tag03",               limit: 255
+    t.string   "pos_tag04",               limit: 255
+    t.string   "pos_tag05",               limit: 255
+    t.string   "pos_tag06",               limit: 255
   end
 
   add_index "posts", ["contact_id"], name: "index_posts_on_contact_id", using: :btree

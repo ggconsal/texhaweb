@@ -30,11 +30,16 @@
 <div id="product-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 </div>
 
+<%= yield %>
+
 <% @menu_home = "" %>
 <% @menu_servicios = "" %>
 <% @menu_quien = "" %>
 <% @menu_ubicacion = "" %>
 <% @menu_otramas = "" %>
+<% @menu_shop = "" %>
+<% @menu_blog = "" %>
+<% @menu_precios = "" %>
 <% @page_lati = -34.603695 %>
 <% @page_long = -58.381705 %>
 
@@ -48,8 +53,8 @@
     <% @menu_otramas = page.pag_titulo %>
   <% end %>
 
-  <% if page.pag_nombre == "pricing" %>
-    <% @menu_otramas = page.pag_titulo %>
+  <% if page.pag_nombre == "precios" %>
+    <% @menu_precios = page.pag_titulo %>
   <% end %>
 
   <% if page.pag_nombre == "quien" %>
@@ -62,6 +67,14 @@
 
   <% if page.pag_nombre == "ubicacion" %>
     <% @menu_ubicacion = page.pag_titulo %>
+  <% end %>
+
+  <% if page.pag_nombre == "blog" %>
+    <% @menu_blog = page.pag_titulo %>
+  <% end %>
+
+  <% if page.pag_nombre == "shop" %>
+    <% @menu_shop = page.pag_titulo %>
   <% end %>
 
   <% if page.pag_nombre == "pie" || page.pag_nombre == "pie-demo" %>
@@ -113,7 +126,7 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand">
-        <%= link_to image_tag("logo-google.png"), static_pages_home_path, :class=>"mov-suave" %>
+        <%= link_to image_tag("logo-google.png"), home_path, :class=>"mov-suave" %>
       </div>
     </div>
 
@@ -122,33 +135,46 @@
       <ul class="nav navbar-nav">
         <% if @menu_home != "" %>
           <li>
-            <%= link_to static_pages_home_path do %>
+            <%= link_to home_path do %>
                 <span class="glyphicon glyphicon-home"></span> <%= @menu_home %>
             <% end %>
           </li>
         <% end %>
         <% if @menu_quien != "" %>
           <li>
-            <%= link_to static_pages_quien_path do %>
+            <%= link_to quienes_path do %>
                 <span class="glyphicon glyphicon-user"></span> <%= @menu_quien %>
             <% end %>
           </li>
           <% end %>
         <% if @menu_servicios != "" %>
           <li>
-            <%= link_to static_pages_servicios_path do %>
+            <%= link_to servicios_path do %>
                 <span class="glyphicon glyphicon-check"></span> <%= @menu_servicios %>
             <% end %>
           </li>
         <% end %>
         <% if @menu_otramas != "" %>
           <li>
-            <%= link_to static_pages_otramas_path do %>
+            <%= link_to otramas_path do %>
                 <span class="glyphicon glyphicon-check"></span> <%= @menu_otramas %>
             <% end %>
           </li>
         <% end %>
-        
+        <% if @menu_precios != "" %>
+          <li>
+            <%= link_to shop_path do %>
+                <span class="glyphicon glyphicon-check"></span> <%= @menu_precios %>
+            <% end %>
+          </li>
+        <% end %>
+        <% if @menu_shop != "" %>
+          <li>
+            <%= link_to shop_path do %>
+                <span class="glyphicon glyphicon-check"></span> <%= @menu_shop %>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -156,7 +182,10 @@
           <ul class="dropdown-menu" role="menu">
             <% if @menu_ubicacion != "" %>
               <li>
-                <%= link_to @menu_ubicacion, static_pages_ubicacion_path %>
+                <%= link_to @menu_blog, blog_path(categ: "Todas") %>
+              </li>
+              <li>
+                <%= link_to @menu_ubicacion, ubicacion_path %>
               </li>
               <li class="divider"></li>
             <% end %>
@@ -170,6 +199,12 @@
             <% if logged_in? %>
               <li class="divider"></li>
               <li>
+                <%= link_to 'Modificar mis Datos', edit_contact_path(current_contact, :tipo => "datos") %>
+              </li>
+              <li>
+                <%= link_to 'Cambiar Contraseña', edit_contact_path(current_contact, :tipo => "") %>
+              </li>
+              <li>
                 <%= link_to "Salir del Sistema", logout_path, method: "delete" %>
               </li>
             <% end %>
@@ -179,8 +214,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<%= yield %>
 
 <div class="col-xs-12 pie-pagina">
 

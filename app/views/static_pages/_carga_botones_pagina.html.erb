@@ -1,5 +1,5 @@
     <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER  ************* -->
-    <% if logged_in? && @current_contact.con_nombre == "Superuser" %>
+    <% if logged_in? && @current_contact.con_nya == "Superuser" %>
       <div class="col-xs-12 righter">
         <p>
           <%= link_to new_page_path, remote: true, class: "btn btn-md btn-danger" do %>
@@ -10,7 +10,9 @@
     <% end %>
 
     <!-- *************  MOSTRAR BOTONES PRINCIPALES ADMIN  ************* -->
-    <% if logged_in? && (@current_contact.con_nombre == "Admin" || @current_contact.con_nombre == "Superuser") %>
+    <% if logged_in? && 
+          (@current_contact.con_nya == "Admin" ||
+           @current_contact.con_nya == "Superuser") %>
       <div class="col-xs-12 righter">
         <h4>
           <% if pagina %>

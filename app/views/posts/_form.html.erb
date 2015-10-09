@@ -52,24 +52,45 @@
               <%= f.text_field :pos_subtitulo, :placeholder => "Ingrese el Sub-título...", :class=>"form-control" %>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-6 hide">
-            <%= image_tag @post.imagen_big.url, style: "width:100%" %>
-          </div><br/><br/><br/>
         </div>
 
-        <div class="row hide">
-          <div class="righter">
-            <div class="field col-xs-12 col-sm-6 ">
-              <!-- <%= f.file_field :imagen_big, required: true %> -->
+          <!-- ********  TIPO DE REGISTRO "BLOG" O "SHOP"  *********  -->
+        <% if @pagina == "blog" %>
+          <div class="row">
+            <div class="col-xs-12 centered">
+              <%= image_tag @post.imagen_big.url, style: "width:60%; max-height:200px;" %>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="field col-xs-11 texto-centrado">
-            <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la descripción del Item...", rows: "6",:class=>"form-control" %>
+          <div class="row">
+            <div class="field col-xs-12 centered">
+              <% if @post %>
+                <%= f.file_field :imagen_big %>
+              <% else %>
+                <%= f.file_field :imagen_big, required: true %>
+              <% end %>
+            </div>
           </div>
-        </div>
+
+          <div class="row">
+            <div class="field col-xs-11 texto-centrado">
+              <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la Introducción...", rows: "6",:class=>"form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field col-xs-11 texto-centrado">
+              <%= f.text_area :pos_conclusion, required: true, :placeholder => "Ingrese la Conclusión...", rows: "6",:class=>"form-control" %>
+            </div>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="field col-xs-11 texto-centrado">
+              <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la descripción del Item...", rows: "6",:class=>"form-control" %>
+            </div>
+          </div>
+        <% end %>
+
 
         <div class="row margen-der-2 margen-izq-1">
           <div class="col-xs-12 col-sm-6 sin-margen">
@@ -116,11 +137,43 @@
           </div>
         </div>
 
-        <div class="row hide">
-          <div class="field col-xs-12">
-            <!-- <%= f.text_area :pos_conclusion, required: true, :placeholder => "Ingrese la Conclusión...", rows: "6",:class=>"form-control" %> -->
+        <% if @pagina == "blog" %>
+          <div class="row margen-der-2 margen-izq-1">
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag01, value: "Todas", :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag02, :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag03, :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <div class="row margen-der-2 margen-izq-1">
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag04, :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag05, :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 sin-margen">
+              <div class="field">
+                <%= f.text_field :pos_tag06, :placeholder => "Categoría...", :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
         <div class="row hide">
           <div class="field col-xs-12">

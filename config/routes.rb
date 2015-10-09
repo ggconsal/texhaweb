@@ -3,16 +3,22 @@ Rails.application.routes.draw do
   resources :pages
 
   get 'static_pages/home'
-
   get 'static_pages/quien'
-
   get 'static_pages/pricing'
-
   get 'static_pages/ubicacion'
-
   get 'static_pages/servicios'
-
   get 'static_pages/pagina1'
+  get 'static_pages/blog'
+  get 'static_pages/shop'
+
+  get    'home'       => 'static_pages#home'
+  get    'quienes'    => 'static_pages#quien'
+  get    'precios'    => 'static_pages#pricing'
+  get    'ubicacion'  => 'static_pages#ubicacion'
+  get    'servicios'  => 'static_pages#servicios'
+  get    'blog'       => 'static_pages#blog'
+  get    'shop'       => 'static_pages#shop'
+  get    'pagina1'    => 'static_pages#pagina1'
 
   resources :post_comment_answers
 

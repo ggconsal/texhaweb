@@ -1,59 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Contacts</h1>
+<div class="margen-afuera-izq-1 margen-afuera-sup-3 margen-afuera-inf-3">
+  <h1>Lista de Contactos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Con nya</th>
-      <th>Con nombre</th>
-      <th>Con apellido</th>
-      <th>Con passw</th>
-      <th>Profile</th>
-      <th>Con telefono</th>
-      <th>Con obs</th>
-      <th>Con boton sitio</th>
-      <th>Con telefono sn</th>
-      <th>Con mail</th>
-      <th>Con password</th>
-      <th>Con password2</th>
-      <th>Con subscribir</th>
-      <th>Con confirmado</th>
-      <th>Con password confirmacion</th>
-      <th>Option</th>
-      <th>Canalingreso</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
+    <table class="table">
+      <div class="col-sm-12">
+        <thead>
+          <tr>
+            <th>NyA</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>telefono</th>
+            <th>Comentario</th>
+            <th>Mail</th>
+            <th>Empresa</th>
+            <th>Subscr?</th>
+            <th>Confirm?</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+      </div> 
 
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.con_nya %></td>
-        <td><%= contact.con_nombre %></td>
-        <td><%= contact.con_apellido %></td>
-        <td><%= contact.password_digest %></td>
-        <td><%= contact.profile %></td>
-        <td><%= contact.con_telefono %></td>
-        <td><%= contact.con_obs %></td>
-        <td><%= contact.con_boton_sitio %></td>
-        <td><%= contact.con_telefono_sn %></td>
-        <td><%= contact.con_mail %></td>
-        <td><%= contact.con_password %></td>
-        <td><%= contact.con_password2 %></td>
-        <td><%= contact.con_subscribir %></td>
-        <td><%= contact.con_confirmado %></td>
-        <td><%= contact.con_password_confirmacion %></td>
-        <td><%= contact.option %></td>
-        <td><%= contact.canalingreso %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="col-sm-12">
+        <tbody>
+          <% @contacts.each do |contact| %>
+            <tr>
+              <td><%= contact.con_nya %></td>
+              <td><%= contact.con_nombre %></td>
+              <td><%= contact.con_apellido %></td>
+              <td><%= contact.con_telefono %></td>
+              <td><%= contact.con_obs %></td>
+              <td><%= contact.con_mail %></td>
+              <td><%= contact.con_password %></td>
+              <td><%= contact.con_subscribir %></td>
+              <td><%= contact.con_confirmado %></td>
+              <td><%= link_to 'Modif', edit_contact_path(contact, :tipo => "datos") %></td>
+              <td><%= link_to 'Borrar', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </div> 
+    </table>
+  </div> 
+</div> 
 
-<br>
-
-<%= link_to 'New Contact', new_contact_path %>

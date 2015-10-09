@@ -5,17 +5,17 @@
 </head>
 <body>
 
-<h3> Por favor, <%= @contact.con_nya %> confirma tu Dirección de Correo:</h3>
+	<h3> Por favor, <%= @contact.con_nya %> confirma tu Dirección de Correo:</h3>
 
-<p><%= link_to 'Presione Aquí para confirmar su mail', contacts_mail_confirmation_url(:id_usuario => @contact.id), :class => "btn btn-primary" %></p>
+	<p><%= link_to 'Presione Aquí para confirmar su mail', contacts_mail_confirmation_url(:id_usuario => @contact.id), :class => "btn btn-primary" %></p>
 
-<p><br/>Es muy importante que Confirmes tu Correo Electrónico en el link de arriba...</p>
+	<p><br/>Es muy importante que Confirmes tu Correo Electrónico en el link de arriba...</p>
 
-<p>Así sabremos que eres realmente tú y no ha sido otra persona que ha utilizado tu dirección sin tu consentimiento.</p>
+	<p>Así sabremos que eres realmente tú y no ha sido otra persona que ha utilizado tu dirección sin tu consentimiento.</p>
 
-<p><b><u>Clave Personal Provisoria</u>:</b> "<%= @contact.password %>" (sin comillas)</p>
+	<p><b><u>Clave Personal Provisoria</u>:</b> "<%= @contact.password %>" (sin comillas)</p>
 
-<p><br/><br/> Equipo de Seguridad. Texha Argentina</p>
+	<p><br/><br/> Equipo de Seguridad. Texha Argentina</p>
 
 
 </body>
