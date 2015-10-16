@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :pages
 
   get 'static_pages/home'
-  get 'static_pages/quien'
+  get 'static_pages/quienes'
   get 'static_pages/pricing'
   get 'static_pages/ubicacion'
   get 'static_pages/servicios'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'static_pages/shop'
 
   get    'home'       => 'static_pages#home'
-  get    'quienes'    => 'static_pages#quien'
+  get    'quienes'    => 'static_pages#quienes'
   get    'precios'    => 'static_pages#pricing'
   get    'ubicacion'  => 'static_pages#ubicacion'
   get    'servicios'  => 'static_pages#servicios'

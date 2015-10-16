@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def paginas
-  	#@pages = Page.where(["pag_nombre like ?", "*-demo"]).order(:pos_section)
-  	@pages = Page.all.order(pag_nombre: :desc)
+  	@pages = Page.all.order(:pag_orden)
   end
 
   helper_method :paginas

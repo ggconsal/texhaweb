@@ -41,6 +41,20 @@
           </div>
         <% end %>
 
+        <!--  TODOS    ************* -->
+        <div class="row margen-der-2 margen-izq-1">
+          <div class="col-xs-12 col-sm-6 sin-margen">
+            <div class="field">
+              <%= f.text_field :pos_page, disabled: true, :placeholder => "Página...", :class=>"form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 sin-margen">
+            <div class="field">
+              <%= f.text_field :pos_simbolo, :placeholder => "Ingrese el Símbolo...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
         <div class="row margen-der-2 margen-izq-1">
           <div class="col-xs-12 col-sm-6 sin-margen">
             <div class="field">
@@ -54,8 +68,9 @@
           </div>
         </div>
 
-          <!-- ********  TIPO DE REGISTRO "BLOG" O "SHOP"  *********  -->
-        <% if @pagina == "blog" %>
+        <!--  SOLO "BLOG" Y "HOME 10"  ************* -->
+        <% if @pagina == "blog" ||
+              @estilo == "home20" %>
           <div class="row">
             <div class="col-xs-12 centered">
               <%= image_tag @post.imagen_big.url, style: "width:60%; max-height:200px;" %>
@@ -71,7 +86,10 @@
               <% end %>
             </div>
           </div>
+        <% end %>
 
+        <!--  SOLO "BLOG"   ************* -->
+        <% if @pagina == "blog" %>
           <div class="row">
             <div class="field col-xs-11 texto-centrado">
               <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la Introducción...", rows: "6",:class=>"form-control" %>
@@ -83,7 +101,10 @@
               <%= f.text_area :pos_conclusion, required: true, :placeholder => "Ingrese la Conclusión...", rows: "6",:class=>"form-control" %>
             </div>
           </div>
-        <% else %>
+        <% end %>
+
+        <!--  TODOS MENOS "BLOG"   ************* -->
+        <% if @pagina != "blog" %>
           <div class="row">
             <div class="field col-xs-11 texto-centrado">
               <%= f.text_area :pos_intro, required: true, :placeholder => "Ingrese la descripción del Item...", rows: "6",:class=>"form-control" %>
@@ -92,6 +113,7 @@
         <% end %>
 
 
+        <!--  TODOS    ************* -->
         <div class="row margen-der-2 margen-izq-1">
           <div class="col-xs-12 col-sm-6 sin-margen">
             <div class="field">
@@ -100,27 +122,20 @@
           </div>
           <div class="col-xs-12 col-sm-6 sin-margen">
             <div class="field">
-              <%= f.text_field :pos_simbolo, :placeholder => "Ingrese el Símbolo...", :class=>"form-control" %>
+              <%= f.text_field :pos_boton_color, :placeholder => "Estilo del Botón...", :class=>"form-control" %>
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="field col-xs-11">
-            <%= f.text_area :pos_feature, required: true, :placeholder => "Ingrese especificaciones de Diseño...", rows: "6",:class=>"form-control" %>
+            <%= f.text_area :pos_feature, :placeholder => "Ingrese especificaciones de Columnas...", rows: "6", :class=>"form-control" %>
           </div>
         </div>
 
-        <div class="row margen-der-2 margen-izq-1">
-          <div class="col-xs-12 col-sm-6 sin-margen">
-            <div class="field">
-              <%= f.text_field :pos_estilo, :placeholder => "Estilo...", :class=>"form-control" %>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 sin-margen">
-            <div class="field">
-              <%= f.text_field :pos_page, :placeholder => "Página...", :class=>"form-control" %>
-            </div>
+        <div class="row">
+          <div class="field col-xs-11">
+              <%= f.text_field :pos_estilo, :placeholder => "Ingrese especificaciones de Estilo...", rows: "6", :class=>"form-control" %>
           </div>
         </div>
 
@@ -137,6 +152,7 @@
           </div>
         </div>
 
+        <!--  SOLO "BLOG"   ************* -->
         <% if @pagina == "blog" %>
           <div class="row margen-der-2 margen-izq-1">
             <div class="col-xs-12 col-sm-4 sin-margen">
@@ -175,6 +191,7 @@
           </div>
         <% end %>
 
+        <!--  TODOS   ************* -->
         <div class="row hide">
           <div class="field col-xs-12">
             <%= f.text_field :contact_id, value: session[:user_id], :class=>"form-control" %>

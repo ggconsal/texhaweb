@@ -5,8 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th>Pag nombre</th>
-      <th>Pag titulo</th>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>orden</th>
+      <th>Diseño</th>
+      <th>Titulo</th>
       <th>Pag desc</th>
       <th>Img Horizontal</th>
       <th>Img Vertical</th>
@@ -18,6 +21,9 @@
     <% @pages.each do |page| %>
       <tr>
         <td><%= page.pag_nombre %></td>
+        <td><%= page.pag_tipo %></td>
+        <td><%= page.pag_orden %></td>
+        <td><%= page.pag_design %></td>
         <td><%= page.pag_titulo %></td>
         <td><%= page.pag_desc %></td>
         <td>

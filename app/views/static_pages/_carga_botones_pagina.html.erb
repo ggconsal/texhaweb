@@ -15,12 +15,12 @@
            @current_contact.con_nya == "Superuser") %>
       <div class="col-xs-12 righter">
         <h4>
-          <% if pagina %>
-            <%= link_to edit_page_path(id: pagina.id), remote: true, class: "btn btn-md btn-warning" do %>
-                <span class="glyphicon glyphicon-retweet"> </span> Cambiar Fotos
+          <% if @page %>
+            <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
+                <span class="glyphicon glyphicon-retweet"> </span> Modificar Página
             <% end %>
           <% end %>
-          <%= link_to new_post_path, remote: true, class: "btn btn-md btn-warning" do %>
+          <%= link_to new_post_path(pagina: @page.pag_tipo, pagina_post: @page.pag_nombre, estilo: @page.pag_design), remote: true, class: "btn btn-md btn-warning" do %>
               <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
           <% end %>
         </h4>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006181412) do
+ActiveRecord::Schema.define(version: 20151015154019) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 20151006181412) do
     t.string   "pag_imagen_texto",         limit: 255
     t.string   "pag_lati",                 limit: 255
     t.string   "pag_long",                 limit: 255
+    t.string   "pag_design",               limit: 255
+    t.integer  "pag_orden",                limit: 4
+    t.string   "pag_tipo",                 limit: 255
+    t.string   "pag_simbolo",              limit: 255
+    t.string   "pag_menu",                 limit: 255
   end
 
   create_table "post_comment_answers", force: :cascade do |t|

@@ -1,0 +1,12 @@
+                      <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->
+                      <% if logged_in? && 
+                            (@current_contact.con_nya == "Admin" || 
+                             @current_contact.con_nya == "Superuser") %>
+                        <div class="righter botones-item">
+                          <h5>
+                          [ <%= link_to ' ', edit_post_path(post, pagina: @page.pag_tipo, estilo: @page.pag_design), remote: true, class: "glyphicon glyphicon-edit" %> - 
+                          <%= link_to ' ', posts_duplicar_path(id: post.id), method: :post, class: "glyphicon glyphicon-duplicate" %> - 
+                          <%= link_to ' ', post_path(id: post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Ítem?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                          </h5>
+                        </div>
+                      <% end %>

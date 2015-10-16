@@ -36,15 +36,54 @@
         <div class="row margen-der-1 margen-izq-1">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
-              <%= f.text_field :pag_nombre, required: true, :placeholder => "Ingrese el Nombre...", :class=>"form-control" %>
+              <%= f.text_field :pag_nombre, required: true, :placeholder => "Nombre de la Página...", :class=>"form-control" %>
             </div>
           </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_menu, required: true, :placeholder => "Ingrese el menú...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row margen-der-1 margen-izq-1">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_simbolo, :placeholder => "Simbolo del Menú...", :class=>"form-control" %>
+            </div>
+          </div>
+
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
             </div>
           </div>
         </div>
+
+        <div class="row margen-der-1 margen-izq-1">
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_tipo, required: true, :placeholder => "Tipo de Página...", :class=>"form-control" %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <div class="field">
+              <%= f.text_field :pag_orden, required: true, :placeholder => "Orden de Página...", :class=>"form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <% if logged_in? && @current_contact.con_nya == "Superuser" %>
+          <div class="row margen-izq-1">
+            <div class="centered">
+              <div class="field col-xs-11">
+                <%= f.text_field :pag_design, required: true, :placeholder => "Ingrese el diseño...", :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
         <div class="row margen-izq-1">
           <div class="centered">

@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :data_load, only: [:home, :ubicacion, :quien, :otramas, :servicios, :blog, :shop]
+  before_action :data_load, only: [:home, :ubicacion, :quienes, :otramas, :servicios, :blog, :shop]
   #before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   def ubicacion
@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   def shop
   end
 
-  def quien
+  def quienes
   end
 
   def otramas
@@ -57,28 +57,34 @@ class StaticPagesController < ApplicationController
       #@posts = Post.find_by pos_page: 'servicios'  # Esto es para un solo registro. Te pone LIMIT 1.
       #where(["name = ? and email = ?", "Joe", "joe@example.com"])
       # "action_name" es el nombre de la vista que esta llamando.
+      @page = Page.find_by pag_tipo: action_name
+
+      # Cuando es un solo registro se pregunta por "nil?".
+      #if @page.nil?
+      #  @page = Page.find_by pag_tipo: action_name + "-demo"
+      #end
+    
       if params[:categ] == nil
-        @posts = Post.where(["pos_page = ? ", action_name]).order(:pos_section)
+        @posts = Post.where(["pos_page = ? ", @page.pag_nombre]).order(:pos_section)
       else
-        @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ?)", action_name, params[:categ], "dd"]).order(:pos_section)
+        @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ? or pos_tag04 = ? or pos_tag05 = ? or pos_tag06 = ?)", @page.pag_nombre, params[:categ], params[:categ], params[:categ], params[:categ], params[:categ], params[:categ]]).order(:pos_section)
+      end
+
+      if @posts.empty?
+        @cant_posts = 0
+      else
+        @cant_posts = @posts.count
       end
 
       # Cuando son varios registros se pregunta por "empty?".
-      if @posts.empty?
-        if params[:categ] == nil
-          @posts = Post.where(["pos_page = ? ", action_name + "-demo"]).order(:pos_section)
-        else
-          @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ?)", action_name , params[:categ], params[:categ], params[:categ]]).order(:pos_section)
-        end
-      end
+      #if @posts.empty?
+      #  if params[:categ] == nil
+      #    @posts = Post.where(["pos_page = ? ", action_name + "-demo"]).order(:pos_section)
+      #  else
+      #    @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ?)", action_name , params[:categ], params[:categ], params[:categ]]).order(:pos_section)
+      #  end
+      #end
 
-      @page = Page.find_by pag_nombre: action_name
-
-      # Cuando es un solo registro se pregunta por "nil?".
-      if @page.nil?
-        @page = Page.find_by pag_nombre: action_name + "-demo"
-      end
-    
       #if @posts
       #  @ultimo = Post.last
       #end

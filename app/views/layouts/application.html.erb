@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title><%= yield(:title) %> txaWeb DEMO, Texha Argentina, Soluciones Simples a Problemas Complejos</title>
+  <title><%= yield(:title) %> Texha Argentina, Soluciones Simples a Problemas Complejos</title>
   <meta name="keywords" content="Aumentar Rentabilidad, Aumentar las Ventas, Reducir los Costos, Tienda on-line, Tienda online, Tienda Virtual,ecommerce,Tienda prearmada,Tienda pre-armada,Tienda pre-fabricada,Tienda prefabricada,Experiencia Comercial,Seriedad,Tecnologia,internet,seo">
   <meta name="description" content="Nuestra Pasión: Incrementar sus ganancias, Facilitando la Tecnologia (aumentando sus ventas y reduciendo sus costos).">
   <meta name="distribution" content="global"/>
@@ -32,88 +32,11 @@
 
 <%= yield %>
 
-<% @menu_home = "" %>
-<% @menu_servicios = "" %>
-<% @menu_quien = "" %>
 <% @menu_ubicacion = "" %>
-<% @menu_otramas = "" %>
-<% @menu_shop = "" %>
 <% @menu_blog = "" %>
-<% @menu_precios = "" %>
 <% @page_lati = -34.603695 %>
 <% @page_long = -58.381705 %>
-
-<% paginas.each do |page| %>
-
-  <% if page.pag_nombre == "home" %>
-    <% @menu_home = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "pagina1" %>
-    <% @menu_otramas = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "precios" %>
-    <% @menu_precios = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "quien" %>
-    <% @menu_quien = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "servicios" %>
-    <% @menu_servicios = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "ubicacion" %>
-    <% @menu_ubicacion = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "blog" %>
-    <% @menu_blog = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "shop" %>
-    <% @menu_shop = page.pag_titulo %>
-  <% end %>
-
-  <% if page.pag_nombre == "pie" || page.pag_nombre == "pie-demo" %>
-    <% @page_pie = page %>
-    <% @page_lati = @page_pie.pag_lati %>
-    <% @page_long = @page_pie.pag_long %>
-  <% end %>
-<% end %>
-
-<script type="text/javascript">
-  function loadScript() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-        'callback=initialize';
-    document.body.appendChild(script);
-  }
-
-  function initialize() {
-
-    var latitud = <%= @page_lati %>;
-    var longitud = <%= @page_long %>;
-    var direc = new google.maps.LatLng(latitud, longitud);
-
-    var mapOptions = {
-      zoom: 14,
-      center: direc
-    };
-    var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
-
-    var marker = new google.maps.Marker({
-      position: direc,
-      map: map,
-      animation: google.maps.Animation.DROP,
-      title: 'Nuestras Oficinas'
-    });
-  }
-
-</script>
+<% @page_marker = 'Nuestras Oficinas' %>
 
 <nav class="navbar navbar-default navbar-fixed-top menu-ppal" role="navigation">
   <div class="container col-md-offset-1 col-xs-12 col-md-10">
@@ -126,64 +49,62 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand">
-        <%= link_to image_tag("logo-google.png"), home_path, :class=>"mov-suave" %>
+        <%= link_to image_tag("texhagris.jpg"), home_path, :class=>"mov-suave" %>
       </div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="menu-principal">
       <ul class="nav navbar-nav">
-        <% if @menu_home != "" %>
-          <li>
-            <%= link_to home_path do %>
-                <span class="glyphicon glyphicon-home"></span> <%= @menu_home %>
-            <% end %>
-          </li>
-        <% end %>
-        <% if @menu_quien != "" %>
-          <li>
-            <%= link_to quienes_path do %>
-                <span class="glyphicon glyphicon-user"></span> <%= @menu_quien %>
-            <% end %>
-          </li>
+        <% paginas.each do |page| %>
+          <% if page.pag_tipo != "pie" &&
+                page.pag_tipo != "ubicacion" &&
+                page.pag_tipo != "blog" %>
+            <li>
+              <% if page.pag_tipo != nil &&
+                    page.pag_tipo != "" %>
+                <% @pag_link = page.pag_tipo + "_path" %>
+              <% else %>
+                <% @pag_link = "home_path" %>
+              <% end %>
+              <%= link_to eval(@pag_link) do %>
+                <span class="glyphicon <%= page.pag_simbolo %>"></span> <%= page.pag_menu %>
+              <% end %>
+            </li>
           <% end %>
-        <% if @menu_servicios != "" %>
-          <li>
-            <%= link_to servicios_path do %>
-                <span class="glyphicon glyphicon-check"></span> <%= @menu_servicios %>
-            <% end %>
-          </li>
-        <% end %>
-        <% if @menu_otramas != "" %>
-          <li>
-            <%= link_to otramas_path do %>
-                <span class="glyphicon glyphicon-check"></span> <%= @menu_otramas %>
-            <% end %>
-          </li>
-        <% end %>
-        <% if @menu_precios != "" %>
-          <li>
-            <%= link_to shop_path do %>
-                <span class="glyphicon glyphicon-check"></span> <%= @menu_precios %>
-            <% end %>
-          </li>
-        <% end %>
-        <% if @menu_shop != "" %>
-          <li>
-            <%= link_to shop_path do %>
-                <span class="glyphicon glyphicon-check"></span> <%= @menu_shop %>
-            <% end %>
-          </li>
+
+          <% if page.pag_tipo == "pie" %>
+            <% @page_pie = page %>
+            <% @page_lati = @page_pie.pag_lati %>
+            <% @page_long = @page_pie.pag_long %>
+            <% @page_marker = @page_pie.pag_titulo %>
+          <% end %>
+
+          <% if page.pag_tipo == "ubicacion" %>
+            <% @menu_ubicacion = page.pag_menu %>
+          <% end %>
+
+          <% if page.pag_tipo == "blog" %>
+            <% @menu_blog = page.pag_menu %>
+          <% end %>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-envelope"></span> Contacto <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <% if @menu_blog != "" %>
+            <span class="glyphicon glyphicon-globe"></span> Nuestra Comunidad 
+          <% else %>
+            <span class="glyphicon glyphicon-envelope"></span> Contacto 
+          <% end %>
+            <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <% if @menu_ubicacion != "" %>
+            <% if @menu_blog != "" %>
               <li>
                 <%= link_to @menu_blog, blog_path(categ: "Todas") %>
               </li>
+            <% end %>
+            <% if @menu_ubicacion != "" %>
               <li>
                 <%= link_to @menu_ubicacion, ubicacion_path %>
               </li>
@@ -215,29 +136,62 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="col-xs-12 pie-pagina">
+<script type="text/javascript">
+  function loadScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+        'callback=initialize';
+    document.body.appendChild(script);
+  }
 
-  <p></p>
-  <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
-    <% if @page_pie %>
-      <h3><%== @page_pie.pag_titulo %></h3>
+  function initialize() {
+
+    var latitud = <%= @page_lati %>;
+    var longitud = <%= @page_long %>;
+    var direc = new google.maps.LatLng(latitud, longitud);
+
+    var mapOptions = {
+      zoom: 14,
+      center: direc
+    };
+    var map = new google.maps.Map(document.getElementById('texha_map'),  mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: direc,
+      map: map,
+      animation: google.maps.Animation.DROP,
+      title: <%= @page_marker %>
+    });
+  }
+
+</script>
+
+<% if @page_pie %>
+  <div class="col-xs-12 pie-pagina">
+
+    <p></p>
+    <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
+      <h3><%== @page_marker %>:</h3>
       <p><%== @page_pie.pag_desc %></p>
-    <% end %>
-  </div>
-  <div class="col-xs-12 col-md-offset-1 col-sm-6 col-md-5">
-    <h3>Encuéntranos también en:</h3>
-    <div class="logo-redes col-sm-offset-1 col-md-offset-2">
-      <%= link_to image_tag("icon-f2.png"), "http://www.facebook.com", target: "_blank", :class=>"img-responsive img-ppal" %>
     </div>
-    <div class="logo-redes">
-      <%= link_to image_tag("icon-t2.png"), "http://www.twitter.com", target: "_blank", :class=>"img-responsive img-ppal" %>
+    <div class="col-xs-12 col-md-offset-1 col-sm-6 col-md-5">
+      <% if @page_pie %>
+        <h3><%== @page_pie.pag_imagen_texto %>:</h3>
+      <% end %>
+      <div class="logo-redes col-sm-offset-1 col-md-offset-2">
+        <%= link_to image_tag("icon-f2.png"), "http://www.facebook.com", target: "_blank", :class=>"img-responsive img-ppal" %>
+      </div>
+      <div class="logo-redes">
+        <%= link_to image_tag("icon-t2.png"), "http://www.twitter.com", target: "_blank", :class=>"img-responsive img-ppal" %>
+      </div>
+    <p><br/><br/><br/><br/><br/><br/></p>
     </div>
-  <p><br/><br/><br/><br/><br/><br/></p>
+
+    <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: @page_pie} %>
+
   </div>
-
-  <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: @page_pie} %>
-
-</div>
+<% end %>
 
 </body>
 </html>

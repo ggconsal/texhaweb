@@ -1,0 +1,85 @@
+
+    <% if @page %>
+      <!--  TODOS MENOS "BLOG" Y "HOME20"  ************* -->
+      <% if @page.pag_tipo != "blog" &&
+            @page.pag_design != "home20" %>
+        <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
+          <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
+        </div>
+        <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
+          <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
+        </div>
+      <% end %>
+
+      <!--  SOLO "HOME"  ************* -->
+      <% if @page.pag_tipo == "home" %>
+        <!--  SOLO "HOME 01"  ************* -->
+        <% if @page.pag_design == "home01" && @page.pag_imagen_texto != "nada" %>
+          <div class="texto-ppal-dark texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs">
+            <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
+          </div>
+
+          <div class="texto-ppal-dark texto-ppal-md texto-ppal-sup0 texto-ppal-100 visible-xs">
+            <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
+          </div>
+        <% end %>
+
+        <!--  SOLO "HOME 02"  ************* -->
+        <% if @page.pag_design == "home02" && @page.pag_imagen_texto != "nada" %>
+          <div class="texto-ppal-light texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs">
+            <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
+          </div>
+
+          <div class="texto-ppal-light texto-ppal-md texto-ppal-100 visible-xs">
+            <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
+          </div>
+        <% end %>
+      <% end %>
+
+      <!--  TODOS LOS "DISEÑO 10"  ************* -->
+      <% if @page.pag_design == "servicios10" || 
+            @page.pag_design == "quienes10" || 
+            @page.pag_design == "ubicacion10" || 
+            @page.pag_design == "blog10" %>
+        <div class="section-heading scrollpoint sp-effect3 active animated fadeInDown sin-marg-bot">
+            <% if @page.pag_titulo != "" && @page.pag_titulo != nil %>
+              <h1><%== @page.pag_titulo %></h1>
+              <div class="divider"></div>
+              <% if @page.pag_imagen_texto != "" && @page.pag_imagen_texto != nil %>
+                <h2><%== @page.pag_imagen_texto %></h2>
+              <% end %>
+            <% end %>
+        </div>
+      <% end %>
+
+      <!--  TODOS LOS "DISEÑO 01" Y "DISEÑO 02"  ************* -->
+      <% if @page.pag_design == "servicios01" || @page.pag_design == "servicios02" || 
+            @page.pag_design == "quienes01" || @page.pag_design == "quienes02" || 
+            @page.pag_design == "blog01" || @page.pag_design == "blog02" || 
+            @page.pag_design == "ubicacion01" || @page.pag_design == "ubicacion02" %>
+          <div class="page-header col-xs-12 centered margen-afuera-sup-2" >
+            <% if @page.pag_titulo != "" && @page.pag_titulo != nil %>
+              <h1><%== @page.pag_titulo %></h1>
+              <% if @page.pag_imagen_texto != "" && @page.pag_imagen_texto != nil %>
+                <h2><%== @page.pag_imagen_texto %></h2>
+              <% end %>
+            <% end %>
+          </div>
+      <% end %>
+
+    <% else %>
+      <!-- *************  MOSTRAR IMAGEN PRINCIPAL VANILLA  ************* -->
+      <div class="col-xs-12 div-img-100 div-hori" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "sin-conf-h.jpg"} %>
+      </div>
+      <div class="col-xs-12 div-img-100 div-vert sin-padd-r margen-menu" >
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "SI", img_url: "", img_name: "sin-conf-v.jpg"} %>
+      </div>
+    <% end %>
+
+    <!--  TODOS MENOS "HOME20"  ************* -->
+    <% if @page.pag_design != "home20" %>
+      <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER y ADMIN  ************* -->
+      <%= render partial: 'static_pages/carga_botones_pagina' %>
+    <% end %>
+
