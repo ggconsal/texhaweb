@@ -64,16 +64,18 @@ class StaticPagesController < ApplicationController
       #  @page = Page.find_by pag_tipo: action_name + "-demo"
       #end
     
-      if params[:categ] == nil
-        @posts = Post.where(["pos_page = ? ", @page.pag_nombre]).order(:pos_section)
-      else
-        @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ? or pos_tag04 = ? or pos_tag05 = ? or pos_tag06 = ?)", @page.pag_nombre, params[:categ], params[:categ], params[:categ], params[:categ], params[:categ], params[:categ]]).order(:pos_section)
-      end
+      if @page
+        if params[:categ] == nil
+          @posts = Post.where(["pos_page = ? ", @page.pag_nombre]).order(:pos_section)
+        else
+          @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ? or pos_tag04 = ? or pos_tag05 = ? or pos_tag06 = ?)", @page.pag_nombre, params[:categ], params[:categ], params[:categ], params[:categ], params[:categ], params[:categ]]).order(:pos_section)
+        end
 
-      if @posts.empty?
-        @cant_posts = 0
-      else
-        @cant_posts = @posts.count
+        if @posts.empty?
+          @cant_posts = 0
+        else
+          @cant_posts = @posts.count
+        end
       end
 
       # Cuando son varios registros se pregunta por "empty?".

@@ -80,6 +80,6 @@
     <!--  TODOS MENOS "HOME20"  ************* -->
     <% if @page.pag_design != "home20" %>
       <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER y ADMIN  ************* -->
-      <%= render partial: 'static_pages/carga_botones_pagina' %>
+      <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: ""} %>
     <% end %>
 

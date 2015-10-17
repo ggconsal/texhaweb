@@ -15,15 +15,24 @@
            @current_contact.con_nya == "Superuser") %>
       <div class="col-xs-12 righter">
         <h4>
-          <% if @page %>
-            <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
+          <% if pagina != nil && pagina != "" %>
+            <%= link_to edit_page_path(id: pagina.id), remote: true, class: "btn btn-md btn-warning" do %>
                 <span class="glyphicon glyphicon-retweet"> </span> Modificar Página
             <% end %>
+            <%= link_to new_post_path(pagina: pagina.pag_tipo, pagina_post: pagina.pag_nombre, estilo: pagina.pag_design), remote: true, class: "btn btn-md btn-warning" do %>
+                <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
+            <% end %>
+          <% else %>
+            <% if @page %>
+              <%= link_to edit_page_path(id: @page.id), remote: true, class: "btn btn-md btn-warning" do %>
+                  <span class="glyphicon glyphicon-retweet"> </span> Modificar Página
+              <% end %>
+              <%= link_to new_post_path(pagina: @page.pag_tipo, pagina_post: @page.pag_nombre, estilo: @page.pag_design), remote: true, class: "btn btn-md btn-warning" do %>
+                  <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
+              <% end %>
+            <% end %>
           <% end %>
-          <%= link_to new_post_path(pagina: @page.pag_tipo, pagina_post: @page.pag_nombre, estilo: @page.pag_design), remote: true, class: "btn btn-md btn-warning" do %>
-              <span class="glyphicon glyphicon-plus-sign"></span> Agregar Ítem
-          <% end %>
-        </h4>
+      </h4>
       </div>
     <% end %>
 
