@@ -30,8 +30,6 @@
 <div id="product-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 </div>
 
-<%= yield %>
-
 <% @menu_ubicacion = "" %>
 <% @menu_blog = "" %>
 <% @page_lati = -34.603695 %>
@@ -57,6 +55,7 @@
     <div class="collapse navbar-collapse" id="menu-principal">
       <ul class="nav navbar-nav">
         <% paginas.each do |page| %>
+
           <% if page.pag_tipo != "pie" &&
                 page.pag_tipo != "ubicacion" &&
                 page.pag_tipo != "blog" %>
@@ -75,9 +74,14 @@
 
           <% if page.pag_tipo == "pie" %>
             <% @page_pie = page %>
-            <% @page_lati = @page_pie.pag_lati %>
-            <% @page_long = @page_pie.pag_long %>
-            <% @page_marker = @page_pie.pag_titulo %>
+            <% if @page_pie.pag_lati != "" &&
+                  @page_pie.pag_lati != nil &&
+                  @page_pie.pag_long != "" &&
+                  @page_pie.pag_long != nil && %>
+              <% @page_lati = @page_pie.pag_lati %>
+              <% @page_long = @page_pie.pag_long %>
+              <% @page_marker = @page_pie.pag_titulo %>
+            <% end %>
           <% end %>
 
           <% if page.pag_tipo == "ubicacion" %>
@@ -161,11 +165,13 @@
       position: direc,
       map: map,
       animation: google.maps.Animation.DROP,
-      title: <%= @page_marker %>
+      title: '<%= @page_marker %>'
     });
   }
 
 </script>
+
+<%= yield %>
 
 <% if @page_pie %>
   <div class="col-xs-12 pie-pagina">

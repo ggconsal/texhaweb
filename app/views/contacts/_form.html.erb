@@ -9,8 +9,8 @@
         </button>
 
         <div class="centered">
-          <h3><%= @post.pos_titulo %></h3>
-          <h4><%= @post.pos_subtitulo %></h4>
+          <h3><%== @post.pos_titulo %></h3>
+          <h4><%== @post.pos_subtitulo %></h4>
         </div>
         
         <% if @contact.errors.any? %>
@@ -77,7 +77,7 @@
 
       <div class="modal-footer">
         <div class="col-xs-6 lefter navbar-brand">
-          <%= image_tag("") %>
+          <!--<%= image_tag("texhagris.jpg") %> -->
         </div>
         <div id="divMeAnoto" class="col-xs-6 righter">
           <%= f.submit 'Enviar Consulta', :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>

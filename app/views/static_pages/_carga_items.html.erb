@@ -33,7 +33,6 @@
 
         <!--  TODOS MENOS "HOME"  ************* -->
         <% if @page.pag_tipo != "home" %>
-
           <% if @section_ant != post.pos_section.to_int %>
             <!-- abro cada row con el cambio de cada section de la BdD -->
             <% if @section_ant != 0 %>  <!-- para no entrar la primera vez -->
@@ -50,10 +49,7 @@
             <div class="row margen-afuera-der-0 margen-afuera-izq-0 margen-der-2 margen-izq-2 margen-afuera-inf-2">
           <% end %>
 
-          <%= @section_ant %>
           <% @section_ant = post.pos_section.to_int %>
-          <%= @section_ant %>
-          <%= post.pos_section.to_int %>
 
           <div class="margen-afuera-sup-1 margen-afuera-inf-1 <%= post.pos_feature %>"> <!-- "pos_feature" es para manejar las columnas  -->
 
@@ -69,36 +65,35 @@
               </div>
             <% end %>
 
-            <!--  ES PARA TODOS  ************* -->
-            
-
             <!--  TODOS LOS "DISEÑO 10"  ************* -->
             <% if post.pos_tipo == "blog10" || 
                   post.pos_tipo == "basico10" || 
-                  post.pos_tipo == "basico10" || 
-                  post.pos_tipo == "basico10" %>
+                  post.pos_tipo == "contacto10" || 
+                  post.pos_tipo == "google10" %>
               <div class="titulo-info titulo-centrado sombra-der-arriba bordes-redondos-2 <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
             <% end %>
 
             <!--  TODOS LOS "DISEÑO 01"  ************* -->
             <% if post.pos_tipo == "blog01" || 
                   post.pos_tipo == "basico01" || 
-                  post.pos_tipo == "basico01" || 
-                  post.pos_tipo == "basico01" %>
+                  post.pos_tipo == "contacto01" || 
+                  post.pos_tipo == "google01" %>
               <div class="titulo-basico texto-justificado Sombra-der-arriba <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
             <% end %>
 
             <!--  TODOS LOS "DISEÑO 02"  ************* -->
             <% if post.pos_tipo == "blog02" || 
                   post.pos_tipo == "basico02" || 
-                  post.pos_tipo == "basico02" || 
-                  post.pos_tipo == "basico02" %>
+                  post.pos_tipo == "contacto02" || 
+                  post.pos_tipo == "google02" %>
               <div class="bs-callout bs-callout-info texto-justificado <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
             <% end %>
 
             <!--  SIN NINGUN DISEÑO  ************* -->
             <% if post.pos_tipo == "blog" || 
-                  post.pos_tipo == "basico" %>
+                  post.pos_tipo == "basico" || 
+                  post.pos_tipo == "contacto" || 
+                  post.pos_tipo == "google" %>
               <div class="<%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
             <% end %>
 
@@ -106,7 +101,7 @@
                 <% if post.pos_simbolo != "" %>
                   <span class="glyphicon <%= post.pos_simbolo %>"> </span>
                 <% end %>
-                  <%== post.pos_titulo %>
+                <%== post.pos_titulo %>
               </h3>
               <% if post.pos_subtitulo != "" %>
                 <h4> <!-- subtitulo  -->
@@ -145,19 +140,15 @@
                 <% end %>
 
                 <!--  SOLO "CONTACTO"  ************* -->
-                <% if post.pos_tipo == "contacto" %>
-                  <div class="col-xs-12 margen-afuera-inf-1">
-                    <%= render partial: 'contacts/form2', locals: {:motivo => "ubicacion"} %>
-                  </div>
+                <% if (post.pos_tipo.include? "contacto") %>
+                  <%= render partial: 'contacts/form2', locals: {:motivo => "ubicacion"} %>
                 <% end %>
 
                 <!--  SOLO "GOOGLE"  ************* -->
-                <% if post.pos_tipo == "google" %>
-                  <div class="centered">
-                    <p></p>
-                      <div id="texha_map"></div>
-                    <p><br/></p>
-                  </div>
+                <% if (post.pos_tipo.include? "google") %>
+                  <p></p>
+                    <div id="texha_map"></div>
+                  <p><br/></p>
                 <% end %>
 
                 <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->

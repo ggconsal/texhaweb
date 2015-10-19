@@ -9,7 +9,7 @@
           <% if @post.id %>
             <h3>Modificar Artículo:</h3>
             <h4>
-              "<%= @post.pos_titulo %>" (Id: <%= @post.id %>)
+              "<%== @post.pos_titulo %>" (Id: <%= @post.id %>)
             </h4>
           <% else %>
             <h3>Crear un nuevo Artículo</h3>
@@ -30,20 +30,19 @@
       </div>
 
       <div id="div-modal-body" class="modal-body margen-afuera-izq-2">
-        <% if @post.id %>
+
+      <!--        <% if @post.id %>
           <div class="field centered">
             <p>
               <b>Autor:</b>
               <%= @post.contact.con_nya %> - (<%= @post.contact.con_mail %>)
             </p>
-            <!-- <%= f.label :contact_id %><br>
-            <%= f.text_field :contact_id %> -->
           </div>
-        <% end %>
+        <% end %> -->
 
         <!--  TODOS    ************* -->
         <div class="row margen-der-2 margen-izq-1">
-          <div class="col-xs-12 col-sm-6 sin-margen">
+          <div class="col-xs-12 col-sm-6 sin-margen centered">
             <h4>Página: <%= @pagina_post %></h4>
             <div class="field hide">
               <%= f.text_field :pos_page, value: @pagina_post, :placeholder => "Página...", :class=>"form-control" %>
@@ -177,7 +176,7 @@
           </div>
           <div class="col-xs-12 col-sm-6 sin-margen">
             <div class="field">
-              <%= f.text_field :pos_section, :placeholder => "Sección...", :class=>"form-control" %>
+              <%= f.text_field :pos_section, required: true, :placeholder => "Sección...", :class=>"form-control" %>
             </div>
           </div>
         </div>
