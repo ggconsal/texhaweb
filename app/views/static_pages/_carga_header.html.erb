@@ -57,14 +57,14 @@
             @page.pag_design == "quienes01" || @page.pag_design == "quienes02" || 
             @page.pag_design == "blog01" || @page.pag_design == "blog02" || 
             @page.pag_design == "ubicacion01" || @page.pag_design == "ubicacion02" %>
+        <% if @page.pag_titulo != nil && @page.pag_titulo != "" %>
           <div class="page-header col-xs-12 centered margen-afuera-sup-2" >
-            <% if @page.pag_titulo != nil && @page.pag_titulo != "" %>
-              <h1><%== @page.pag_titulo %></h1>
-              <% if @page.pag_imagen_texto != nil && @page.pag_imagen_texto != "" %>
-                <h2><%== @page.pag_imagen_texto %></h2>
-              <% end %>
+            <h1><%== @page.pag_titulo %></h1>
+            <% if @page.pag_imagen_texto != nil && @page.pag_imagen_texto != "" %>
+              <h2><%== @page.pag_imagen_texto %></h2>
             <% end %>
           </div>
+        <% end %>
       <% end %>
 
       <!--  TODOS MENOS "HOME20"  ************* -->
