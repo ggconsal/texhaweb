@@ -1,7 +1,10 @@
-<!--  TODOS MENOS "HOME"  ************* -->
-<% if @page.pag_tipo != "home" %>
-  <div class="col-xs-12 margen-sup-4 margen-inf-3">
-<% end %>
+
+<% if @page != nil %>
+
+  <!--  TODOS MENOS "HOME"  ************* -->
+  <% if @page.pag_tipo != "home" %>
+    <div class="col-xs-12 margen-sup-4 margen-inf-3">
+  <% end %>
 
     <% if @page && @posts %>
 
@@ -188,7 +191,9 @@
       <% end %>
     <% end %>
 
-<!--  TODOS MENOS "HOME"  ************* -->
-<% if @page.pag_tipo != "home" %>
-  </div>   <!-- es el primer div de todos  -->
+  <!--  TODOS MENOS "HOME"  ************* -->
+  <% if @page.pag_tipo != "home" %>
+    </div>   <!-- es el primer div de todos  -->
+  <% end %>
+
 <% end %>

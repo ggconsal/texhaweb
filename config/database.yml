@@ -51,7 +51,6 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root  
   database: txaWeb_prod
   username: root
   password: <%= ENV['db_pass'] %>
