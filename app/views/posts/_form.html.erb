@@ -44,8 +44,9 @@
         <!--  TODOS    ************* -->
         <div class="row margen-der-2 margen-izq-1">
           <div class="col-xs-12 col-sm-6 sin-margen">
-            <div class="field">
-              <%= f.text_field :pos_page, disabled: true, :placeholder => "Página...", :class=>"form-control" %>
+            <h4>Página: <%= @pagina_post %></h4>
+            <div class="field hide">
+              <%= f.text_field :pos_page, value: @pagina_post, :placeholder => "Página...", :class=>"form-control" %>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 sin-margen">

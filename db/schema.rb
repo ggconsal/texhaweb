@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019124725) do
+ActiveRecord::Schema.define(version: 20151019192117) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -173,14 +173,14 @@ ActiveRecord::Schema.define(version: 20151019124725) do
     t.string   "pos_simbolo",               limit: 255
     t.string   "pos_estilo",                limit: 255
     t.integer  "contact_id",                limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.string   "imagen_big_file_name",      limit: 255
     t.string   "imagen_big_content_type",   limit: 255
     t.integer  "imagen_big_file_size",      limit: 4
     t.datetime "imagen_big_updated_at"
     t.string   "pos_page",                  limit: 255
-    t.integer  "pos_section",               limit: 4
+    t.decimal  "pos_section",                             precision: 5, scale: 2
     t.string   "pos_tipo",                  limit: 255
     t.string   "pos_tag01",                 limit: 255
     t.string   "pos_tag02",                 limit: 255

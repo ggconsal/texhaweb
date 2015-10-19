@@ -34,7 +34,7 @@
         <!--  TODOS MENOS "HOME"  ************* -->
         <% if @page.pag_tipo != "home" %>
 
-          <% if @section_ant != post.pos_section %>
+          <% if @section_ant != post.pos_section.to_int %>
             <!-- abro cada row con el cambio de cada section de la BdD -->
             <% if @section_ant != 0 %>  <!-- para no entrar la primera vez -->
               </div>
@@ -50,7 +50,10 @@
             <div class="row margen-afuera-der-0 margen-afuera-izq-0 margen-der-2 margen-izq-2 margen-afuera-inf-2">
           <% end %>
 
-          <% @section_ant = post.pos_section %>
+          <%= @section_ant %>
+          <% @section_ant = post.pos_section.to_int %>
+          <%= @section_ant %>
+          <%= post.pos_section.to_int %>
 
           <div class="margen-afuera-sup-1 margen-afuera-inf-1 <%= post.pos_feature %>"> <!-- "pos_feature" es para manejar las columnas  -->
 

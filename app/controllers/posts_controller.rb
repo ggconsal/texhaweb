@@ -20,13 +20,14 @@ class PostsController < ApplicationController
     @post = Post.new
     @pagina = params[:pagina]
     @estilo = params[:estilo]
-    @post.pos_page = params[:pagina_post]
+    @pagina_post = params[:pagina_post]
   end
 
   # GET /posts/1/edit
   def edit
     @pagina = params[:pagina]
     @estilo = params[:estilo]
+    @pagina_post = params[:pagina_post]
   end
 
   # POST /posts
