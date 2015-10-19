@@ -23,7 +23,7 @@ $(document).ready(function(){
   // You used .myCarousel here. 
   // That's the class selector not the id selector,
   // which is #myCarousel
-	//$('#myCarousel').carousel();
+	$('#myCarousel').carousel();
 
 	$('.mov-suave-post').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')

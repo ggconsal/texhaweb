@@ -25,7 +25,7 @@
                       <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: post.imagen_big, img_name: post.imagen_big_file_name} %>
                     </div>
                     <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
-                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: post.imagen_big, img_name: post.imagen_big_file_name} %>
+                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: post.imagen_big_v, img_name: post.imagen_big_v_file_name} %>
                     </div>
                     <div class="carousel-lg-abajo"></div>
                     <div class="carousel-caption">
@@ -48,7 +48,6 @@
 <% end %>
 
 <% if interr == 2 %>
-      <% if @page.pag_design == "home20" %>
             </div>
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><!-- Left and right controls -->
               <span class="glyphicon glyphicon-hand-left" aria-hidden="true">
@@ -63,5 +62,4 @@
           </div>
           <!-- *************  MOSTRAR BOTONES PRINCIPALES SUPERUSER y ADMIN  ************* -->
           <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: ""} %>
-      <% end %>
 <% end %>
