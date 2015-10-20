@@ -21,26 +21,15 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-  :address => ENV["txa_address"], #"mail.texhaarg.com",
-  :port => ENV["txa_port"], #587,
-  :domain => ENV["txa_domain"], #"texhaarg.com",
+  :address => ENV["txa_address"],
+  :port => ENV["txa_port"],
+  :domain => ENV["txa_domain"],
   :user_name => ENV["txa_mail"],
   :password => ENV["txa_pass"],
-  :authentication => ENV["txa_authentication"], #:login,
-  :enable_starttls_auto => ENV["txa_enable_starttls_auto"], #true,
-  :openssl_verify_mode => ENV["txa_openssl_verify_mode"], #'none'
+  :authentication => ENV["txa_authentication"],
+  :enable_starttls_auto => ENV["txa_enable_starttls_auto"],
+  :openssl_verify_mode => ENV["txa_openssl_verify_mode"]
   }
-
-#  config.action_mailer.smtp_settings = {
-#  :address => "mail.texhaarg.com",
-#  :port => 587,
-#  :domain => "texhaarg.com",
-#  :user_name => ENV["txa_mail"],
-#  :password => ENV["txa_pass"],
-#  :authentication => :login,
-#  :enable_starttls_auto => true,
-#  :openssl_verify_mode => 'none'
-#  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
