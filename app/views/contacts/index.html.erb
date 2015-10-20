@@ -3,45 +3,50 @@
 <div class="margen-afuera-izq-1 margen-afuera-sup-3 margen-afuera-inf-3">
   <h1>Lista de Contactos</h1>
 
-  <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
-    <table class="table">
-      <div class="col-sm-12">
-        <thead>
-          <tr>
-            <th>NyA</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>telefono</th>
-            <th>Comentario</th>
-            <th>Mail</th>
-            <th>Empresa</th>
-            <th>Subscr?</th>
-            <th>Confirm?</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-      </div> 
 
-      <div class="col-sm-12">
-        <tbody>
-          <% @contacts.each do |contact| %>
+  <% if logged_in? && 
+        (@current_contact.con_nya == "Admin" || 
+         @current_contact.con_nya == "Superuser") %>
+    <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
+      <table class="table">
+        <div class="col-sm-12">
+          <thead>
             <tr>
-              <td><%= contact.con_nya %></td>
-              <td><%= contact.con_nombre %></td>
-              <td><%= contact.con_apellido %></td>
-              <td><%= contact.con_telefono %></td>
-              <td><%= contact.con_obs %></td>
-              <td><%= contact.con_mail %></td>
-              <td><%= contact.con_password %></td>
-              <td><%= contact.con_subscribir %></td>
-              <td><%= contact.con_confirmado %></td>
-              <td><%= link_to 'Modif', edit_contact_path(contact, :tipo => "datos") %></td>
-              <td><%= link_to 'Borrar', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <th>NyA</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>telefono</th>
+              <th>Comentario</th>
+              <th>Mail</th>
+              <th>Empresa</th>
+              <th>Subscr?</th>
+              <th>Confirm?</th>
+              <th colspan="2"></th>
             </tr>
-          <% end %>
-        </tbody>
-      </div> 
-    </table>
-  </div> 
+          </thead>
+        </div> 
+
+        <div class="col-sm-12">
+          <tbody>
+            <% @contacts.each do |contact| %>
+              <tr>
+                <td><%= contact.con_nya %></td>
+                <td><%= contact.con_nombre %></td>
+                <td><%= contact.con_apellido %></td>
+                <td><%= contact.con_telefono %></td>
+                <td><%= contact.con_obs %></td>
+                <td><%= contact.con_mail %></td>
+                <td><%= contact.con_password %></td>
+                <td><%= contact.con_subscribir %></td>
+                <td><%= contact.con_confirmado %></td>
+                <td><%= link_to 'Modif', edit_contact_path(contact, :tipo => "datos") %></td>
+                <td><%= link_to 'Borrar', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </div> 
+      </table>
+    </div> 
+  <% end %>
 </div> 
 

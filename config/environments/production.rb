@@ -65,19 +65,19 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.default_url_options = { :host => 'localhost:3000'}
-  config.action_mailer.default_url_options = { host: 'http://texhablog.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: ENV["txa_server"] }
 
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-  :address => "mail.texhaarg.com",
-  :port => 587,
-  :domain => "texhaarg.com",
+  :address => ENV["txa_address"], #"mail.texhaarg.com",
+  :port => ENV["txa_port"], #587,
+  :domain => ENV["txa_domain"], #"texhaarg.com",
   :user_name => ENV["txa_mail"],
   :password => ENV["txa_pass"],
-  :authentication => :login,
-  :enable_starttls_auto => true,
-  :openssl_verify_mode => 'none'
+  :authentication => ENV["txa_authentication"], #:login,
+  :enable_starttls_auto => ENV["txa_enable_starttls_auto"] true,
+  :openssl_verify_mode => ENV["txa_openssl_verify_mode"], #'none'
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

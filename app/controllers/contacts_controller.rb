@@ -43,7 +43,9 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        ContactMailer.contact_email(@contact_admin, @contact).deliver_now
+        if @contact_admin.con_password == "Texha"
+          ContactMailer.contact_email(@contact_admin, @contact).deliver_now
+        end
         ContactMailer.contact_advise(@contact_admin, @contact).deliver_now
         
         if @contact.con_boton_sitio.include? "ubicacion"

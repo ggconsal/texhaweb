@@ -50,11 +50,9 @@
 					<%= f.label :canalingreso_id %><br>
 					<%= f.text_field :canalingreso_id %>
 				</div>
-				<% if @contact.con_mail == "" %>
-					<div class="field">
-						<%= f.text_field :con_mail, :placeholder => "Ingrese su Mail...", :class=>"form-control" %>
-					</div>
-				<% end %>
+				<div class="field">
+					<%= f.text_field :con_mail, :placeholder => "Ingrese su Mail...", :class=>"form-control" %>
+				</div>
 				<div class="field">
 					<%= f.text_area :con_obs, rows: 4, :placeholder => "Dejenos su Comentario...", :class=>"form-control" %>
 				</div>
