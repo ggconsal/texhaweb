@@ -3,7 +3,7 @@
 
   <!--  TODOS MENOS "HOME"  ************* -->
   <% if @page.pag_tipo != "home" %>
-    <div class="col-xs-12 margen-sup-4 margen-inf-3">
+    <div class="col-xs-12 margen-sup-2 margen-inf-3">
   <% end %>
 
     <% if @page && @posts %>
@@ -40,7 +40,7 @@
               <% if post.pos_tipo == "blog" %>
                 <% @section_count = @section_count + 1 %>
                 <% if @section_count % 3 == 0 %>
-                  <div class="col-xs-12">
+                  <div class="col-xs-offset-2 col-xs-8">
                     <%= render "form_cta" %>
                   </div>
                 <% end %>
@@ -134,7 +134,7 @@
                 <!--  SOLO "BLOG" Y "SHOP"  ************* -->
                 <% if (post.pos_tipo.include? "blog") || 
                       (post.pos_tipo.include? "shop") %>
-                  <div class="col-xs-12 texto-a-derecha margen-afuera-inf-1">
+                  <div class="texto-a-derecha margen-inf-1 margen-der-1">
                     <%= link_to post.pos_boton_desc, post_parrafos_path(post: post.id), class: @estilo_boton %>
                   </div>
                 <% end %>

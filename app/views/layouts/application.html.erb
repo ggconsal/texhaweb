@@ -32,6 +32,8 @@
 
 <% @menu_ubicacion = "" %>
 <% @menu_blog = "" %>
+<% @menu_blog2 = "" %>
+<% @menu_blog3 = "" %>
 <% @page_lati = -34.603695 %>
 <% @page_long = -58.381705 %>
 <% @page_marker = 'Nuestras Oficinas' %>
@@ -90,6 +92,8 @@
 
           <% if page.pag_tipo == "blog" %>
             <% @menu_blog = page.pag_menu %>
+            <% @menu_blog2 = page.pag_titulo %>
+            <% @menu_blog3 = page.pag_imagen_texto %>
           <% end %>
         <% end %>
       </ul>
@@ -107,6 +111,17 @@
               <li>
                 <%= link_to @menu_blog, blog_path(categ: "Todas") %>
               </li>
+              <% if @menu_blog2 != "" %>
+                <li>
+                  <%= link_to @menu_blog2, blog_path(categ: "comovendermas") %>
+                </li>
+              <% end %>
+              <% if @menu_blog3 != "" %>
+                <li>
+                  <%= link_to @menu_blog3, blog_path(categ: "mejorarmisitio") %>
+                </li>
+              <% end %>
+              <li class="divider"></li>
             <% end %>
             <% if @menu_ubicacion != "" %>
               <li>
@@ -118,7 +133,7 @@
               <%= link_to 'Consultas', new_contact_path(:motivo => "menu - Contacto"), remote: true %>
             </li>
             <li>
-              <%= link_to 'Te llamamos Gratis', new_contact_path(:motivo => "menu - telefono"), remote: true %>
+              <%= link_to '¿Te llamamos?', new_contact_path(:motivo => "menu - telefono"), remote: true %>
             </li>
 
             <% if logged_in? %>
@@ -205,3 +220,4 @@
 
 </body>
 </html>
+

@@ -71,7 +71,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
   :address => ENV["txa_address"],
-  :port => ENV["txa_port"],
+  :port => 587,
   :domain => ENV["txa_domain"],
   :user_name => ENV["txa_mail"],
   :password => ENV["txa_pass"],
