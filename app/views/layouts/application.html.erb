@@ -38,18 +38,32 @@
 <% @page_long = -58.381705 %>
 <% @page_marker = 'Nuestras Oficinas' %>
 
-<nav class="navbar navbar-default navbar-fixed-top menu-ppal" role="navigation">
-  <div class="container col-md-offset-1 col-xs-12 col-md-10">
+<% @logo = "" %>
+<% @logo_id = 0 %>
+<% @logo_foto = "texhagris.jpg" %>
+<% @logo_estilo = "" %>
+<% @logo_estilo_pic = "" %>
+
+<% pagconfig.each do |config| %>
+  <% if config.pag_nombre == "logo" %>
+    <% @logo = config.pag_nombre %>
+    <% @logo_id = config.id %>
+    <% @logo_foto = config.pag_menu %>
+    <% @logo_estilo = config.pag_design %>
+    <% @logo_estilo_pic = config.pag_estilo_body %>
+    <% @logo_menu = config.pag_titulo %>
+  <% end %>
+<% end %>
+
+<nav class="navbar navbar-default navbar-fixed-top <%= @logo_menu %>" role="navigation">
+  <div class="container col-xs-12 col-md-offset-1 col-md-10">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-principal">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <span class="glyphicon glyphicon-hand-up"></span> MENU
       </button>
-      <div class="navbar-brand">
-        <%= link_to image_tag("texhagris.jpg"), home_path, :class=>"mov-suave" %>
+      <div class="navbar-brand <%= @logo_estilo %> <%= @logo_estilo_pic %>">
+        <%= link_to image_tag(@logo_foto), home_path, :class=>"" %>
       </div>
     </div>
 
@@ -98,6 +112,20 @@
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? && 
+              (@current_contact.con_nya == "Admin" ||
+               @current_contact.con_nya == "Superuser") %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-wrench"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <% if @logo != "" %>
+                <li>
+                  <%= link_to "Modificar Logo", edit_page_path(id: @logo_id), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
           <% if @menu_blog != "" %>

@@ -6,9 +6,15 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def paginas
-  	@pages = Page.all.order(:pag_orden)
+	@pages = Page.where(["pag_tipo <> ? ", "config"]).order(:pag_orden)
+  end
+
+  def pagconfig
+	@config = Page.where(["pag_tipo = ? ", "config"])
   end
 
   helper_method :paginas
+  helper_method :pagconfig
+
 
 end
