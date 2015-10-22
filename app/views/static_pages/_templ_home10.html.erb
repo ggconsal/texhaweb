@@ -1,8 +1,7 @@
 <% if interr == 1 %>
           <!--  Solo la primera vez del '@posts.each' -->
           <% if @post_count == 1 %>
-            <div class="carousel-ppal", id="pp1" >
-              <div id="myCarousel" class="carousel slide"> <!--  data-ride="carousel"  -->
+              <div id="myCarousel" class="carousel slide carousel-ppal"> <!--  data-ride="carousel"  -->
                 <ol class="carousel-indicators hidden-xs"> <!-- Indicators -->
                   <% for i in 1..@cant_posts %>
                     <% if i == 1 %>
@@ -14,15 +13,15 @@
                   <% end %>
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                  <div class="item active carousel-sm">
+                  <div class="item active">
 
           <!-- Desde la segunda vez del '@posts.each' -->
           <% else %>
-                  <div class="item carousel-sm">
+                  <div class="item">
           <% end %>
 
           <!-- Para todas las veces del '@posts.each' -->
-                    <div class="carousel-caption">
+                    <div class="carousel-caption carousel-sm">
                       <h1>
                         <% if post.pos_simbolo != "" %>
                           <i class="glyphicon <%= post.pos_simbolo %>"> </i>
@@ -43,6 +42,5 @@
       <% if @page.pag_design == "home10" %>
             </div>
           </div>
-        </div> <!-- <div class="carousel-ppal"> -->
       <% end %>
 <% end %>
