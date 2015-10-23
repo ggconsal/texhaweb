@@ -33,7 +33,7 @@
 
       <div id="div-modal-body" class="modal-body margen-afuera-izq-2">
 
-        <div class="row margen-der-1 margen-izq-1">
+        <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_nombre, required: true, :placeholder => "Nombre de la Página...", :class=>"form-control" %>
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="row margen-der-1 margen-izq-1">
+        <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_simbolo, :placeholder => "Simbolo del Menú...", :class=>"form-control" %>
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <div class="row margen-der-1 margen-izq-1">
+        <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_tipo, required: true, :placeholder => "Tipo de Página...", :class=>"form-control" %>
@@ -76,18 +76,18 @@
         </div>
 
         <% if logged_in? && @current_contact.con_nya == "Superuser" %>
-          <div class="row margen-izq-1">
+          <div class="row margen-der-2">
             <div class="centered">
-              <div class="field col-xs-11">
+              <div class="field col-xs-12">
                 <%= f.text_field :pag_design, required: true, :placeholder => "Ingrese el diseño...", :class=>"form-control" %>
               </div>
             </div>
           </div>
         <% end %>
 
-        <div class="row margen-izq-1">
+        <div class="row margen-der-2">
           <div class="centered">
-            <div class="field col-xs-11">
+            <div class="field col-xs-12">
               <% if @page.imagen_hori.exists? %>
                 <%= image_tag @page.imagen_hori.url, style: "width:70%" %>
               <% end %>
@@ -99,9 +99,9 @@
           </div>
         </div>
 
-        <div class="row margen-izq-1">
+        <div class="row margen-der-2">
           <div class="centered">
-            <div class="field col-xs-11">
+            <div class="field col-xs-12">
               <% if @page.imagen_vert.exists? %>
                 <%= image_tag @page.imagen_vert.url, style: "width:70%" %>
               <% end %>
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <div class="row margen-der-1 margen-izq-1">
+        <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_estilo_body, :placeholder => "Ingrese Estilo Body...", :class=>"form-control" %>
@@ -125,13 +125,13 @@
           </div>
         </div>
 
-        <div class="row margen-izq-1">
-          <div class="field col-xs-11">
+        <div class="row margen-der-2">
+          <div class="field col-xs-12">
             <%= f.text_area :pag_desc, required: true, :placeholder => "Ingrese la Descripción...", rows: "6",:class=>"form-control" %>
           </div>
         </div>
 
-        <div class="row margen-der-1 margen-izq-1">
+        <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <%= f.text_field :pag_lati, :placeholder => "Ingrese Latitud...", :class=>"form-control" %>

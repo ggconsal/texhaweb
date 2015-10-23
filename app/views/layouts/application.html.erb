@@ -38,33 +38,23 @@
 <% @page_long = -58.381705 %>
 <% @page_marker = 'Nuestras Oficinas' %>
 
-<% @logo = "" %>
-<% @logo_id = 0 %>
-<% @logo_foto = "texhagris.jpg" %>
-<% @logo_menu = "menu-ppal-dark" %>
-<% @logo_estilo = "logo-1" %>
-<% @logo_estilo_pic = "logo-pic-130" %>
-
 <% pagconfig.each do |config| %>
   <% if config.pag_nombre == "logo" %>
     <% @logo = config.pag_nombre %>
     <% @logo_id = config.id %>
-    <% @logo_foto = config.pag_menu %>
-    <% @logo_estilo = config.pag_design %>
-    <% @logo_estilo_pic = config.pag_estilo_body %>
-    <% @logo_menu = config.pag_titulo %>
+    <% @pag_logo = config %>
   <% end %>
 <% end %>
 
-<nav class="navbar navbar-default navbar-fixed-top <%= @logo_menu %>" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top <%= @pag_logo.pag_titulo %>" role="navigation">
   <div class="container col-xs-12 col-md-offset-1 col-md-10">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-principal">
       <span class="glyphicon glyphicon-hand-up"></span> MENU
       </button>
-      <div class="navbar-brand <%= @logo_estilo %> <%= @logo_estilo_pic %>">
-        <%= link_to image_tag(@logo_foto), home_path, :class=>"" %>
+      <div class="navbar-brand <%= @pag_logo.pag_design %> <%= @pag_logo.pag_estilo_body %>">
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @pag_logo.imagen_hori, img_name: @pag_logo.imagen_hori_file_name} %>
       </div>
     </div>
 
