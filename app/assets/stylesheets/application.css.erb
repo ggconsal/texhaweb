@@ -32,6 +32,7 @@ html h5 {
 	height: 15px;
 	bottom: 5px;
 	right: 15px;
+	z-index: 2000;
 }
 
 .firma h2 {
@@ -264,7 +265,7 @@ html h5 {
 
 .carousel-lg .carousel-caption .botones-item {
 	text-align: center;
-	z-index: 20000;
+	z-index: 100;
 }
 
 .carousel-indicators li {
@@ -578,14 +579,6 @@ html h5 {
 	line-height: 25px;
 }
 
-.blog-div-col-der {
-	position: absolute;
-	top: 80px;
-	right: 2%;
-	border-radius: 5px;
-	padding: 0px;
-}
-
 .blog-div-cta {
 	background-color: #EDE8E2;
 	margin-bottom: 20px;
@@ -632,11 +625,12 @@ html h5 {
 }
 
 /*                                                BLOG - Titulo Ppal */
-.blog-div-title {
-	margin-top: 60px;
-/*	margin-left: 3%;
-	border-bottom: 1px dotted #828282;
-	padding-left: 8%;*/
+.blog-div-title h1 {
+	margin-top: 40px;
+	font-weight: bold; 
+	margin-bottom: 30px;
+	text-align: center;
+	color: #444;
 }
 
 .blog-div-title h1 {
@@ -653,11 +647,6 @@ html h5 {
 	border-bottom-style: groove;
 }
 
-/*                                                BLOG - Fila de Posts */
-.blog-div-row {
-	/*padding: 0px;*/
-}
-
 /*                                                BLOG - Cada Post */
 .blog-div-post, .blog-div-post2 {
 	/*background-color: #F5EEEE;*/
@@ -671,7 +660,7 @@ html h5 {
 }
 
 /*                                                BLOG Foto del Post */
-.blog-div-foto {
+.blog-div-foto, .blog-div-foto-lg {
 	padding: 0px;
 	margin: 0px;
 	margin-bottom: 10px;
@@ -684,9 +673,16 @@ html h5 {
 	max-height: 250px;
 }
 
+.blog-div-foto-lg img {
+	border-radius: 5px 5px 0px 0px;
+	width: 100%;
+	margin: 0px auto;
+	max-height: 500px;
+}
+
 .blog-pic-post {
 	width: 50%; 
-	max-width: 500px;
+	max-width: 300px;
 	float: right;
 	margin-left: 15px;
 }

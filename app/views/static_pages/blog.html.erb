@@ -5,22 +5,7 @@
 	<!-- *************  MOSTRAR LAS IMÁGENES  ************* -->
 	<%= render partial: 'static_pages/carga_header' %>
 
-	<div class="row blog-div-row col-xs-12 visible-xs">
-		<%= render "form_categorias" %>
-	</div>
-
-	<div class="col-xs-12 col-sm-8 col-md-9">
-		<!-- *************  MOSTRAR LOS ITEMS  ************* -->
-		<%= render partial: 'static_pages/carga_items', locals: {post: @post} %>
-	</div>
-
-	<div class="col-sm-4 col-md-3">
-		<div class="hidden-xs">
-			<%= render "form_cta" %>
-		</div>
-		<div class="hidden-xs">
-			<%= render "form_categorias" %>
-		</div>
-	</div>
+	<!-- *************  MOSTRAR LOS ITEMS  ************* -->
+	<%= render partial: 'static_pages/carga_items_blog', locals: {post: @post} %>
 
 </div>

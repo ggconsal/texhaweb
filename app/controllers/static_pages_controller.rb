@@ -75,6 +75,8 @@ class StaticPagesController < ApplicationController
           @cant_posts = 0
         else
           @cant_posts = @posts.count
+          #@ultimo = @posts.last
+          #@primero = @posts.first
         end
       end
 

@@ -1,7 +1,7 @@
 
-<div id="blog-div-ppal" class="container-fluid" >
+<div id="blog-div-ppal" class="container-fluid div-paginas margen-sup-4">
 
-  <div class="blog-div-post2 col-xs-11 col-sm-8">
+  <div class="blog-div-post2 col-xs-12 col-sm-8">
 
     <% if @post_parrafos.any? %>
       <div class="blog-div-title col-xs-12 col-sm-10 col-sm-offset-1">
@@ -15,7 +15,7 @@
             </h4>
           </div>
         <% end %>
-        <div class="blog-div-foto">
+        <div class="blog-div-foto-lg">
           <% if ENV["herokuapp"] == "NO" %>
             <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
           <% else %>
@@ -30,14 +30,16 @@
       </div>
 
       <div id="introduccion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-        <p>
-          <% if @post.contact.con_nya %>
-            <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
-          <% else %>
-            <b>Autor:</b> Sin Nombre<br/><br/>
-          <% end %>
-        </p>
         <h3>Introducción: </h3>
+        <p>
+          <div class="righter">
+            <% if @post.contact.con_nya %>
+              <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
+            <% else %>
+              <b>Autor:</b> Sin Nombre<br/><br/>
+            <% end %>
+          </div>
+        </p>
         <p>
           <%== @post.pos_intro %>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
@@ -72,7 +74,7 @@
       </div>
 
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-        <div class="row blog-div-row blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+        <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
 
           <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto">
             <!-- Texto del Parrafo -->
@@ -154,9 +156,9 @@
         </div>
       </div>
 
-      <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-        <h3>Cometarios del Artículo:</h3>
+      <div id="comentarios" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
         <%= render "static_pages/rescate" %> 
+        <h3>Cometarios del Artículo:</h3>
         <div class="righter">
           <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), remote: true, class: "glyphicon glyphicon-comment btn btn-md btn-info" %></h4>
         </div>
@@ -177,7 +179,7 @@
 
               <% if post_comment.post_comment_answers.any? %> 
                 <% post_comment.post_comment_answers.each do |post_answer| %> <!-- BEGIN Impresion de las Respuestas-->
-                  <div class="blog-div-texto col-md-offset-1">
+                  <div class="blog-div-texto col-xs-offset-1">
                     <p>
                       <% if post_answer.contact.con_nya? %>
                         <% if post_answer.pca_titulo != "" %>
@@ -193,7 +195,7 @@
                 <% end %> <!-- END Impresion de las Respuestas-->
               <% else %> <!-- ELSE post_comment.post_comment_answers.any? -->
                 <div class="righter">
-                  <h5>Comentario sin Respuestas aun</h5>
+                  <!-- <h5>Comentario sin Opiniones</h5> -->
                 </div>
               <% end %> <!-- END post_comment.post_comment_answers.any? -->
           <% end %> <!-- END Impresion de todos los Cometarios -->
@@ -218,7 +220,7 @@
     <% end %> <!-- END @post_parrafos.any? -->
   </div>  <!-- END div-cada-post -->
 
-  <div class="blog-div-col-der col-md-4 col-sm-4">
+  <div class="col-md-4 col-sm-4 margen-sup-1">
     <div class="hidden-xs">
       <%= render "form_cta" %>
     </div>
@@ -236,6 +238,7 @@
             
             <%= link_to "Links del Artículo", {:action => "index", :controller => "post_parrafos", :anchor => "links"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
             <%= link_to "Conclusión", {:action => "index", :controller => "post_parrafos", :anchor => "conclusion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+            <%= link_to "Comentarios", {:action => "index", :controller => "post_parrafos", :anchor => "comentarios"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
           <% end %> <!-- END Impresion de todos los Cometarios -->
           <br/><br/>
         </h4>
