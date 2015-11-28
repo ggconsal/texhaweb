@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully destroyed.' }
+        format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
         format.json { render :show, status: :created, location: @post }
         format.js {render inline: "location.reload();" }
         #format.json { head :no_content }

@@ -39,7 +39,8 @@
       <% if @page.pag_design == "servicios10" || 
             @page.pag_design == "quienes10" || 
             @page.pag_design == "ubicacion10" || 
-            @page.pag_design == "blog10" %>
+            @page.pag_design == "blog10" || 
+            @page.pag_design == "info10" %>
         <div class="section-heading scrollpoint sp-effect3 active animated fadeInDown sin-marg-bot">
             <% if @page.pag_titulo != "" && @page.pag_titulo != nil %>
               <h1><%== @page.pag_titulo %></h1>
@@ -54,6 +55,7 @@
       <!--  TODOS LOS "DISEÑO 01" Y "DISEÑO 02"  ************* -->
       <% if @page.pag_design == "servicios01" || @page.pag_design == "servicios02" || 
             @page.pag_design == "quienes01" || @page.pag_design == "quienes02" || 
+            @page.pag_design == "info01" || @page.pag_design == "info02" || 
             @page.pag_design == "blog01" || @page.pag_design == "blog02" || 
             @page.pag_design == "ubicacion01" || @page.pag_design == "ubicacion02" %>
         <% if @page.pag_titulo != nil && @page.pag_titulo != "" %>

@@ -1,31 +1,10 @@
 class StaticPagesController < ApplicationController
-  before_action :data_load, only: [:home, :ubicacion, :quienes, :otramas, :servicios, :blog, :shop]
+  before_action :data_load, only: [:home, :ubicacion, :quienes, :pagina1, :pagina2, :servicios, :blog, :shop, :preguntas, :formapag]
   #before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   def ubicacion
     @contact = Contact.new
     @contact.con_boton_sitio = params[:motivo]
-  end
-
-  def home
-  end
-
-  def blog
-  end
-
-  def shop
-  end
-
-  def quienes
-  end
-
-  def otramas
-  end
-
-  def servicios
-  end
-
-  def contacto
   end
 
   # POST /contacts
@@ -79,19 +58,6 @@ class StaticPagesController < ApplicationController
           #@primero = @posts.first
         end
       end
-
-      # Cuando son varios registros se pregunta por "empty?".
-      #if @posts.empty?
-      #  if params[:categ] == nil
-      #    @posts = Post.where(["pos_page = ? ", action_name + "-demo"]).order(:pos_section)
-      #  else
-      #    @posts = Post.where(["pos_page = ? and (pos_tag01 = ? or pos_tag02 = ? or pos_tag03 = ?)", action_name , params[:categ], params[:categ], params[:categ]]).order(:pos_section)
-      #  end
-      #end
-
-      #if @posts
-      #  @ultimo = Post.last
-      #end
     end
 
     def contact_params

@@ -32,8 +32,11 @@ class PostLinksController < ApplicationController
 
     respond_to do |format|
       if @post_link.save
-        format.html { redirect_to @post_link, notice: 'Post link was successfully created.' }
+        format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post_link }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_link, notice: 'Post link was successfully created.' }
+#        format.json { render :show, status: :created, location: @post_link }
       else
         format.html { render :new }
         format.json { render json: @post_link.errors, status: :unprocessable_entity }
@@ -46,8 +49,11 @@ class PostLinksController < ApplicationController
   def update
     respond_to do |format|
       if @post_link.update(post_link_params)
-        format.html { redirect_to @post_link, notice: 'Post link was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post_link }
+        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :created, location: @post_link }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_link, notice: 'Post link was successfully updated.' }
+#        format.json { render :show, status: :ok, location: @post_link }
       else
         format.html { render :edit }
         format.json { render json: @post_link.errors, status: :unprocessable_entity }

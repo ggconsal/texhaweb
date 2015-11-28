@@ -67,7 +67,7 @@
 
             <!--  TODOS LOS "DISEÑO 10"  ************* -->
             <% if post.pos_tipo == "blog10" || 
-                  post.pos_tipo == "basico10" || 
+                  post.pos_tipo == "info10" || 
                   post.pos_tipo == "contacto10" || 
                   post.pos_tipo == "google10" %>
               <div class="titulo-info sombra-der-arriba bordes-redondos-2 <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
@@ -75,7 +75,7 @@
 
             <!--  TODOS LOS "DISEÑO 01"  ************* -->
             <% if post.pos_tipo == "blog01" || 
-                  post.pos_tipo == "basico01" || 
+                  post.pos_tipo == "info01" || 
                   post.pos_tipo == "contacto01" || 
                   post.pos_tipo == "google01" %>
               <div class="titulo-basico texto-justificado Sombra-der-arriba <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
@@ -83,7 +83,7 @@
 
             <!--  TODOS LOS "DISEÑO 02"  ************* -->
             <% if post.pos_tipo == "blog02" || 
-                  post.pos_tipo == "basico02" || 
+                  post.pos_tipo == "info02" || 
                   post.pos_tipo == "contacto02" || 
                   post.pos_tipo == "google02" %>
               <div class="bs-callout bs-callout-info texto-justificado <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
@@ -91,7 +91,7 @@
 
             <!--  SIN NINGUN DISEÑO  ************* -->
             <% if post.pos_tipo == "blog" || 
-                  post.pos_tipo == "basico" || 
+                  post.pos_tipo == "info" || 
                   post.pos_tipo == "contacto" || 
                   post.pos_tipo == "google" %>
               <div class="<%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
@@ -113,7 +113,7 @@
                 <!--  SOLO "BASICO", "BLOG" Y "SHOP"  ************* -->
                 <% if (post.pos_tipo.include? "blog") || 
                       (post.pos_tipo.include? "shop") || 
-                      (post.pos_tipo.include? "basico") %>
+                      (post.pos_tipo.include? "info") %>
                   <%== post.pos_intro %>
                   <% if post.pos_boton_color != "" &&
                         post.pos_boton_color != nil  %>
@@ -124,7 +124,7 @@
                 <% end %>
 
                 <!--  SOLO "BASICO"  ************* -->
-                <% if (post.pos_tipo.include? "basico") && 
+                <% if (post.pos_tipo.include? "info") && 
                       post.pos_boton_desc != "" %>
                   <div class="texto-a-derecha margen-sup-2 margen-der-2">
                     <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - Contacto"), remote: true, class: @estilo_boton %>

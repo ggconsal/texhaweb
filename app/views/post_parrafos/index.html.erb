@@ -1,3 +1,7 @@
+<% @tag_title = @post.pos_titulo %>
+<% @tag_descr = @post.pos_intro %>
+<% @tag_image = "#{request.protocol}#{request.host_with_port}#{@post.imagen_big.url}" %>
+<% @tag_url = "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + @post.id.to_s %>
 
 <div id="blog-div-ppal" class="container-fluid div-paginas margen-sup-4">
 

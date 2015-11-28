@@ -32,8 +32,11 @@ class PostParrafoBulletsController < ApplicationController
 
     respond_to do |format|
       if @post_parrafo_bullet.save
-        format.html { redirect_to @post_parrafo_bullet, notice: 'Post parrafo bullet was successfully created.' }
+        format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post_parrafo_bullet }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_parrafo_bullet, notice: 'Post parrafo bullet was successfully created.' }
+#        format.json { render :show, status: :created, location: @post_parrafo_bullet }
       else
         format.html { render :new }
         format.json { render json: @post_parrafo_bullet.errors, status: :unprocessable_entity }
@@ -46,8 +49,11 @@ class PostParrafoBulletsController < ApplicationController
   def update
     respond_to do |format|
       if @post_parrafo_bullet.update(post_parrafo_bullet_params)
-        format.html { redirect_to @post_parrafo_bullet, notice: 'Post parrafo bullet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post_parrafo_bullet }
+        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :created, location: @post_parrafo_bullet }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_parrafo_bullet, notice: 'Post parrafo bullet was successfully updated.' }
+#        format.json { render :show, status: :ok, location: @post_parrafo_bullet }
       else
         format.html { render :edit }
         format.json { render json: @post_parrafo_bullet.errors, status: :unprocessable_entity }

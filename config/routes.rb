@@ -2,23 +2,27 @@ Rails.application.routes.draw do
 
   resources :pages
 
+  get 'static_pages/formapag'
+  get 'static_pages/preguntas'
   get 'static_pages/home'
   get 'static_pages/quienes'
   get 'static_pages/pricing'
   get 'static_pages/ubicacion'
   get 'static_pages/servicios'
   get 'static_pages/pagina1'
+  get 'static_pages/pagina2'
   get 'static_pages/blog'
   get 'static_pages/shop'
 
-  get    'home'       => 'static_pages#home'
-  get    'quienes'    => 'static_pages#quienes'
-  get    'precios'    => 'static_pages#pricing'
-  get    'ubicacion'  => 'static_pages#ubicacion'
-  get    'servicios'  => 'static_pages#servicios'
-  get    'blog'       => 'static_pages#blog'
-  get    'shop'       => 'static_pages#shop'
-  get    'pagina1'    => 'static_pages#pagina1'
+  get 'formapag'  => 'static_pages#formapag'
+  get 'preguntas' => 'static_pages#preguntas'
+  get 'home'      => 'static_pages#home'
+  get 'quienes'   => 'static_pages#quienes'
+  get 'precios'   => 'static_pages#pricing'
+  get 'ubicacion' => 'static_pages#ubicacion'
+  get 'servicios' => 'static_pages#servicios'
+  get 'blog'      => 'static_pages#blog'
+  get 'shop'      => 'static_pages#shop'
 
   resources :post_comment_answers
 

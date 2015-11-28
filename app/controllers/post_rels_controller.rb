@@ -32,8 +32,11 @@ class PostRelsController < ApplicationController
 
     respond_to do |format|
       if @post_rel.save
-        format.html { redirect_to @post_rel, notice: 'Post rel was successfully created.' }
+        format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post_rel }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_rel, notice: 'Post rel was successfully created.' }
+#        format.json { render :show, status: :created, location: @post_rel }
       else
         format.html { render :new }
         format.json { render json: @post_rel.errors, status: :unprocessable_entity }
@@ -46,8 +49,11 @@ class PostRelsController < ApplicationController
   def update
     respond_to do |format|
       if @post_rel.update(post_rel_params)
-        format.html { redirect_to @post_rel, notice: 'Post rel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post_rel }
+        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :created, location: @post_rel }
+        format.js {render inline: "location.reload();" }
+#        format.html { redirect_to @post_rel, notice: 'Post rel was successfully updated.' }
+#        format.json { render :show, status: :ok, location: @post_rel }
       else
         format.html { render :edit }
         format.json { render json: @post_rel.errors, status: :unprocessable_entity }
