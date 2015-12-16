@@ -38,6 +38,52 @@ $(document).ready(function(){
 		}
 	});
 
+	$(function() {  
+
+	    // cada vez que se produzca scroll en la ventana
+	    $(window).scroll(function(event) {
+
+	    	// Saco la posicion bottom del elemento de arriba al 
+	    	// que quiero inmovilizar. Luego pregunto por esa
+	    	// posicion (posic).
+	    	var	elemento = document.getElementById("divcta"),
+		    	posictop = elemento.getBoundingClientRect().top,
+		    	posic = posictop + elemento.clientHeight;
+
+		    // la variable fijo indica si el elemento ya fue inmovilizado
+		    // (fijo en la pantalla) o esta flotando en (en su estado normal).
+		    var	fijo = false;
+		    
+		    // obtengo el ancho del elemento de arriba que asignarle ese valor.
+		    // NO FUNCIONO: en el caso que achiquen o agranden la pantalla el
+		    // elemento continua en el mismo tamaño salvo que se haga scroll.
+		    // por eso utilicé un porcentaje.
+		    var	ancho = elemento.offsetWidth;
+
+	    	// var pwind = document.body.scrollTop;
+
+		    // alert(curtop - curtopscroll);
+	        // dependiendo el lugar de la pantalla
+	        // modificamos la clase del header
+	        // par cambiar su color de fondo
+	        // alert(posic.top);
+	        if (posic < 90 && fijo == false) 
+	        {
+	            fijo = true;
+	            $("#divcateg").addClass("blog-div-ontop");
+	            $("#divcateg").removeClass("blog-div-movible");
+	            document.getElementById('divcateg').style.width=29.5+"%";
+	        }
+	        else 
+	        {
+	            fijo = false;
+	            $("#divcateg").addClass("blog-div-movible");
+	            $("#divcateg").removeClass("blog-div-ontop");
+	            document.getElementById('divcateg').style.width=94+"%";
+	        }
+	    });
+	});	
+
 	$('.mov-suave').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
 		 && location.hostname == this.hostname) {
@@ -94,16 +140,3 @@ $(document).ready(function(){
 
 });
 
-
-
-/*		$('.div-boton').hide();
-		$('.boton-mas').addClass("hide"); 
-		$('.div-boton').removeClass( "myClass noClass" )
-
-        $('html, body').animate({
-           scrollTop: '0px'
-        },
-        1500); 
-		$('#div-mensajes').hide();
-
-*/

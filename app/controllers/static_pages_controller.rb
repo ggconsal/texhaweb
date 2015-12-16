@@ -44,6 +44,14 @@ class StaticPagesController < ApplicationController
       #end
     
       if @page
+        if  (@page.pag_nombre.include? "blog")
+          @categories = Category.where(["cat_tipo = ? ", "blog"]).order(:cat_orden)
+        elsif (@page.pag_nombre.include? "shop")
+          @categories = Category.where(["cat_tipo = ? ", "shop"]).order(:cat_orden)
+        else
+          @categories = nil
+        end
+
         if params[:categ] == nil
           @posts = Post.where(["pos_page = ? ", @page.pag_nombre]).order(:pos_section)
         else

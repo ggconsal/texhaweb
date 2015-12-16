@@ -1,11 +1,12 @@
     <div class="blog-div-categorias col-xs-12">
       <h3>Filtrar por Categorías:</h3>
       <h4>
-        <%= link_to 'Todas', blog_path(categ: "Todas"), class: "btn btn-warning blog-bot-categoria" %>
-        <%= link_to 'Como Vender Más', blog_path(categ: "ComoVenderMas"), class: "btn btn-warning blog-bot-categoria" %>
-        <%= link_to 'Mejorar mi Sitio', blog_path(categ: "MejorarMiSitio"), class: "btn btn-warning blog-bot-categoria" %>
-        <%= link_to 'Tienda Virtual', blog_path(categ: "TiendaVirtual"), class: "btn btn-warning blog-bot-categoria" %>
-        <%= link_to 'Texha Argentina', blog_path(categ: "TexhaArgentina"), class: "btn btn-warning blog-bot-categoria" %>
+        <% if @categories != nil %>
+          <% @categories.each do |categ| %>
+            <%= link_to categ.cat_titulo, blog_path(categ: categ.cat_titulo), class: "btn btn-warning blog-bot-categoria" %>
+          <% end %>
+        <% end %>
         <br/><br/>
       </h4>
     </div>
+

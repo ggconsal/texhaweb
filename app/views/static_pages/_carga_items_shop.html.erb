@@ -5,11 +5,20 @@
     <%= render "form_categorias" %>
   </div>
 
+  <div class="col-sm-4 col-md-4 margen-izq-1 margen-sup-3">
+    <div id="divcta" class="hidden-xs col-sm-12 margen-der-0">
+      <%= render "form_cta" %>
+    </div>
+    <div id="divcateg" class="hidden-xs col-sm-12 margen-der-0">
+      <%= render "form_categorias" %>
+    </div>
+  </div>
+
   <% if @posts.any? %>
     <div class="col-xs-12 col-sm-8 margen-sup-2 margen-der-1 margen-inf-3">
       <% @posts.each do |post| %>
     
-        <% if @cant_post % 2 == 0 %>
+        <% if @cant_post % 4 == 0 %>
           <div class="row margen-der-0 margen-izq-0">
         <% end %>
 
@@ -84,7 +93,7 @@
               </div>
             </div>
 
-        <% if @cant_post % 2 == 0 %>
+        <% if @cant_post % 4 == 0 %>
           </div>
           <% @cant_post = 0 %>
           <% @cant_row = @cant_row + 1 %>
@@ -111,15 +120,3 @@
       <% end %>
     </div>
   <% end %>
-
-  <div class="col-sm-4 col-md-4 margen-izq-1 margen-sup-3">
-    <div id="divcta" class="hidden-xs col-sm-12 margen-der-0">
-      <%= render "form_cta" %>
-    </div>
-    <div id="divcateg" class="hidden-xs col-sm-12 margen-der-0">
-      <%= render "form_categorias" %>
-    </div>
-  </div>
-
-
-
