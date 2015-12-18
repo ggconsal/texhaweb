@@ -44,12 +44,14 @@
                     <% @estilo_boton = "btn btn-info" %>
                   <% end %>
                   <div class="texto-a-derecha margen-sup-2 margen-der-1">
-                    <%= link_to 'Seguir Leyendo...', post_parrafos_path(post: post.id), class: @estilo_boton %>
+                    <%= link_to post.pos_boton_desc, post_parrafos_path(post: post.id), class: @estilo_boton %>
                   </div>
                   <div class="compartdir texto-a-derecha margen-inf-1 margen-der-1">
                     <h5 style="font-size: 17px; font-weight: bold; color: #444;">
                       Compartir en: 
                     </h5>
+
+                    <!-- mostrar logos de redes para compartir -->
                     <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + post.id.to_s + "&ret=login" %>
                     <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
                     <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + post.id.to_s + "&text=" + post.pos_titulo %>

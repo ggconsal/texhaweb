@@ -2,12 +2,20 @@
 <html>
 <head>
  
-  <title><%= @tag_title || "Texha Argentina, Soluciones Simples a Problemas Complejos" %></title>
-  <meta name="description" content='<%= @tag_descr || "Nuestro Objetivo es Aumentar sus ganancias, poniendo la Tecnologia al servicio de su Negocio." %>'>
-  <meta name="keywords" content="Aumentar Rentabilidad, Aumentar las Ventas, Reducir los Costos, Tienda on-line, Tienda online, Tienda Virtual,ecommerce,Tienda prearmada,Tienda pre-armada,Tienda pre-fabricada,Tienda prefabricada,Experiencia Comercial,Seriedad,Tecnologia,internet,seo">
+  <% if pag_general %>
+    <% @tag_title = pag_general.pag_titulo %>
+    <% @tag_descr = pag_general.pag_estilo_headerh %>
+    <% @tag_keys = pag_general.pag_estilo_headerv %>
+    <% @tag_sitio = pag_general.pag_menu %>
+  <% end %>
+
+
+  <title><%= @tag_title || "Texha Argentina" %></title>
+  <meta name="description" content="<%= @tag_descr || 'Nuestro Objetivo es Aumentar sus ganancias, poniendo la Tecnología al servicio de su Negocio' %>" />
+  <meta name="keywords" content="<%= @tag_keys || 'Aumentar Rentabilidad, Aumentar las Ventas, Reducir los Costos, Tienda on-line, Tienda online, Tienda Virtual,ecommerce,Tienda prearmada,Tienda pre-armada,Tienda pre-fabricada,Tienda prefabricada,Experiencia Comercial,Seriedad,Tecnologia,internet,seo' %>" />
 
   <!-- START - Facebook Open Graph, Google+ and Twitter Card Tags 1.6.3 -->
-  <meta property="og:site_name" content="Texha Argentina"/>
+  <meta property="og:site_name" content="<%= @tag_sitio || 'Texha Argentina' %>"/>
   <meta property="og:title" content="<%= @tag_title %>"/>
   <meta itemprop="name" content="<%= @tag_title %>"/>
   <meta property="og:url" content="<%= @tag_url %>"/>
@@ -65,15 +73,15 @@
 <% @page_long = -58.381705 %>
 <% @page_marker = 'Nuestras Oficinas' %>
 
-<nav class="navbar navbar-default navbar-fixed-top <%= pag_logo.pag_titulo %>" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top <%= pag_menu.pag_design %>" role="navigation">
   <div class="container col-xs-12 col-md-offset-1 col-md-10">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-principal">
       <span class="glyphicon glyphicon-hand-up"></span> MENU
       </button>
-      <div class="navbar-brand <%= pag_logo.pag_design %> <%= pag_logo.pag_estilo_body %>">
-        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: pag_logo.imagen_hori, img_name: pag_logo.imagen_hori_file_name} %>
+      <div class="navbar-brand <%= pag_menu.pag_estilo_headerh %>">
+        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: pag_menu.imagen_hori, img_name: pag_menu.imagen_hori_file_name} %>
       </div>
     </div>
 
@@ -101,13 +109,12 @@
 
           <% if page.pag_tipo == "pie" %>
             <% @page_pie = page %>
-            <% if @page_pie.pag_lati != "" &&
-                  @page_pie.pag_lati != nil &&
-                  @page_pie.pag_long != "" &&
-                  @page_pie.pag_long != nil && %>
-              <% @page_lati = @page_pie.pag_lati %>
-              <% @page_long = @page_pie.pag_long %>
-              <% @page_marker = @page_pie.pag_titulo %>
+            <% if @page_pie.pag_estilo_headerv != "" &&
+                  @page_pie.pag_estilo_headerv != nil &&
+                  @page_pie.pag_estilo_headerh != "" &&
+                  @page_pie.pag_estilo_headerh != nil && %>
+              <% @page_section01 = @page_pie.pag_estilo_headerh %>
+              <% @page_section02 = @page_pie.pag_estilo_headerv %>
             <% end %>
           <% end %>
 
@@ -133,9 +140,27 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-wrench"></span><span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <% if pag_logo != nil %>
+              <% if pag_general != nil %>
                 <li>
-                  <%= link_to "Modificar Logo", edit_page_path(id: pag_logo.id), remote: true %>
+                  <%= link_to "Configuración del Sitio", edit_page_path(id: pag_general.id), remote: true %>
+                </li>
+              <% end %>
+
+              <% if pag_menu != nil %>
+                <li>
+                  <%= link_to "Menú-Logo", edit_page_path(id: pag_menu.id), remote: true %>
+                </li>
+              <% end %>
+
+              <% if pag_direc != nil %>
+                <li>
+                  <%= link_to "Dirección", edit_page_path(id: pag_direc.id), remote: true %>
+                </li>
+              <% end %>
+
+              <% if @page_pie %>
+                <li>
+                  <%= link_to "Pie de Página", edit_page_path(id: @page_pie.id), remote: true %>
                 </li>
               <% end %>
 
@@ -248,27 +273,28 @@
 <%= yield %>
 
 <% if @page_pie %>
-  <div class="col-xs-12 pie-pagina">
+  <div class="col-xs-12 pie-pagina margen-inf-3 margen-sup-1">
 
     <p></p>
     <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
-      <h3><%== @page_marker %>:</h3>
-      <p><%== @page_pie.pag_desc %></p>
+      <h3><%== @page_section01 %>:</h3>
+      <p>
+        <%== pag_direc.pag_estilo_headerh + " " + pag_direc.pag_design %> <br/>
+        Teléfonos: <%== pag_direc.pag_estilo_headerv %> <br/>
+        <%== pag_direc.pag_imagen_texto %> <br/>
+      </p>
     </div>
 
     <% if pag_redes != nil %>
       <div class="col-xs-12 col-md-offset-1 col-sm-6 col-md-5">
-        <h3><%== @page_pie.pag_imagen_texto %>:</h3>
+        <h3><%== @page_section02 %>:</h3>
         <% pag_redes.each do |config| %>
           <div class="logo-redes">
-            <%= link_to image_tag(config.imagen_hori.url), config.pag_desc, target: "_blank", :class=>"img-responsive img-ppal" %>
+            <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
           </div>
         <% end %>
       </div>
     <% end %>
-
-    <%= render partial: 'static_pages/carga_botones_pagina', locals: {pagina: @page_pie} %>
-
   </div>
 <% end %>
 
@@ -279,3 +305,5 @@
 </body>
 </html>
 
+
+<% @page_marker = @page_pie.pag_titulo %>

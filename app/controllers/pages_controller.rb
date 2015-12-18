@@ -15,6 +15,11 @@ class PagesController < ApplicationController
   # GET /pages/new
   def new
     @page = Page.new
+
+    if params[:config]
+      @page.pag_tipo = "config"
+    end
+
   end
 
   # GET /pages/1/edit

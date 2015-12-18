@@ -13,12 +13,22 @@ class ApplicationController < ActionController::Base
 	 @tmp01 = Page.where(["pag_nombre = ? ", "redes"])
   end
 
-  def pag_logo
-    @tmp02 = Page.find_by pag_nombre: "logo"
+  def pag_menu
+    @tmp_menu = Page.find_by pag_nombre: "menu"
+  end
+
+  def pag_general
+    @tmp_general = Page.find_by pag_nombre: "general"
+  end
+
+  def pag_direc
+    @tmp_direc = Page.find_by pag_nombre: "direccion"
   end
 
   helper_method :paginas
-  helper_method :pag_logo
+  helper_method :pag_menu
+  helper_method :pag_general
+  helper_method :pag_direc
   helper_method :pag_redes
 
 end

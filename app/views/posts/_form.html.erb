@@ -80,6 +80,7 @@
 
         <!--  SOLO "BLOG" Y "HOME 20"  ************* -->
         <% if @pagina == "blog" ||
+              @pagina == "shop" ||
               @estilo == "home20" %>
           <div class="row margen-der-2">
             <div class="col-xs-12">
@@ -182,7 +183,8 @@
         </div>
 
         <!--  SOLO "BLOG"   ************* -->
-        <% if @pagina == "blog" %>
+        <% if @pagina == "blog" ||
+              @pagina == "shop" %>
           <div class="row margen-der-2">
             <div class="col-xs-12 col-sm-4">
               <div class="field">
