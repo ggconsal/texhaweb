@@ -36,21 +36,23 @@
         </div>
         
         <div class="row">
-          <div class="col-xs-12 col-sm-6">
-            <div class="field">
-              <%= f.text_field :par_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
-            </div>
+          <div class="field col-xs-12 col-sm-6">
+            <%= f.text_field :par_titulo, required: true, :placeholder => "Ingrese el título...", :class=>"form-control" %>
           </div>
-          <div class="col-xs-12 col-sm-6">
-            <%= image_tag @post_parrafo.imagen_small.url, style: "width:100%" %>
+          <div class="field col-xs-12 col-sm-6">
+              <% if @post_parrafo.par_imagen_tmp == nil ||
+                    @post_parrafo.par_imagen_tmp == "" %>
+                <%= f.text_field :par_imagen_tmp, required: true, value: "Standard", :placeholder => "Tipo Párrafo (standard/imagen)...", :class=>"form-control" %>
+              <% else %>
+                <%= f.text_field :par_imagen_tmp, required: true, :placeholder => "Tipo Párrafo (standard/imagen)...", :class=>"form-control" %>
+              <% end %>
           </div><br/><br/><br/>
         </div>
 
         <div class="row">
-          <div class="righter">
-            <div class="field col-xs-12 col-sm-6 ">
-              <%= f.file_field :imagen_small %>
-            </div>
+          <div class="field col-xs-12 centered">
+            <%= image_tag @post_parrafo.imagen_small.url, style: "width:40%" %>
+            <%= f.file_field :imagen_small %>
           </div>
         </div>
 

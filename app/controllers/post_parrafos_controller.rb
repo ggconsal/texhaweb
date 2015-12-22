@@ -6,9 +6,16 @@ class PostParrafosController < ApplicationController
   def index
     #@post_parrafos = PostParrafo.all
     @post = Post.find(params[:post])
-    @post_parrafos = PostParrafo.where("post_id = ?", params[:post])
+    @post_parrafos = PostParrafo.where("post_id = ? and par_imagen_tmp <> 'imagen'", params[:post])
+    @post_images = PostParrafo.where("post_id = ? and par_imagen_tmp = 'imagen'", params[:post])
     @post_comments = PostComment.where("post_id = ?", params[:post])
     @post_rels = PostRel.where("post_id = ?", params[:post])
+
+    if @post_images.empty?
+      @cant_images = 0
+    else
+      @cant_images = @post_images.count
+    end
   end
 
   # GET /post_parrafos/1
