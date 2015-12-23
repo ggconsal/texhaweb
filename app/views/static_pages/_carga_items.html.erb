@@ -65,14 +65,6 @@
               </div>
             <% end %>
 
-            <!--  TODOS LOS "DISEÑO 10"  ************* -->
-            <% if post.pos_tipo == "blog10" || 
-                  post.pos_tipo == "info10" || 
-                  post.pos_tipo == "contacto10" || 
-                  post.pos_tipo == "google10" %>
-              <div class="titulo-info sombra-der-arriba bordes-redondos-2 <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
-            <% end %>
-
             <!--  TODOS LOS "DISEÑO 01"  ************* -->
             <% if post.pos_tipo == "blog01" || 
                   post.pos_tipo == "info01" || 
@@ -89,6 +81,14 @@
               <div class="bs-callout bs-callout-info texto-justificado <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
             <% end %>
 
+            <!--  TODOS LOS "DISEÑO 10"  ************* -->
+            <% if post.pos_tipo == "blog10" || 
+                  post.pos_tipo == "info10" || 
+                  post.pos_tipo == "contacto10" || 
+                  post.pos_tipo == "google10" %>
+              <div class="titulo-info sombra-der-arriba bordes-redondos-2 <%= post.pos_estilo %>"> <!-- "pos_estilo" es para los estilos -->
+            <% end %>
+
             <!--  SIN NINGUN DISEÑO  ************* -->
             <% if post.pos_tipo == "blog" || 
                   post.pos_tipo == "info" || 
@@ -99,7 +99,7 @@
 
               <h3> <!-- titulo  -->
                 <% if post.pos_simbolo != "" %>
-                  <span class="glyphicon <%= post.pos_simbolo %>"> </span>
+                  <span class="<%= post.pos_simbolo %>"> </span>
                 <% end %>
                 <%== post.pos_titulo %>
               </h3>
@@ -123,19 +123,17 @@
                   <% end %>
                 <% end %>
 
-                <!--  SOLO "BASICO"  ************* -->
-                <% if (post.pos_tipo.include? "info") && 
-                      post.pos_boton_desc != "" %>
-                  <div class="texto-a-derecha margen-sup-2 margen-der-2">
-                    <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - Contacto"), remote: true, class: @estilo_boton %>
-                  </div>
-                <% end %>
-
                 <!--  SOLO "BLOG" Y "SHOP"  ************* -->
                 <% if (post.pos_tipo.include? "blog") || 
-                      (post.pos_tipo.include? "shop") %>
+                      (post.pos_tipo.include? "shop") ||
+                      ((post.pos_tipo.include? "info") && post.pos_imagen_tmp && (post.pos_imagen_tmp.include? "pagina")) %>
                   <div class="texto-a-derecha margen-inf-1 margen-der-1">
                     <%= link_to post.pos_boton_desc, post_parrafos_path(post: post.id), class: @estilo_boton %>
+                  </div>
+                <% else %>
+                  <!--  SOLO "BASICO"  ************* -->
+                  <div class="texto-a-derecha margen-sup-2 margen-der-2">
+                    <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - Contacto"), remote: true, class: @estilo_boton %>
                   </div>
                 <% end %>
 

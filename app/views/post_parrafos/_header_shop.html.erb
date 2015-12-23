@@ -29,9 +29,10 @@
                     </li>
                 <% end %>
               </ol>
-              <div class="carousel-inner" style="height:450px;" role="listbox">
+              <div class="carousel-inner" role="listbox">
                 <div class="item active">
                   <div class="col-xs-12 centered blog-pic-shop" >
+                    <span class="helper"></span>
                     <% if ENV["herokuapp"] == "NO" %>
                       <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
                     <% else %>
@@ -49,6 +50,7 @@
 
                 <div class="item">
                   <div class="col-xs-12 centered blog-pic-shop" >
+                    <span class="helper"></span>
                     <% if image.imagen_small.url != "Missing.png" %>
                       <% if ENV["herokuapp"] == "NO" %>
                         <%= image_tag image.imagen_small.url, class: "img-responsive" %>
@@ -116,7 +118,18 @@
         </h3>
         <h4>
           <br/><%== @post.pos_intro %>
-        </h4>
+        </h4><br/>
+        <% if pag_redes != nil %>
+          <div class="col-xs-10 centered margen-izq-3" style="background-color: #ddd;">
+            <h3>Realiza tu pedido:</h3>
+            <% pag_redes.each do |config| %>
+              <div class="logo-redes-shop">
+                <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">
             <h4>

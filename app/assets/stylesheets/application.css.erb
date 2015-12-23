@@ -284,12 +284,14 @@ html h5 {
 
 .indi-shop .carousel-indicators li, .indi-shop .carousel-indicators .active {
 	background-color: #fff;
-	width: 60px;
-	height: 70px;
+	width: 15%;
+	height: 18%;
 	border-radius: 4%;
 }
 
 .indi-shop .carousel-indicators {
+	position: absolute;
+	bottom: 0px;
 	width: 100%;
 	left: 30%;
 }
@@ -302,8 +304,42 @@ html h5 {
 	top: 0%;
 }
 
+.indi-shop .carousel-inner {
+	width: 100%;
+	max-height: 500px;
+}
+
+.indi-shop .carousel-caption {
+	position: absolute;
+	background-color: transparent;
+	color: #444;
+	bottom: 20%;
+	width: 90%;
+}
+
+.indi-shop .carousel-caption h1 {
+	font-weight: bolder;
+	color: #444; 
+	opacity: 1;
+}
+
+.indi-shop .carousel-caption h1 span {
+	color: #566068;
+    text-shadow: 3px -4px 4px #ddd, -1px 4px 4px #ddd;
+	font-weight: bold;
+}
+
+.indi-shop .carousel-caption h1 i {
+	font-size: 30px;
+}
+
+.indi-shop .carousel-caption h2 {
+	color: #333;
+	margin-bottom: 3%;
+}
+
+
 .indi-shop {
-	height: 70%;
 }
 
 .carousel-lg-abajo {
@@ -537,13 +573,19 @@ html h5 {
 	font-weight: bold;
 }
 
-.logo-redes {
+.logo-redes-shop {
 	float: left;
-	width: 70px;
-	height: 70px;
+	width: 30%;
+	height: 30%;
 }
 
-.logo-redes img {
+.logo-redes {
+	float: left;
+	width: 18%;
+	height: 18%;
+}
+
+.logo-redes img, .logo-redes-shop img {
 	width: 100%;
 }
 
@@ -670,6 +712,43 @@ html h5 {
 	font-size: 2em;
 }
 
+.about-item {
+  text-align: center;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.about-item h3 {
+  color: #222;
+}
+
+.about-item p {
+  color: #999999;
+}
+
+.about-item i.fa {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  padding: 30px;
+  width: 104px;
+}
+
+.about-item i.fa {
+  border: 2px solid #cc6698;
+  color: #cc6698;
+}
+
+.about-item:hover i.fa {
+  color: #ffffff;
+  background: #cc6698;
+}
+
+.about-item:hover h3 {
+  color: #cc6698;
+}
 
 #p-answer {
 	border-bottom-width: 1px;
@@ -703,7 +782,7 @@ html h5 {
 	border-radius: 5px 5px 0px 0px;
 	width: 100%;
 	margin: 0px auto;
-	max-height: 250px;
+	max-height: 500px;
 }
 
 .blog-div-foto-lg img {
@@ -720,9 +799,14 @@ html h5 {
 	margin-left: 15px;
 }
 
+.blog-pic-shop {
+	height: 400px;
+	text-align: center;
+}
+
 .blog-pic-shop img {
-	width: 70%; 
-	max-height: 400px;
+	margin: 10px auto;
+	height: 100%;
 }
 
 /*                                                BLOG Texto del Post */
@@ -811,7 +895,7 @@ section#about .about-item:hover h3 {
 }
 
 .section-heading {
-    margin: 90px 0px 40px;
+    margin: 0px 0px 40px;
 	text-align: center;
 }
 .section-heading h1 {

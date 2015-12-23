@@ -159,6 +159,12 @@
 
         <div class="row margen-der-2">
           <div class="field col-xs-12">
+            <%= f.text_field :pos_imagen_tmp, required: true, :placeholder => "Destino del Botón (pagina / contacto)...", :class=>"form-control" %>
+          </div>
+        </div>
+
+        <div class="row margen-der-2">
+          <div class="field col-xs-12">
             <%= f.text_area :pos_feature, :placeholder => "Ingrese especificaciones de Columnas...", rows: "6", :class=>"form-control" %>
           </div>
         </div>
