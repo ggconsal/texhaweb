@@ -119,16 +119,27 @@
         <h4>
           <br/><%== @post.pos_intro %>
         </h4><br/>
-        <% if pag_redes != nil %>
-          <div class="col-xs-10 centered margen-izq-3" style="background-color: #ddd;">
-            <h3>Realiza tu pedido:</h3>
-            <% pag_redes.each do |config| %>
-              <div class="logo-redes-shop">
-                <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
-              </div>
-            <% end %>
-          </div>
+        <% if @post.pos_boton_color != "" &&
+              @post.pos_boton_color != nil  %>
+          <% @estilo_boton = "btn " + @post.pos_boton_color %>
+        <% else %>
+          <% @estilo_boton = "btn btn-primary" %>
         <% end %>
+        <div class="col-xs-10 centered margen-izq-2" style="background-color: #ddd;">
+          <h3>Realiza tu pedido:</h3>
+          <div class="row margen-sup-1">
+            <%= link_to "Pedido Directo", new_contact_path(:motivo => @post.pos_titulo), remote: true, class: "btn btn-primary pedido-shop" %>
+          </div>
+          <% if fpg_redes != nil %>
+            <div class="row margen-izq-2 margen-sup-1">
+              <% fpg_redes.each do |config| %>
+                <div class="logo-redes-shop">
+                  <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
 
         <% if logged_in? && session[:user_id] == @post.contact_id %>
           <div class="righter">

@@ -68,8 +68,8 @@
                     <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
                     <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + post.id.to_s + "&text=" + post.pos_titulo %>
 
-                    <% if pag_redes != nil %>
-                      <% pag_redes.each do |config| %>
+                    <% if fpg_redes != nil %>
+                      <% fpg_redes.each do |config| %>
 
                         <% if config.pag_titulo == "Facebook" %>
                           <%= link_to @share_facebook, :target => '_blank' do %>

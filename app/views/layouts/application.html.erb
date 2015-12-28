@@ -2,11 +2,11 @@
 <html>
 <head>
  
-  <% if pag_general %>
-    <% @tag_title = pag_general.pag_titulo %>
-    <% @tag_descr = pag_general.pag_estilo_headerh %>
-    <% @tag_keys = pag_general.pag_estilo_headerv %>
-    <% @tag_sitio = pag_general.pag_menu %>
+  <% if fpg_general %>
+    <% @tag_title = fpg_general.pag_titulo %>
+    <% @tag_descr = fpg_general.pag_estilo_headerh %>
+    <% @tag_keys = fpg_general.pag_estilo_headerv %>
+    <% @tag_sitio = fpg_general.pag_menu %>
   <% end %>
 
 
@@ -72,16 +72,20 @@
 <% @page_lati = -34.603695 %>
 <% @page_long = -58.381705 %>
 <% @page_marker = 'Nuestras Oficinas' %>
+<% @page_section01 = "" %>
+<% @page_section02 = "" %>
 
-<nav class="navbar navbar-default navbar-fixed-top <%= pag_menu.pag_design %>" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top <%= fpg_menu.pag_design if fpg_menu %>" role="navigation">
   <div class="container col-xs-12 col-md-offset-1 col-md-10">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-principal">
       <span class="glyphicon glyphicon-hand-up"></span> MENU
       </button>
-      <div class="navbar-brand <%= pag_menu.pag_estilo_headerh %>">
-        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: pag_menu.imagen_hori, img_name: pag_menu.imagen_hori_file_name} %>
+      <div class="navbar-brand <%= fpg_menu.pag_estilo_headerh if fpg_menu %>">
+        <% if fpg_menu %>
+          <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: fpg_menu.imagen_hori, img_name: fpg_menu.imagen_hori_file_name} %>
+        <% end %>
       </div>
     </div>
 
@@ -109,11 +113,13 @@
 
           <% if page.pag_tipo == "pie" %>
             <% @page_pie = page %>
-            <% if @page_pie.pag_estilo_headerv != "" &&
-                  @page_pie.pag_estilo_headerv != nil &&
-                  @page_pie.pag_estilo_headerh != "" &&
-                  @page_pie.pag_estilo_headerh != nil && %>
+            <% if @page_pie.pag_estilo_headerh != "" &&
+                  @page_pie.pag_estilo_headerh != nil %>
               <% @page_section01 = @page_pie.pag_estilo_headerh %>
+              <% @page_marker = @page_pie.pag_estilo_headerh %>
+            <% end %>
+            <% if @page_pie.pag_estilo_headerv != "" &&
+                  @page_pie.pag_estilo_headerv != nil %>
               <% @page_section02 = @page_pie.pag_estilo_headerv %>
             <% end %>
           <% end %>
@@ -140,21 +146,21 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-wrench"></span><span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <% if pag_general != nil %>
+              <% if fpg_general != nil %>
                 <li>
-                  <%= link_to "Configuración del Sitio", edit_page_path(id: pag_general.id), remote: true %>
+                  <%= link_to "Configuración del Sitio", edit_page_path(id: fpg_general.id), remote: true %>
                 </li>
               <% end %>
 
-              <% if pag_menu != nil %>
+              <% if fpg_menu != nil %>
                 <li>
-                  <%= link_to "Menú-Logo", edit_page_path(id: pag_menu.id), remote: true %>
+                  <%= link_to "Menú-Logo", edit_page_path(id: fpg_menu.id), remote: true %>
                 </li>
               <% end %>
 
-              <% if pag_direc != nil %>
+              <% if fpg_direc != nil %>
                 <li>
-                  <%= link_to "Dirección", edit_page_path(id: pag_direc.id), remote: true %>
+                  <%= link_to "Dirección", edit_page_path(id: fpg_direc.id), remote: true %>
                 </li>
               <% end %>
 
@@ -164,9 +170,9 @@
                 </li>
               <% end %>
 
-              <% if pag_redes != nil %>
+              <% if fpg_redes != nil %>
                 <li class="divider"></li>
-                <% pag_redes.each do |config| %>
+                <% fpg_redes.each do |config| %>
                   <li>
                     <%= link_to config.pag_titulo, edit_page_path(id: config.id), remote: true %>
                   </li>
@@ -275,20 +281,26 @@
 <% if @page_pie %>
   <div class="col-xs-12 pie-pagina margen-inf-3 margen-sup-1">
 
-    <p></p>
-    <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
-      <h3><%== @page_section01 %>:</h3>
-      <p>
-        <%== pag_direc.pag_estilo_headerh + " " + pag_direc.pag_design %> <br/>
-        Teléfonos: <%== pag_direc.pag_estilo_headerv %> <br/>
-        <%== pag_direc.pag_imagen_texto %> <br/>
-      </p>
-    </div>
+    <% if @page_section01 != "" %>
+      <p></p>
+      <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
+        <h3><%== @page_section01 %>:</h3>
+        <div class="margen-sup-1">
+          <p>
+            <% if fpg_direc %>
+              <%== fpg_direc.pag_estilo_headerh + " " + fpg_direc.pag_design %> <br/>
+              Teléfonos: <%== fpg_direc.pag_estilo_headerv %> <br/>
+              <%== fpg_direc.pag_imagen_texto %> <br/>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
 
-    <% if pag_redes != nil %>
+    <% if @page_section02 != "" %>
       <div class="col-xs-12 col-md-offset-1 col-sm-6 col-md-5">
         <h3><%== @page_section02 %>:</h3>
-        <% pag_redes.each do |config| %>
+        <% fpg_redes.each do |config| %>
           <div class="logo-redes">
             <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
           </div>
@@ -304,6 +316,3 @@
 
 </body>
 </html>
-
-
-<% @page_marker = @page_pie.pag_titulo %>
