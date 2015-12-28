@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   # "fpg_" significa Funcion sobre una Pagina.
 
   def fpg_redes
-	 @tmp01 = Page.where(["pag_nombre = ? ", "redes"])
+    # uso el "where" porque puede traer mas de un registro
+    @tmp_redes = Page.where(["pag_nombre = ? ", "redes"])
   end
 
   def fpg_menu
@@ -27,10 +28,16 @@ class ApplicationController < ActionController::Base
     @tmp_direc = Page.find_by pag_nombre: "direccion"
   end
 
+  def fpg_contacto
+    @tmp_contacto = Page.find_by pag_nombre: "contacto"
+  end
+
+
   helper_method :paginas
   helper_method :fpg_menu
   helper_method :fpg_general
   helper_method :fpg_direc
   helper_method :fpg_redes
+  helper_method :fpg_contacto
 
 end

@@ -4,10 +4,10 @@
   <h1>Lista de Contactos</h1>
 
 
-  <% if logged_in? && 
+  <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
+    <% if logged_in? && 
         (@current_contact.con_nya == "Admin" || 
          @current_contact.con_nya == "Superuser") %>
-    <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
       <table class="table">
         <div class="col-sm-12">
           <thead>
@@ -46,7 +46,9 @@
           </tbody>
         </div> 
       </table>
-    </div> 
-  <% end %>
+    <% else %>
+      <p>Debe ingresar al sistema para visualizar contactos.</p>
+    <% end %>
+  </div> 
 </div> 
 

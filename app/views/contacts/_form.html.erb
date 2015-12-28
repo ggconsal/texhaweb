@@ -9,8 +9,17 @@
         </button>
 
         <div class="centered">
-          <h3><%== @post.pos_titulo %></h3>
-          <h4><%== @post.pos_subtitulo %></h4>
+          <% if fpg_contacto %>
+            <h3><%== fpg_contacto.pag_estilo_headerh %></h3>
+            <h4><%== fpg_contacto.pag_estilo_headerv %></h4>
+          <% elsif @post %>
+            <!-- "@post" es por compatibilidad con versiones anteriores -->
+            <h3><%== @post.pos_titulo %></h3>
+            <h4><%== @post.pos_subtitulo %></h4>
+          <% else %>
+            <h3>Envíanos tu Pedido o Consulta</h3>
+            <h4>Te responderemos hoy mismo!</h4>
+          <% end %>
         </div>
         
         <% if @contact.errors.any? %>
@@ -78,96 +87,15 @@
           <!--<%= image_tag("texhagris.jpg") %> -->
         </div>
         <div id="divMeAnoto" class="col-xs-6 righter">
-          <%= f.submit 'Enviar', :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>
+          <% if fpg_contacto &&
+                fpg_contacto.pag_design &&
+                fpg_contacto.pag_design != "" %>
+            <%= f.submit fpg_contacto.pag_design, :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>
+          <% else %>
+            <%= f.submit 'Enviar', :class=>"btn btn-primary btn-md", :id=>"gc-aceptar" %>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
-
-
-
-<!--
-<%= form_for(@contact) do |f| %>
-  <% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
-      <ul>
-      <% @contact.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :con_nya %><br>
-    <%= f.text_field :con_nya %>
-  </div>
-  <div class="field">
-    <%= f.label :con_nombre %><br>
-    <%= f.text_field :con_nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :con_apellido %><br>
-    <%= f.text_field :con_apellido %>
-  </div>
-  <div class="field">
-    <%= f.label :profile_id %><br>
-    <%= f.text_field :profile_id %>
-  </div>
-  <div class="field">
-    <%= f.label :con_telefono %><br>
-    <%= f.text_field :con_telefono %>
-  </div>
-  <div class="field">
-    <%= f.label :con_obs %><br>
-    <%= f.text_area :con_obs %>
-  </div>
-  <div class="field">
-    <%= f.label :con_boton_sitio %><br>
-    <%= f.text_field :con_boton_sitio %>
-  </div>
-  <div class="field">
-    <%= f.label :con_telefono_sn %><br>
-    <%= f.check_box :con_telefono_sn %>
-  </div>
-  <div class="field">
-    <%= f.label :con_mail %><br>
-    <%= f.text_field :con_mail %>
-  </div>
-  <div class="field">
-    <%= f.label :con_password %><br>
-    <%= f.text_field :con_password %>
-  </div>
-  <div class="field">
-    <%= f.label :con_password2 %><br>
-    <%= f.text_field :con_password2 %>
-  </div>
-  <div class="field">
-    <%= f.label :con_subscribir %><br>
-    <%= f.check_box :con_subscribir %>
-  </div>
-  <div class="field">
-    <%= f.label :con_confirmado %><br>
-    <%= f.check_box :con_confirmado %>
-  </div>
-  <div class="field">
-    <%= f.label :con_password_confirmacion %><br>
-    <%= f.text_field :con_password_confirmacion %>
-  </div>
-  <div class="field">
-    <%= f.label :option_id %><br>
-    <%= f.text_field :option_id %>
-  </div>
-  <div class="field">
-    <%= f.label :canalingreso_id %><br>
-    <%= f.text_field :canalingreso_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
--->

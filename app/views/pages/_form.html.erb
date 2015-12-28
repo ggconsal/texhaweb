@@ -72,7 +72,7 @@
             </div>
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                  <%= f.text_field :pag_design, required: true, :placeholder => "Ingrese la Localidad...", :class=>"form-control" %>
+                <%= f.text_field :pag_design, :placeholder => "Ingrese la Localidad...", :class=>"form-control" %>
               </div>
             </div>
             <div class="row margen-der-2">
@@ -97,7 +97,7 @@
 
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                  <%= f.text_field :pag_design, required: true, :placeholder => "Ingrese el diseño del Menú...", :class=>"form-control" %>
+                  <%= f.text_field :pag_design, :placeholder => "Ingrese el diseño del Menú...", :class=>"form-control" %>
               </div>
             </div>
             <div class="row margen-der-2">
@@ -119,7 +119,7 @@
 
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                <%= f.text_field :pag_menu, required: true, :placeholder => "Ingrese la URL (¡incluir http o https!)...", :class=>"form-control" %>
+                <%= f.text_field :pag_menu, :placeholder => "Ingrese la URL (¡incluir http o https!)...", :class=>"form-control" %>
               </div>
             </div>
             <div class="row margen-der-2">
@@ -141,12 +141,29 @@
             </div>
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                <%= f.text_field :pag_estilo_headerv, required: true, :placeholder => 'Ingrese las keywords (separadas por "," sin espacios)...', :class=>"form-control" %>
+                <%= f.text_field :pag_estilo_headerv, :placeholder => 'Ingrese las keywords (separadas por "," sin espacios)...', :class=>"form-control" %>
               </div>
             </div>
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                <%= f.text_field :pag_menu, required: true, :placeholder => 'Ingrese el Nombre del Sitio...', :class=>"form-control" %>
+                <%= f.text_field :pag_menu, :placeholder => 'Ingrese el Nombre del Sitio...', :class=>"form-control" %>
+              </div>
+            </div>
+          <% elsif @page.pag_nombre == "contacto" %>
+
+            <div class="row margen-der-2">
+              <div class="field col-xs-12">
+                <%= f.text_field :pag_estilo_headerh, :placeholder => "Ingrese el Título del Formulario...", :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="row margen-der-2">
+              <div class="field col-xs-12">
+                <%= f.text_field :pag_estilo_headerv, :placeholder => 'Ingrese el Sub-Título del Formulario...', :class=>"form-control" %>
+              </div>
+            </div>
+            <div class="row margen-der-2">
+              <div class="field col-xs-12">
+                <%= f.text_field :pag_design, :placeholder => "Ingrese el título del botón...", :class=>"form-control" %>
               </div>
             </div>
           <% else %>
@@ -158,12 +175,12 @@
 
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                <%= f.text_field :pag_estilo_headerh, :placeholder => "Ingrese Título de Sección 2...", :class=>"form-control" %>
+                <%= f.text_field :pag_estilo_headerh, :placeholder => "Ingrese Título de Sección 1...", :class=>"form-control" %>
               </div>
             </div>
             <div class="row margen-der-2">
               <div class="field col-xs-12">
-                <%= f.text_field :pag_estilo_headerv, :placeholder => "Ingrese Título de Sección 1...", :class=>"form-control" %>
+                <%= f.text_field :pag_estilo_headerv, :placeholder => "Ingrese Título de Sección 2...", :class=>"form-control" %>
               </div>
             </div>
           <% else %>
@@ -197,7 +214,6 @@
                   Foto Horizontal
                   <%= f.file_field :imagen_hori, :class=>"btn btn-info" %>
                   <%= f.text_field :pag_estilo_headerh, :placeholder => "Ingrese el estilo Horizontal...", :class=>"form-control" %>
-
                 </div>
               </div>
             </div>

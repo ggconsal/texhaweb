@@ -14,6 +14,9 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
+    # lo que estoy usando ahora es fpg_contacto. @post lo dejo por
+    # compatibilidad con versiones anteriores.
+
     # Para traerme los datos a mostrar en la pantalla.
     @post = Post.find_by pos_tipo: "contacto"
 

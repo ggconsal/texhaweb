@@ -152,6 +152,12 @@
                 </li>
               <% end %>
 
+              <% if fpg_contacto %>
+                <li>
+                  <%= link_to "Formulario de Contacto", edit_page_path(id: fpg_contacto.id), remote: true %>
+                </li>
+              <% end %>
+
               <% if fpg_menu != nil %>
                 <li>
                   <%= link_to "Menú-Logo", edit_page_path(id: fpg_menu.id), remote: true %>
