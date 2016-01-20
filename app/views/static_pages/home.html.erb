@@ -1,4 +1,9 @@
-<% provide(:title, "Home |") %>
+<% if fpg_general %>
+	<% @tag_title = @page.pag_menu + " | " + fpg_general.pag_titulo %>
+	<% @tag_descr = fpg_general.pag_estilo_headerh %>
+	<% @tag_keys = fpg_general.pag_estilo_headerv %>
+	<% @tag_sitio = fpg_general.pag_menu %>
+<% end %>
 
 <div class="container-fluid div-ppal">
 

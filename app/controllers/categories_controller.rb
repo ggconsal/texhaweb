@@ -26,6 +26,8 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
+    @category.cat_titulo_translate = @category.cat_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -40,6 +42,9 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+
+    @category.cat_titulo_translate = @category.cat_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
@@ -69,6 +74,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:cat_titulo, :cat_desc, :cat_tipo, :cat_orden)
+      params.require(:category).permit(:cat_titulo, :cat_desc, :cat_tipo, :cat_orden, :cat_titulo_translate)
     end
 end

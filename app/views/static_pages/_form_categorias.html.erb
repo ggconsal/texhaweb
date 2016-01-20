@@ -3,10 +3,10 @@
       <h4>
         <% if @categories != nil %>
           <% @categories.each do |categ| %>
-            <% if categ.cat_tipo == "blog" %>
-              <%= link_to categ.cat_titulo, blog_path(categ: categ.cat_titulo), class: "btn btn-warning blog-bot-categoria" %>
+            <% if categ.cat_tipo.downcase == "blog" %>
+              <%= link_to categ.cat_titulo, blog_path(categ: categ.cat_titulo_translate), class: "btn btn-warning blog-bot-categoria" %>
             <% else %>
-              <%= link_to categ.cat_titulo, shop_path(categ: categ.cat_titulo), class: "btn btn-warning blog-bot-categoria" %>
+              <%= link_to categ.cat_titulo, shop_path(categ: categ.cat_titulo_translate), class: "btn btn-warning blog-bot-categoria" %>
             <% end %>
           <% end %>
         <% end %>

@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   resources :post_parrafos
 
+  get 'informar'      => 'post_parrafos#index'
+
   resources :post_rels
 
   resources :post_links

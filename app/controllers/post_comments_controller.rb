@@ -60,7 +60,7 @@ class PostCommentsController < ApplicationController
   def destroy
     @post_comment.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
+      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
       #format.html { redirect_to post_comments_url, notice: 'Post comment was successfully destroyed.' }
       format.json { head :no_content }
     end

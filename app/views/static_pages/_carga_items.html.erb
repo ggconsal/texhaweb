@@ -126,15 +126,15 @@
                 <% if (post.pos_tipo.include? "blog") || 
                       (post.pos_tipo.include? "shop") ||
                       ((post.pos_tipo.include? "info") &&
-                        post.pos_imagen_tmp && 
-                        (post.pos_imagen_tmp.include? "pagina")) %>
+                        post.pos_boton_destino && 
+                        (post.pos_boton_destino.include? "pagina")) %>
                   <!--  SOLO "INFO", "BLOG" Y "SHOP" BOTON "PAGINA"  ******** -->
                   <div class="texto-a-derecha margen-inf-1 margen-der-1">
-                    <%= link_to post.pos_boton_desc, post_parrafos_path(post: post.id), class: @estilo_boton %>
+                    <%= link_to post.pos_boton_desc, informar_path(post: post.id), class: @estilo_boton %>
                   </div>
                 <% elsif ((post.pos_tipo.include? "info") &&
-                           post.pos_imagen_tmp &&
-                           (post.pos_imagen_tmp.include? "contacto")) %>
+                           post.pos_boton_destino &&
+                           (post.pos_boton_destino.include? "contacto")) %>
                   <!--  SOLO "INFO" BOTON "CONTACTO"  ************* -->
                   <div class="texto-a-derecha margen-sup-2 margen-der-2">
                     <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - Contacto"), remote: true, class: @estilo_boton %>

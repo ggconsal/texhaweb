@@ -114,11 +114,25 @@
           <%== @post.pos_titulo %>
         </h1>
         <h3>
-          <br/><%== @post.pos_subtitulo %>
+          <%== @post.pos_subtitulo %>
         </h3>
-        <h4>
-          <br/><%== @post.pos_intro %>
-        </h4><br/>
+        <% if @post.pos_porcentaje_oferta &&
+              @post.pos_porcentaje_oferta != 0 
+              @post.pos_precio_lista &&
+              @post.pos_precio_lista != 0 %>
+          <p class="texto-a-derecha precio-tachado margen-izq-1">
+            Precio de Lista: $ <%== "#{format("%.2f", @post.pos_precio_lista)}" %>
+          </p>
+          <p class="precio-final margen-izq-1">
+            $ <%== "#{format("%.2f", @post.pos_precio_oferta)}" %> (<%= "#{format("%.0f", @post.pos_porcentaje_oferta)}" %>% <%== @post.pos_palabra_oferta %>)
+          </p>
+        <% elsif @post.pos_precio_lista &&
+                 @post.pos_precio_lista != 0 %>
+          <p class="texto-a-derecha precio-final margen-izq-1">
+            Precio de Lista: $ <%== "#{format("%.2f", @post.pos_precio_lista)}" %>
+          </p>
+        <% end %>
+        <br/>
         <% if @post.pos_boton_color != "" &&
               @post.pos_boton_color != nil  %>
           <% @estilo_boton = "btn " + @post.pos_boton_color %>

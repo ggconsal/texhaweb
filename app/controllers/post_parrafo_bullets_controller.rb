@@ -66,7 +66,7 @@ class PostParrafoBulletsController < ApplicationController
   def destroy
     @post_parrafo_bullet.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post parrafo bullet was successfully destroyed.' }
+      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post parrafo bullet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

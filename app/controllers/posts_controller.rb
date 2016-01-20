@@ -35,6 +35,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
+    @post.pos_tag_translate1 = @post.pos_tag01.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate2 = @post.pos_tag02.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate3 = @post.pos_tag03.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate4 = @post.pos_tag04.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate5 = @post.pos_tag05.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate6 = @post.pos_tag06.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
@@ -58,9 +65,15 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @post.pos_tag_translate1 = @post.pos_tag01.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate2 = @post.pos_tag02.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate3 = @post.pos_tag03.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate4 = @post.pos_tag04.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate5 = @post.pos_tag05.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+    @post.pos_tag_translate6 = @post.pos_tag06.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+
     respond_to do |format|
       if @post.update(post_params)
-        #format.html { redirect_to post_parrafos_url, notice: 'Post was successfully destroyed.' }
         format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render :back, status: :created, location: @post }
         format.js {render inline: "location.reload();" }
@@ -104,6 +117,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:imagen_big, :imagen_big_v, :pos_titulo, :pos_subtitulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id, :pos_page, :pos_section, :pos_estilo, :pos_feature, :pos_boton_desc, :pos_boton_color, :pos_simbolo, :pos_tipo, :pos_tag01, :pos_tag02, :pos_tag03, :pos_tag04, :pos_tag05, :pos_tag06)
+      params.require(:post).permit(:imagen_big, :imagen_big_v, :pos_titulo, :pos_subtitulo, :pos_intro, :pos_conclusion, :pos_imagen_tmp, :contact_id, :pos_page, :pos_section, :pos_estilo, :pos_feature, :pos_boton_desc, :pos_boton_color, :pos_simbolo, :pos_tipo, :pos_tag01, :pos_tag02, :pos_tag03, :pos_tag04, :pos_tag05, :pos_tag06, :pos_clase, :pos_boton_destino, :pos_tag_translate1, :pos_tag_translate2, :pos_tag_translate3, :pos_tag_translate4, :pos_tag_translate5, :pos_tag_translate6, :pos_precio_lista, :pos_porcentaje_oferta, :pos_palabra_oferta, :pos_texto_oferta, :pos_precio_oferta, :pos_ribbon1_texto, :pos_ribbon1_estilo, :pos_ribbon2_texto, :pos_ribbon2_estilo)
     end
 end

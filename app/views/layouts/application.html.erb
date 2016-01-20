@@ -2,14 +2,6 @@
 <html>
 <head>
  
-  <% if fpg_general %>
-    <% @tag_title = fpg_general.pag_titulo %>
-    <% @tag_descr = fpg_general.pag_estilo_headerh %>
-    <% @tag_keys = fpg_general.pag_estilo_headerv %>
-    <% @tag_sitio = fpg_general.pag_menu %>
-  <% end %>
-
-
   <title><%= @tag_title || "Texha Argentina" %></title>
   <meta name="description" content="<%= @tag_descr || 'Nuestro Objetivo es Aumentar sus ganancias, poniendo la Tecnología al servicio de su Negocio' %>" />
   <meta name="keywords" content="<%= @tag_keys || 'Aumentar Rentabilidad, Aumentar las Ventas, Reducir los Costos, Tienda on-line, Tienda online, Tienda Virtual,ecommerce,Tienda prearmada,Tienda pre-armada,Tienda pre-fabricada,Tienda prefabricada,Experiencia Comercial,Seriedad,Tecnologia,internet,seo' %>" />
@@ -24,9 +16,9 @@
   <meta property="og:image" content="<%= @tag_image %>" />
   <meta itemprop="image" content="<%= @tag_image %>" />
   <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2015-10-10T05:00:52+00:00"/>
-  <meta property="article:modified_time" content="2015-10-10T09:16:24+00:00" />
-  <meta property="og:updated_time" content="2015-10-10T09:16:24+00:00" />
+  <meta property="article:published_time" content="<%= @tag_fecha || '2015-10-10T09:16:24+00:00' %>"/>
+  <meta property="article:modified_time" content="<%= @tag_fecha_upd || '2015-10-10T09:16:24+00:00' %>" />
+  <meta property="og:updated_time" content="<%= @tag_fecha_upd || '2015-10-10T09:16:24+00:00' %>" />
   <meta property="article:publisher" content="http://www.facebook.com"/>
   <link rel="publisher" href="https://plus.google.com/110936487938647963454"/>
   <meta name="twitter:card" content="summary_large_image" />

@@ -5,7 +5,9 @@ class PostParrafosController < ApplicationController
   # GET /post_parrafos.json
   def index
     #@post_parrafos = PostParrafo.all
-    @post = Post.find(params[:post])
+    if params[:post]
+      @post = Post.find(params[:post])
+    end
     @post_parrafos = PostParrafo.where("post_id = ? and par_imagen_tmp <> 'imagen'", params[:post])
     @post_images = PostParrafo.where("post_id = ? and par_imagen_tmp = 'imagen'", params[:post])
     @post_comments = PostComment.where("post_id = ?", params[:post])
@@ -93,7 +95,7 @@ class PostParrafosController < ApplicationController
   def destroy
     @post_parrafo.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post parrafo was successfully destroyed.' }
+      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post parrafo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -66,7 +66,7 @@ class PostRelsController < ApplicationController
   def destroy
     @post_rel.destroy
     respond_to do |format|
-      format.html { redirect_to post_parrafos_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
+      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post rel was successfully destroyed.' }
       #format.html { redirect_to post_rels_url, notice: 'Post rel was successfully destroyed.' }
       format.json { head :no_content }
     end

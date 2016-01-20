@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216215446) do
+ActiveRecord::Schema.define(version: 20160119170548) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "are_titulo", limit: 255
@@ -28,12 +28,13 @@ ActiveRecord::Schema.define(version: 20151216215446) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "cat_titulo", limit: 255
-    t.text     "cat_desc",   limit: 65535
-    t.string   "cat_tipo",   limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.decimal  "cat_orden",                precision: 10
+    t.string   "cat_titulo",           limit: 255
+    t.text     "cat_desc",             limit: 65535
+    t.string   "cat_tipo",             limit: 255
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.decimal  "cat_orden",                          precision: 10
+    t.string   "cat_titulo_translate", limit: 255
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -201,6 +202,23 @@ ActiveRecord::Schema.define(version: 20151216215446) do
     t.string   "imagen_big_v_content_type", limit: 255
     t.integer  "imagen_big_v_file_size",    limit: 4
     t.datetime "imagen_big_v_updated_at"
+    t.string   "pos_clase",                 limit: 255
+    t.string   "pos_boton_destino",         limit: 255
+    t.decimal  "pos_precio_lista",                        precision: 8, scale: 2
+    t.decimal  "pos_porcentaje_oferta",                   precision: 5, scale: 2
+    t.string   "pos_palabra_oferta",        limit: 255
+    t.string   "pos_texto_oferta",          limit: 255
+    t.decimal  "pos_precio_oferta",                       precision: 8, scale: 2
+    t.string   "pos_ribbon1_texto",         limit: 255
+    t.string   "pos_ribbon1_estilo",        limit: 255
+    t.string   "pos_ribbon2_texto",         limit: 255
+    t.string   "pos_ribbon2_estilo",        limit: 255
+    t.string   "pos_tag_translate1",        limit: 255
+    t.string   "pos_tag_translate2",        limit: 255
+    t.string   "pos_tag_translate3",        limit: 255
+    t.string   "pos_tag_translate4",        limit: 255
+    t.string   "pos_tag_translate5",        limit: 255
+    t.string   "pos_tag_translate6",        limit: 255
   end
 
   add_index "posts", ["contact_id"], name: "index_posts_on_contact_id", using: :btree

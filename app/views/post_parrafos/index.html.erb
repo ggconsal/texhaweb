@@ -1,7 +1,14 @@
+<% if fpg_general %>
+  <% @tag_keys = fpg_general.pag_estilo_headerv %>
+  <% @tag_sitio = fpg_general.pag_menu %>
+<% end %>
+
+<% @tag_fecha = @post.created_at %>
+<% @tag_fecha_upd = @post.updated_at %>
 <% @tag_title = @post.pos_titulo %>
 <% @tag_descr = @post.pos_intro %>
 <% @tag_image = "#{request.protocol}#{request.host_with_port}#{@post.imagen_big.url}" %>
-<% @tag_url = "#{request.protocol}#{request.host_with_port}" + "/post_parrafos?post=" + @post.id.to_s %>
+<% @tag_url = "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + @post.id.to_s %>
 
 <div id="blog-div-ppal" class="container-fluid div-paginas margen-sup-4">
 
@@ -45,31 +52,6 @@
         </div>
       <% end %>
 
-      <% if @post.pos_tipo == "blog" %>
-        <div id="relacionados" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <h3>Artículos Relacionados:</h3>
-          <% if logged_in? && session[:user_id] == @post.contact_id %>
-            <div class="righter">
-              <h4> <%= link_to ' Relación', new_post_rel_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
-            </div>
-          <% end %>
-          <% if @post.post_rels.any? %> 
-
-            <% @post.post_rels.each do |post_rel| %>
-              <p>
-                <%= link_to post_rel.pre_titulo, post_parrafos_path(post: post_rel.pli_url.to_i) %> 
-                <% if logged_in? && session[:user_id] == @post.contact_id %>
-                  [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                  <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
-                <% end %>
-              </p>
-            <% end %>
-          <% else %>
-            <h4>No tiene Artículos Relacionados</h4>
-          <% end %>
-        </div>
-      <% end %>
-
       <% if @post.pos_tipo.include? "info" %>
         <div class="col-sm-offset-1 col-xs-12">
       <% end %>
@@ -77,50 +59,47 @@
       <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
         <% if (@post.pos_tipo.include? "shop") ||
               (@post.pos_tipo.include? "blog") %>
-          <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-
-            <div id="<%= post_parrafo.par_titulo.delete(' ') %>" class="blog-div-texto">
-              <!-- Texto del Parrafo -->
-              <h3><%== post_parrafo.par_titulo %></h3>
-              <% if post_parrafo.imagen_small.url != "Missing.png" %>
-                <% if ENV["herokuapp"] == "NO" %>
-                  <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
-                <% else %>
-                  <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
-                <% end %>
+          <div id='<%= post_parrafo.par_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") %>' class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+            <!-- Texto del Parrafo -->
+            <h3><%== post_parrafo.par_titulo %></h3>
+            <% if post_parrafo.imagen_small.url != "Missing.png" %>
+              <% if ENV["herokuapp"] == "NO" %>
+                <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
+              <% else %>
+                <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
               <% end %>
-              <p>
-                <%== post_parrafo.par_texto %>
-                <% if logged_in? && session[:user_id] == @post.contact_id %>
-                  [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                  <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
-                <% end %>
-              </p>
-              <!-- Viñetas del Parrafo, si hay -->
-
+            <% end %>
+            <p>
+              <%== post_parrafo.par_texto %>
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                <div class="righter">
-                  <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
-                </div>
+                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
+                <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
               <% end %>
-              <% if post_parrafo.post_parrafo_bullets.any? %>
-                <ul class="blog-ul">
-                  <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
-                    <li>
-                      <% if bullet.ppb_titulo != "" %>
-                        <b><u><%== bullet.ppb_titulo %></u>: </b>
-                      <% end %>
-                      <%== bullet.ppb_texto %>
-                      <% if logged_in? && session[:user_id] == @post.contact_id %>
-                        [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                        <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              <% end %>
-            </div>
-          </div> <!-- END container-fluid -->
+            </p>
+            <!-- Viñetas del Parrafo, si hay -->
+
+            <% if logged_in? && session[:user_id] == @post.contact_id %>
+              <div class="righter">
+                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
+              </div>
+            <% end %>
+            <% if post_parrafo.post_parrafo_bullets.any? %>
+              <ul class="blog-ul">
+                <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
+                  <li>
+                    <% if bullet.ppb_titulo != "" %>
+                      <b><u><%== bullet.ppb_titulo %></u>: </b>
+                    <% end %>
+                    <%== bullet.ppb_texto %>
+                    <% if logged_in? && session[:user_id] == @post.contact_id %>
+                      [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit" %> - 
+                      <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
         <% else %>
 
           <div class="about-item animated fadeInRight col-sm-5 col-xs-12 margen-inf-3">
@@ -145,14 +124,32 @@
       <% end %>
 
       <% if @post.pos_tipo == "blog" %>
+        <div id="conclusion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+          <h3>Conclusión: </h3>
+          <p>
+            <%== @post.pos_conclusion %> <br/>
+            <% if logged_in? && session[:user_id] == @post.contact_id %>
+              <div class="righter">
+                <h4> <%= link_to ' Conclusión', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
+              </div>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+
+      <% if @post.pos_tipo == "blog" %>
         <div id="links" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <h3>Links Externos:</h3>
           <% if logged_in? && session[:user_id] == @post.contact_id %>
             <div class="righter">
-              <h4> <%= link_to ' Link', new_post_link_path(post: @post.id),remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %></h4><br/>
+              <h4> 
+                <%= link_to new_post_link_path(post: @post.id), remote: true, class: "btn btn-lg btn-info" do %>
+                    <span class="glyphicon glyphicon-plus-sign"></span> Links con más Información
+                <% end %>
+              </h4><br/>
             </div>
           <% end %>
           <% if @post.post_links.any? %> 
+            <h3>Links Externos con más Información:</h3>
             <% @post.post_links.each do |post_link| %>
               <p>
                 > <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
@@ -162,37 +159,49 @@
                 <% end %>
               </p>
             <% end %>
-          <% else %>
-            <h4>No tiene Links Externos</h4>
           <% end %>
         </div>
       <% end %>
 
       <% if @post.pos_tipo == "blog" %>
-        <div id="conclusion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <div class="blog-div-texto">
-            <h3>Conclusión: </h3>
-            <p>
-              <%== @post.pos_conclusion %> <br/>
-              <% if logged_in? && session[:user_id] == @post.contact_id %>
-                <div class="righter">
-                  <h4> <%= link_to ' Conclusión', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
-                </div>
-              <% end %>
-            </p>
-          </div>
+        <div id="relacionados" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
+            <div class="righter">
+              <h4> 
+                <%= link_to new_post_rel_path(post: @post.id), remote: true, class: "btn btn-lg btn-info" do %>
+                    <span class="glyphicon glyphicon-plus-sign"></span> Artículos Relacionados
+                <% end %>
+              </h4><br/>
+            </div>
+          <% end %>
+          <% if @post.post_rels.any? %> 
+            <h3>Artículos Relacionados:</h3>
+            <% @post.post_rels.each do |post_rel| %>
+              <p>
+                <%= link_to post_rel.pre_titulo, informar_path(post: post_rel.pli_url.to_i) %> 
+                <% if logged_in? && session[:user_id] == @post.contact_id %>
+                  [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
+                  <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                <% end %>
+              </p>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
 
       <% if (@post.pos_tipo.include? "shop") ||
             (@post.pos_tipo.include? "blog") %>
         <div id="comentarios" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+          <p><br/><br/><br/></p>
           <% if @post.pos_tipo == "blog" %>
             <%= render "static_pages/rescate" %> 
           <% end %>
           <h3>Cometarios:</h3>
           <div class="righter">
-            <h4> <%= link_to ' Comentar', new_post_comment_path(post: @post.id), remote: true, class: "glyphicon glyphicon-comment btn btn-md btn-info" %></h4>
+            <h4> 
+            <%= link_to new_post_comment_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
+                <span class="glyphicon glyphicon-comment"></span> Comentar
+            <% end %>
           </div>
           <% if @post.post_comments.any? %> 
 
@@ -207,7 +216,11 @@
                 </p>
                 <p id="p-comment" >
                   <%== post_comment.pco_texto %>
-                   [ <%= link_to ' Opinar', new_post_comment_answer_path(comment: post_comment.id), remote: true, class: "glyphicon glyphicon-comment" %> ] 
+                   [ 
+                    <%= link_to new_post_comment_answer_path(comment: post_comment.id), remote: true do %>
+                        <span class="glyphicon glyphicon-comment"></span> Opinar
+                    <% end %>
+                    ] 
                 </p><br/>
 
                 <% if post_comment.post_comment_answers.any? %> 
@@ -239,8 +252,17 @@
       <% end %>
 
     <% else %> <!-- ELSE @post_parrafos.any? -->
-      <div class="blog-div-titulo col-xs-11">
-        <br/><br/><br/><h3>Articulo no definido aun</h3>
+      <div class="blog-div-titulo col-xs-11 centered">
+        <h1><br/><%== @post.pos_titulo %></h1>
+        <br/><h3>Estamos Construyendo este artículo,</h3>
+        <% if @post.pos_imagen_tmp && 
+              @post.pos_imagen_tmp != "" %>
+          <h4>Solo quedan <%= @post.pos_imagen_tmp %> días.</h4><br/><br/><br/>
+        <% else %>
+          <h4>Quedan muy pocos días.</h4><br/><br/>
+        <% end %>
+        <h3>¡Anótate para recibirlo en tu email primero que nadie!</h3><br/>
+        <%= link_to '¡ Forme parte de Nuestra Comunidad !', new_contact_path(:motivo => "Opinar" +  @post.pos_titulo), remote: true, class: "btn btn-lg btn-success" %><br/><br/><br/><br/><br/><br/>
       </div>
       <% if logged_in?  %> <!-- && session[:user_id] == @post.contact_id -->
         <div class="blog-div-titulo righter">
@@ -268,19 +290,23 @@
           <h4>
             <% if @post_parrafos.any? %>
               <% if @post.pos_tipo == "blog" %>
-                <%= link_to "Introducción", {:action => "index", :controller => "post_parrafos", :anchor => "introduccion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
-                <%= link_to "Artículos Relacionados", {:action => "index", :controller => "post_parrafos", :anchor => "relacionados"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+                <%= link_to "Introducción", informar_path(post: @post.id, anchor: "introduccion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <% if @post.post_rels.any? %> 
+                  <%= link_to "Artículos Relacionados", informar_path(post: @post.id, anchor: "relacionados"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <% end %>
               <% end %>
               
               <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-                <%= link_to post_parrafo.par_titulo, {:action => "index", :controller => "post_parrafos", :anchor => post_parrafo.par_titulo.delete(' ')} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+                <%= link_to post_parrafo.par_titulo, informar_path(post: @post.id, anchor: post_parrafo.par_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
               <% end %> <!-- END Impresion de todos los Cometarios -->
               
               <% if @post.pos_tipo == "blog" %>
-                <%= link_to "Links del Artículo", {:action => "index", :controller => "post_parrafos", :anchor => "links"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
-                <%= link_to "Conclusión", {:action => "index", :controller => "post_parrafos", :anchor => "conclusion"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+                <% if @post.post_links.any? %> 
+                  <%= link_to "Links con más Info", informar_path(post: @post.id, anchor: "links"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <% end %>
+                <%= link_to "Conclusión", informar_path(post: @post.id, anchor: "conclusion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
               <% end %>
-              <%= link_to "Comentarios", {:action => "index", :controller => "post_parrafos", :anchor => "comentarios"} , class: "btn btn-warning blog-bot-categoria mov-suave" %>
+              <%= link_to "Comentarios", informar_path(post: @post.id, anchor: "comentarios"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
             <% end %> <!-- END Impresion de todos los Cometarios -->
             <br/><br/>
           </h4>
