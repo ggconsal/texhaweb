@@ -114,6 +114,16 @@
                 <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->
                 <%= render partial: 'static_pages/carga_botones_item', locals: {post: post} %>
               </div>
+
+              <% if post.pos_ribbon1_texto &&
+                    post.pos_ribbon1_texto != "" %>
+                <div class="ribbon-wrapper">
+                  <div class="<%= post.pos_ribbon1_estilo %>">
+                    <%= post.pos_ribbon1_texto %>
+                  </div>
+                </div>
+              <% end %>
+
             </div>
 
         <% if (@page.pag_tipo == "shop" && @cant_post % 2 == 0) ||

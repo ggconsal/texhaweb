@@ -33,15 +33,6 @@
         <div id="introduccion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
           <h3>Introducción: </h3>
           <p>
-            <div class="righter">
-              <% if @post.contact.con_nya %>
-                <b>Autor:</b> <%= @post.contact.con_nya %><br/><br/>
-              <% else %>
-                <b>Autor:</b> Sin Nombre<br/><br/>
-              <% end %>
-            </div>
-          </p>
-          <p>
             <%== @post.pos_intro %>
             <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">

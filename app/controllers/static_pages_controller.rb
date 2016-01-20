@@ -52,10 +52,12 @@ class StaticPagesController < ApplicationController
           @categories = nil
         end
 
+        @post_images = Post.where(["pos_page = ? and pos_clase = ?", @page.pag_nombre, "imagen"]).order(:pos_section)
+
         if params[:categ] == nil
-          @posts = Post.where(["pos_page = ? ", @page.pag_nombre]).order(:pos_section)
+          @posts = Post.where(["pos_page = ? and pos_clase <> ?", @page.pag_nombre, "imagen"]).order(:pos_section)
         else
-          @posts = Post.where(["pos_page = ? and (pos_tag_translate1 = ? or pos_tag_translate2 = ? or pos_tag_translate3 = ? or pos_tag_translate4 = ? or pos_tag_translate5 = ? or pos_tag_translate6 = ?)", @page.pag_nombre, params[:categ], params[:categ], params[:categ], params[:categ], params[:categ], params[:categ]]).order(:pos_section)
+          @posts = Post.where(["pos_page = ? and pos_clase <> ? and (pos_tag_translate1 = ? or pos_tag_translate2 = ? or pos_tag_translate3 = ? or pos_tag_translate4 = ? or pos_tag_translate5 = ? or pos_tag_translate6 = ?)", @page.pag_nombre, "imagen", params[:categ], params[:categ], params[:categ], params[:categ], params[:categ], params[:categ]]).order(:pos_section)
         end
 
         if @posts.empty?
