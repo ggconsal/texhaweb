@@ -6,103 +6,99 @@
         <% if (@page.pag_design.include? "shop") &&
               @post_images.any? %>
 
-        <div class="col-xs-12 <%= @page.pag_estilo_headerh %>" >
           <% @image_count = 0 %>
 
-            <div id="myCarousel" class="carousel slide indi-shop-ppal"> <!--  data-ride="carousel"  -->
-              <ol class="carousel-indicators"> <!-- Indicators -->
-                <% i = 0 %>
+          <div id="myCarousel" class="carousel slide indi-shop-ppal"> <!--  data-ride="carousel"  -->
+            <ol class="carousel-indicators"> <!-- Indicators -->
+              <% i = 0 %>
 
-                <li data-target="#myCarousel" data-slide-to=0 class="active">
-                  <div class="col-xs-12 div-hori indi-pic" >
+              <li data-target="#myCarousel" data-slide-to=0 class="active">
+                <div class="col-xs-12 div-hori indi-pic" >
+                  <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
+                </div>
+                <div class="col-xs-12 div-vert indi-pic" >
+                  <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
+                </div>
+              </li>
+              <% @post_images.each do |img| %>
+
+                  <% i = i + 1 %>
+                  <li data-target="#myCarousel" data-slide-to="<%= i %>">
+                    <% if img.imagen_big.url != "Missing.png" %>
+                      <div class="col-xs-12 div-hori indi-pic" >
+                        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: img.imagen_big, img_name: img.imagen_big_file_name} %>
+                      </div>
+                      <div class="col-xs-12 div-vert indi-pic" >
+                        <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: img.imagen_big_v, img_name: img.imagen_big_v_file_name} %>
+                      </div>
+                    <% end %>
+                  </li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <div class="col-xs-12 centered blog-pic-shop-ppal" >
+                  <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
                     <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
                   </div>
-                  <div class="col-xs-12 div-vert indi-pic" >
+                  <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
                     <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
                   </div>
-                </li>
-                <% @post_images.each do |img| %>
-
-                    <% i = i + 1 %>
-                    <li data-target="#myCarousel" data-slide-to="<%= i %>">
-                      <% if img.imagen_big.url != "Missing.png" %>
-                        <div class="col-xs-12 div-hori indi-pic" >
-                          <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: img.imagen_big, img_name: img.imagen_big_file_name} %>
-                        </div>
-                        <div class="col-xs-12 div-vert indi-pic" >
-                          <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: img.imagen_big_v, img_name: img.imagen_big_v_file_name} %>
-                        </div>
-                      <% end %>
-                    </li>
-                <% end %>
-              </ol>
-              <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <div class="col-xs-12 centered blog-pic-shop-ppal" >
-                    <span class="helper"></span>
-                    <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
-                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_hori, img_name: @page.imagen_hori_file_name} %>
-                    </div>
-                    <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
-                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: @page.imagen_vert, img_name: @page.imagen_vert_file_name} %>
-                    </div>
-                    <% if @page.pag_titulo != nil &&
-                          @page.pag_titulo != "" %>
-                      <div class="carousel-lg-abajo"></div>
-                    <% end %>
-                    <div class="carousel-caption <%= @page.pag_estilo_body %>">
-                      <h1>
-                        <%== @page.pag_titulo %>
-                      </h1>
-                      <h2>
-                        <%== @page.pag_desc %>
-                      </h2>
-                    </div>
+                  <% if @page.pag_titulo != nil &&
+                        @page.pag_titulo != "" %>
+                    <div class="carousel-lg-abajo"></div>
+                  <% end %>
+                  <div class="carousel-caption <%= @page.pag_estilo_body %>">
+                    <h1>
+                      <%== @page.pag_titulo %>
+                    </h1>
+                    <h2>
+                      <%== @page.pag_desc %>
+                    </h2>
                   </div>
                 </div>
-
-              <% @post_images.each do |image| %>
-
-                <div class="item">
-                  <div class="col-xs-12 centered blog-pic-shop-ppal" >
-                    <span class="helper"></span>
-                    <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
-                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: image.imagen_big, img_name: image.imagen_big_file_name} %>
-                    </div>
-                    <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
-                      <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: image.imagen_big_v, img_name: image.imagen_big_v_file_name} %>
-                    </div>
-                    <% if image.pos_titulo != nil &&
-                          image.pos_titulo != "" %>
-                      <div class="carousel-lg-abajo"></div>
-                    <% end %>
-                    <div class="carousel-caption <%= image.pos_feature %>">
-                      <h1>
-                        <%== image.pos_titulo %>
-                      </h1>
-                      <h2>
-                        <%== image.pos_subtitulo %>
-                      </h2>
-                      <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->
-                      <%= render partial: 'static_pages/carga_botones_item', locals: {post: image} %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-
               </div>
-              <a class="left carousel-control hide" href="#myCarousel" role="button" data-slide="prev"><!-- Left and right controls -->
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
-                </span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control hide" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true">
-                </span>
-                <span class="sr-only">Next</span>
-              </a>
+
+            <% @post_images.each do |image| %>
+
+              <div class="item">
+                <div class="col-xs-12 centered blog-pic-shop-ppal" >
+                  <div class="col-xs-12 div-hori <%= @page.pag_estilo_headerh %>" >
+                    <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: image.imagen_big, img_name: image.imagen_big_file_name} %>
+                  </div>
+                  <div class="col-xs-12 div-vert <%= @page.pag_estilo_headerv %>" >
+                    <%= render partial: 'static_pages/mostrar_inagen_pagina', locals: {vanilla: "NO", img_url: image.imagen_big_v, img_name: image.imagen_big_v_file_name} %>
+                  </div>
+                  <% if image.pos_titulo != nil &&
+                        image.pos_titulo != "" %>
+                    <div class="carousel-lg-abajo"></div>
+                  <% end %>
+                  <div class="carousel-caption <%= image.pos_feature %>">
+                    <h1>
+                      <%== image.pos_titulo %>
+                    </h1>
+                    <h2>
+                      <%== image.pos_subtitulo %>
+                    </h2>
+                    <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->
+                    <%= render partial: 'static_pages/carga_botones_item', locals: {post: image} %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
             </div>
-        </div>
+            <a class="left carousel-control hide" href="#myCarousel" role="button" data-slide="prev"><!-- Left and right controls -->
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
+              </span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control hide" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true">
+              </span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
 
         <% else %>
 
@@ -120,22 +116,22 @@
       <% if @page.pag_tipo == "home" %>
         <!--  SOLO "HOME 01"  ************* -->
         <% if @page.pag_design == "home01" && @page.pag_imagen_texto != "nada" %>
-          <div class="texto-ppal-dark texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs">
+          <div class="texto-ppal-dark texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs <%= @page.pag_estilo_body %>">
             <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
           </div>
 
-          <div class="texto-ppal-dark texto-ppal-md texto-ppal-sup0 texto-ppal-100 visible-xs">
+          <div class="texto-ppal-dark texto-ppal-md texto-ppal-sup0 texto-ppal-100 visible-xs <%= @page.pag_estilo_body %>">
             <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
           </div>
         <% end %>
 
         <!--  SOLO "HOME 02"  ************* -->
         <% if @page.pag_design == "home02" && @page.pag_imagen_texto != "nada" %>
-          <div class="texto-ppal-light texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs">
+          <div class="texto-ppal-light texto-ppal-lg texto-ppal-sup1 texto-ppal-100 texto-ppal-der0 hidden-xs <%= @page.pag_estilo_body %>">
             <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
           </div>
 
-          <div class="texto-ppal-light texto-ppal-md texto-ppal-100 visible-xs">
+          <div class="texto-ppal-light texto-ppal-md texto-ppal-sup0 texto-ppal-100 visible-xs <%= @page.pag_estilo_body %>">
             <h1><%== @page.pag_imagen_texto %><span></span></h1><br/><br/>
           </div>
         <% end %>

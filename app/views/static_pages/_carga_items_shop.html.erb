@@ -73,21 +73,30 @@
                   <% else %>
                     <% @estilo_boton = "btn btn-info" %>
                   <% end %>
-                  <div class="texto-a-derecha margen-sup-2 margen-der-1">
-                    <%= link_to post.pos_boton_desc, informar_path(post: post.id), class: @estilo_boton %>
-                  </div>
-                  <div class="compartdir texto-a-derecha margen-inf-1 margen-der-1">
-                    <h5 style="font-size: 17px; font-weight: bold; color: #444;">
-                      Compartir en: 
-                    </h5>
+                  <% if (post.pos_boton_destino && 
+                          (post.pos_boton_destino.include? "pagina")) %>
+                    <div class="texto-a-derecha margen-sup-2 margen-der-1">
+                      <%= link_to post.pos_boton_desc, informar_path(post: post.id), class: @estilo_boton %>
+                    </div>
+                  <% elsif (post.pos_boton_destino &&
+                             (post.pos_boton_destino.include? "contacto")) %>
+                    <!--  SOLO "INFO" BOTON "CONTACTO"  ************* -->
+                    <div class="texto-a-derecha margen-sup-2 margen-der-2">
+                      <%= link_to post.pos_boton_desc, new_contact_path(:motivo => "menu - Contacto"), remote: true, class: @estilo_boton %>
+                    </div>
+                  <% end %>
+                  <% if fpg_redes %>
+                    <div class="compartdir texto-a-derecha margen-inf-1 margen-der-1">
+                      <!-- mostrar logos de redes para compartir -->
+                      <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&ret=login" %>
+                      <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
+                      <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&text=" + post.pos_titulo %>
 
-                    <!-- mostrar logos de redes para compartir -->
-                    <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&ret=login" %>
-                    <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
-                    <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + post.id.to_s + "&text=" + post.pos_titulo %>
-
-                    <% if fpg_redes != nil %>
                       <% fpg_redes.each do |config| %>
+
+                        <h5 style="font-size: 17px; font-weight: bold; color: #444;">
+                          Compartir en: 
+                        </h5>
 
                         <% if config.pag_titulo == "Facebook" %>
                           <%= link_to @share_facebook, :target => '_blank' do %>
@@ -107,8 +116,8 @@
                           <% end %>
                         <% end %>
                       <% end %>
-                    <% end %>
-                  </div>
+                    </div>
+                  <% end %>
                 </p>
 
                 <!-- ********  MUESTRO BOTONES PARA CONFIGURAR  *********  -->

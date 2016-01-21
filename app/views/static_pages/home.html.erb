@@ -1,5 +1,9 @@
 <% if fpg_general %>
-	<% @tag_title = @page.pag_menu + " | " + fpg_general.pag_titulo %>
+	<% if @page %> <!-- Esto se utiliza solo al ppio cuando no hay ninguna pagina -->
+		<% @tag_title = @page.pag_menu + " | " + fpg_general.pag_titulo %>
+	<% else %>
+		<% @tag_title = "Inicio | " + fpg_general.pag_titulo %>
+	<% end %>	
 	<% @tag_descr = fpg_general.pag_estilo_headerh %>
 	<% @tag_keys = fpg_general.pag_estilo_headerv %>
 	<% @tag_sitio = fpg_general.pag_menu %>
