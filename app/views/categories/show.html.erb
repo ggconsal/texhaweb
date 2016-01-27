@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><br/><br/><br/><br/><%= notice %></p>
 
 <p>
   <strong>Cat titulo:</strong>
@@ -13,6 +13,11 @@
 <p>
   <strong>Cat tipo:</strong>
   <%= @category.cat_tipo %>
+</p>
+
+<p>
+  <strong>Cat tipo:</strong>
+  <%= @category.cat_titulo_translate %>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

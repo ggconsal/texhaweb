@@ -2,6 +2,21 @@ class StaticPagesController < ApplicationController
   before_action :data_load, only: [:home, :ubicacion, :quienes, :pagina1, :pagina2, :servicios, :blog, :shop, :preguntas, :formapag]
   #before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
+
+  def home
+    if !@page
+      @page = Page.find_by pag_tipo: "blog"
+      if @page
+        redirect_to :blog
+      else
+        @page = Page.find_by pag_tipo: "shop"
+        if @page
+          redirect_to :shop
+        end
+      end
+    end
+  end
+
   def ubicacion
     @contact = Contact.new
     @contact.con_boton_sitio = params[:motivo]

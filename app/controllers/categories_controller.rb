@@ -26,8 +26,6 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
-    @category.cat_titulo_translate = @category.cat_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -42,8 +40,6 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
-
-    @category.cat_titulo_translate = @category.cat_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
 
     respond_to do |format|
       if @category.update(category_params)
