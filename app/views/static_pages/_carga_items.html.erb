@@ -130,7 +130,11 @@
                         (post.pos_boton_destino.include? "pagina")) %>
                   <!--  SOLO "INFO", "BLOG" Y "SHOP" BOTON "PAGINA"  ******** -->
                   <div class="texto-a-derecha margen-inf-1 margen-der-1">
-                    <%= link_to post.pos_boton_desc, informar_path(post: post.id), class: @estilo_boton %>
+                    <% if post.pos_subtitulo && !post.pos_subtitulo.blank? %>
+                      <%= link_to post.pos_boton_desc, detallar_path(item: post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "-" + post.pos_subtitulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post.id), class: @estilo_boton %>
+                    <% else %>
+                      <%= link_to post.pos_boton_desc, detallar_path(item: post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post.id), class: @estilo_boton %>
+                    <% end %>
                   </div>
                 <% elsif ((post.pos_tipo.include? "info") &&
                            post.pos_boton_destino &&

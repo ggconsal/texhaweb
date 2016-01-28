@@ -8,7 +8,7 @@
 <% @tag_title = @post.pos_titulo %>
 <% @tag_descr = @post.pos_intro %>
 <% @tag_image = "#{request.protocol}#{request.host_with_port}#{@post.imagen_big.url}" %>
-<% @tag_url = "#{request.protocol}#{request.host_with_port}" + "/informar?post=" + @post.id.to_s %>
+<% @tag_url = "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + @post.id.to_s %>
 
 <div id="blog-div-ppal" class="container-fluid div-paginas margen-sup-4">
 
@@ -69,11 +69,6 @@
             </p>
             <!-- Viñetas del Parrafo, si hay -->
 
-            <% if logged_in? && session[:user_id] == @post.contact_id %>
-              <div class="righter">
-                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
-              </div>
-            <% end %>
             <% if post_parrafo.post_parrafo_bullets.any? %>
               <ul class="blog-ul">
                 <% post_parrafo.post_parrafo_bullets.each do |bullet| %>
@@ -89,6 +84,11 @@
                   </li>
                 <% end %>
               </ul>
+            <% end %>
+            <% if logged_in? && session[:user_id] == @post.contact_id %>
+              <div class="righter">
+                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
+              </div>
             <% end %>
           </div>
         <% else %>
@@ -130,15 +130,6 @@
 
       <% if @post.pos_tipo == "blog" %>
         <div id="links" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <% if logged_in? && session[:user_id] == @post.contact_id %>
-            <div class="righter">
-              <h4> 
-                <%= link_to new_post_link_path(post: @post.id), remote: true, class: "btn btn-lg btn-info" do %>
-                    <span class="glyphicon glyphicon-plus-sign"></span> Links con más Información
-                <% end %>
-              </h4><br/>
-            </div>
-          <% end %>
           <% if @post.post_links.any? %> 
             <h3>Links Externos con más Información:</h3>
             <% @post.post_links.each do |post_link| %>
@@ -151,31 +142,40 @@
               </p>
             <% end %>
           <% end %>
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
+            <div class="righter">
+              <h4> 
+                <%= link_to new_post_link_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
+                    <span class="glyphicon glyphicon-plus-sign"></span> Links con más Información
+                <% end %>
+              </h4><br/>
+            </div>
+          <% end %>
         </div>
       <% end %>
 
       <% if @post.pos_tipo == "blog" %>
         <div id="relacionados" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <% if logged_in? && session[:user_id] == @post.contact_id %>
-            <div class="righter">
-              <h4> 
-                <%= link_to new_post_rel_path(post: @post.id), remote: true, class: "btn btn-lg btn-info" do %>
-                    <span class="glyphicon glyphicon-plus-sign"></span> Artículos Relacionados
-                <% end %>
-              </h4><br/>
-            </div>
-          <% end %>
           <% if @post.post_rels.any? %> 
             <h3>Artículos Relacionados:</h3>
             <% @post.post_rels.each do |post_rel| %>
               <p>
-                <%= link_to post_rel.pre_titulo, informar_path(post: post_rel.pli_url.to_i) %> 
+                <%= link_to post_rel.pre_titulo, detallar_path(item: post_rel.pre_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post_rel.pli_url.to_i) %> 
                 <% if logged_in? && session[:user_id] == @post.contact_id %>
                   [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
                   <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
                 <% end %>
               </p>
             <% end %>
+          <% end %>
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
+            <div class="righter">
+              <h4> 
+                <%= link_to new_post_rel_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
+                    <span class="glyphicon glyphicon-plus-sign"></span> Artículos Relacionados
+                <% end %>
+              </h4><br/>
+            </div>
           <% end %>
         </div>
       <% end %>
@@ -281,23 +281,23 @@
           <h4>
             <% if @post_parrafos.any? %>
               <% if @post.pos_tipo == "blog" %>
-                <%= link_to "Introducción", informar_path(post: @post.id, anchor: "introduccion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <%= link_to "Introducción", detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "introduccion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
                 <% if @post.post_rels.any? %> 
-                  <%= link_to "Artículos Relacionados", informar_path(post: @post.id, anchor: "relacionados"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                  <%= link_to "Artículos Relacionados", detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "relacionados"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
                 <% end %>
               <% end %>
               
               <% @post_parrafos.each do |post_parrafo| %> <!-- BEGIN Impresion de todos los Parrafos Comunes -->
-                <%= link_to post_parrafo.par_titulo, informar_path(post: @post.id, anchor: post_parrafo.par_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <%= link_to post_parrafo.par_titulo, detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: post_parrafo.par_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
               <% end %> <!-- END Impresion de todos los Cometarios -->
               
               <% if @post.pos_tipo == "blog" %>
                 <% if @post.post_links.any? %> 
-                  <%= link_to "Links con más Info", informar_path(post: @post.id, anchor: "links"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                  <%= link_to "Links con más Info", detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "links"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
                 <% end %>
-                <%= link_to "Conclusión", informar_path(post: @post.id, anchor: "conclusion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+                <%= link_to "Conclusión", detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "conclusion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
               <% end %>
-              <%= link_to "Comentarios", informar_path(post: @post.id, anchor: "comentarios"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
+              <%= link_to "Comentarios", detallar_path(item: @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "comentarios"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
             <% end %> <!-- END Impresion de todos los Cometarios -->
             <br/><br/>
           </h4>

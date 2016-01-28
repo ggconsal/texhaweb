@@ -16,4 +16,27 @@ class Post < ActiveRecord::Base
   has_attached_file :imagen_big_v, default_url: "Missing.png"
   validates_attachment_content_type :imagen_big_v, :content_type => /\Aimage\/.*\Z/
 
+  before_save :calculate_results_post
+
+  def calculate_results_post
+      unless self.pos_tag01.blank?
+          self.pos_tag_translate1 = self.pos_tag01.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+      unless self.pos_tag02.blank?
+          self.pos_tag_translate2 = self.pos_tag02.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+      unless self.pos_tag03.blank?
+          self.pos_tag_translate3 = self.pos_tag03.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+      unless self.pos_tag04.blank?
+          self.pos_tag_translate4 = self.pos_tag04.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+      unless self.pos_tag05.blank?
+          self.pos_tag_translate5 = self.pos_tag05.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+      unless self.pos_tag06.blank?
+          self.pos_tag_translate6 = self.pos_tag06.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      end
+  end
+
 end

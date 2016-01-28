@@ -35,13 +35,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    @post.pos_tag_translate1 = @post.pos_tag01.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate2 = @post.pos_tag02.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate3 = @post.pos_tag03.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate4 = @post.pos_tag04.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate5 = @post.pos_tag05.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate6 = @post.pos_tag06.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
@@ -65,13 +58,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @post.pos_tag_translate1 = @post.pos_tag01.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate2 = @post.pos_tag02.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate3 = @post.pos_tag03.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate4 = @post.pos_tag04.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate5 = @post.pos_tag05.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-    @post.pos_tag_translate6 = @post.pos_tag06.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
-
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to :back, notice: 'Post was successfully created.' }

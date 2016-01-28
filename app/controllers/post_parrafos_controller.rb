@@ -1,5 +1,6 @@
 class PostParrafosController < ApplicationController
   before_action :set_post_parrafo, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:index, :new, :edit]
 
   # GET /post_parrafos
   # GET /post_parrafos.json
@@ -95,7 +96,9 @@ class PostParrafosController < ApplicationController
   def destroy
     @post_parrafo.destroy
     respond_to do |format|
-      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post parrafo was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'It was successfully destroyed.' }
+      format.js {render inline: "location.reload();" }
+      #format.html { redirect_to detallar_url(post: params[:postdel]), notice: 'Post parrafo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -104,6 +107,10 @@ class PostParrafosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post_parrafo
       @post_parrafo = PostParrafo.find(params[:id])
+    end
+
+    def set_post
+      @post_id = 1
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

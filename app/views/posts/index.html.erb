@@ -37,7 +37,7 @@
               </p>
 
               <div class="blog-div-post-pie col-xs-11">
-                <%= link_to 'Seguir Leyendo...', informar_path(post: post.id), class: "btn btn-info blog-bot-cta" %>
+                <%= link_to 'Seguir Leyendo...', detallar_path(item: post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post.id), class: "btn btn-info blog-bot-cta" %>
               </div>
             </div>
           </div>

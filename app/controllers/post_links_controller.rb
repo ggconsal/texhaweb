@@ -66,7 +66,9 @@ class PostLinksController < ApplicationController
   def destroy
     @post_link.destroy
     respond_to do |format|
-      format.html { redirect_to informar_url(post: params[:postdel]), notice: 'Post link was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'It was successfully destroyed.' }
+      format.js {render inline: "location.reload();" }
+      #format.html { redirect_to detallar_url(post: params[:postdel]), notice: 'Post link was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
