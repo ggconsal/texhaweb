@@ -19,23 +19,35 @@ class Post < ActiveRecord::Base
   before_save :calculate_results_post
 
   def calculate_results_post
-      unless self.pos_tag01.blank?
+      if !self.pos_tag01.blank?
           self.pos_tag_translate1 = self.pos_tag01.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate1 = ""
       end
-      unless self.pos_tag02.blank?
+      if !self.pos_tag02.blank?
           self.pos_tag_translate2 = self.pos_tag02.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate2 = ""
       end
-      unless self.pos_tag03.blank?
+      if !self.pos_tag03.blank?
           self.pos_tag_translate3 = self.pos_tag03.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate3 = ""
       end
-      unless self.pos_tag04.blank?
+      if !self.pos_tag04.blank?
           self.pos_tag_translate4 = self.pos_tag04.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate4 = ""
       end
-      unless self.pos_tag05.blank?
+      if !self.pos_tag05.blank?
           self.pos_tag_translate5 = self.pos_tag05.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate5 = ""
       end
-      unless self.pos_tag06.blank?
+      if !self.pos_tag06.blank?
           self.pos_tag_translate6 = self.pos_tag06.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-")
+      else
+          self.pos_tag_translate6 = ""
       end
   end
 

@@ -25,7 +25,16 @@
           <div class="row margen-der-0 margen-izq-0">
         <% end %>
 
-            <% @cant_post = @cant_post + 1 %>
+            <% if post.pos_feature.match("col-[a-w][a-z]-8") ||
+                  post.pos_feature.match("col-[a-w][a-z]-9") ||
+                  post.pos_feature.match("col-[a-w][a-z]-10") ||
+                  post.pos_feature.match("col-[a-w][a-z]-11") ||
+                  post.pos_feature.match("col-[a-w][a-z]-12") %>
+              <!-- Esto es para cuando algun post tiene col-sm-8/12 o col-md-8/12 o col-lg-8/12 -->
+              <% @cant_post = 2 %>
+            <% else %>
+              <% @cant_post = @cant_post + 1 %>
+            <% end %>
 
             <div class="margen-afuera-sup-1 margen-afuera-inf-1 margen-der-1 margen-izq-1 <%= post.pos_feature %>">
                
@@ -141,16 +150,19 @@
           <% @cant_post = 0 %>
           <% @cant_row = @cant_row + 1 %>
 
-          <% if @cant_row == 1 %>
-            <div class="visible-xs sin-margen col-xs-12">
-              <%= render "form_cta" %>
-            </div>
+          <% if @page.pag_tipo == "blog" %>
+            <% if @cant_row == 1 %>
+              <div class="visible-xs sin-margen col-xs-12">
+                <%= render "form_cta" %>
+              </div>
+            <% end %>
+            <% if @cant_row % 3 == 0 %>  <!-- para que imprima cada 3 rows -->
+              <div class="sin-margen col-xs-12 col-sm-offset-2 col-sm-8">
+                <%= render "form_cta" %>
+              </div>
+            <% end %>
           <% end %>
-          <% if @cant_row % 3 == 0 %>  <!-- para que imprima cada 3 rows -->
-            <div class="sin-margen col-xs-12 col-sm-offset-2 col-sm-8">
-              <%= render "form_cta" %>
-            </div>
-          <% end %>
+
         <% end %>
       <% end %>
       
