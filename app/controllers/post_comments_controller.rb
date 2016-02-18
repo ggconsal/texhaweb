@@ -32,8 +32,9 @@ class PostCommentsController < ApplicationController
 
     respond_to do |format|
       if @post_comment.save
-        format.html { redirect_to @post_comment, notice: 'Post comment was successfully created.' }
-        format.json { render :show, status: :created, location: @post_comment }
+        format.html { redirect_to :back, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @post_parrafo }
+        format.js {render inline: "location.reload();" }
       else
         format.html { render :new }
         format.json { render json: @post_comment.errors, status: :unprocessable_entity }

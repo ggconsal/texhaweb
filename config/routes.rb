@@ -45,7 +45,8 @@ Rails.application.routes.draw do
   resources :posts
 
   get 'contacts/mail_confirmation'
-  get 'contacts/mail_explanation'
+  get 'show2' => 'contacts#show2'
+  get 'mail_explanation'      => 'contacts#mail_explanation'
 
   resources :contacts
 

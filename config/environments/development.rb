@@ -15,20 +15,18 @@ Rails.application.configure do
 
   # I Do care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000'}
-  config.action_mailer.default_url_options = { host: ENV["txa_server"] }
+  config.action_mailer.default_url_options = { host: 'localhost:3000'}
 
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-  :address => ENV["txa_address"],
-  :port => ENV["txa_port"],
-  :domain => ENV["txa_domain"],
-  :user_name => ENV["txa_mail"],
-  :password => ENV["txa_pass"],
-  :authentication => ENV["txa_authentication"],
-  :enable_starttls_auto => ENV["txa_enable_starttls_auto"],
-  :openssl_verify_mode => ENV["txa_openssl_verify_mode"]
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => "gmail.com",
+  :user_name => "gconsal@gmail.com",
+  :password => "slkjfd25",
+  :authentication => :plain,
+  :enable_starttls_auto => true
   }
 
   # Print deprecation notices to the Rails logger.

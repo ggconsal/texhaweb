@@ -24,7 +24,11 @@
     <div class="row sin-margen-afuera sin-margen">
       <div class="col-xs-12 sin-margen-afuera sin-margen">
         <div class="field">
-          <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
+          <% if logged_in? %>
+            <%= f.text_field :con_nya, required: true, value: current_contact.con_nya, :placeholder => "Ingrese su Nombre...", :class=>"form-control", disabled: true %>
+          <% else %>
+            <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -32,7 +36,11 @@
     <div class="row sin-margen-afuera sin-margen">
       <div class="col-xs-12 sin-margen-afuera sin-margen">
         <div class="field">
-          <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+          <% if logged_in? %>
+            <%= f.email_field :con_mail, value: current_contact.con_mail, required: true, :placeholder => "Ingrese su email...", :class=>"form-control", disabled: true %>
+          <% else %>
+            <%= f.email_field :con_mail, required: true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+          <% end %>
         </div>
       </div>
     </div>

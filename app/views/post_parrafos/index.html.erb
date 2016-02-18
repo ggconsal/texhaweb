@@ -180,10 +180,44 @@
         </div>
       <% end %>
 
+    <% else %> <!-- ELSE @post_parrafos.any? -->
+      <% if logged_in?  %> <!-- && session[:user_id] == @post.contact_id -->
+        <div class="col-xs-11 blog-div-titulo righter">
+          <h4>
+            <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %>
+          </h4>
+        </div>
+      <% end %>
+
+      <div class="blog-div-titulo col-xs-11 col-sm-7 centered">
+        <h1><br/><%== @post.pos_titulo %></h1>
+        <br/><h3>Estamos Construyendo este artículo,</h3>
+        <% if @post.pos_imagen_tmp && 
+              @post.pos_imagen_tmp != "" %>
+          <h4>Solo quedan <%= @post.pos_imagen_tmp %> días.</h4><br/><br/><br/>
+        <% else %>
+          <h4>Quedan muy pocos días.</h4><br/><br/>
+        <% end %>
+      </div>
+      <div class="col-xs-10 col-sm-4 centered margen-afuera-inf-2 margen-afuera-sup-2" style="background-color: #ddd;">
+        <h3>Realiza tu pedido:</h3>
+        <div class="row margen-sup-1">
+          <%= link_to "Pedido Directo", new_contact_path(:motivo => @post.pos_titulo), remote: true, class: "btn btn-primary pedido-shop" %>
+        </div>
+        <% if fpg_redes != nil %>
+          <div class="row margen-izq-2 margen-sup-1">
+            <% fpg_redes.each do |config| %>
+              <div class="logo-redes-shop">
+                <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
       <% if (@post.pos_tipo.include? "shop") ||
             (@post.pos_tipo.include? "blog") %>
         <div id="comentarios" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <p><br/><br/><br/></p>
           <% if @post.pos_tipo == "blog" %>
             <%= render "static_pages/rescate" %> 
           <% end %>
@@ -239,28 +273,6 @@
           <% else %> <!-- ELSE @post_comments.any? -->
             <h4>Articulo sin Comentarios aun</h4><br/><br/><br/>
           <% end %> <!-- END @post_comments.any? -->
-        </div>
-      <% end %>
-
-    <% else %> <!-- ELSE @post_parrafos.any? -->
-      <div class="blog-div-titulo col-xs-11 centered">
-        <h1><br/><%== @post.pos_titulo %></h1>
-        <br/><h3>Estamos Construyendo este artículo,</h3>
-        <% if @post.pos_imagen_tmp && 
-              @post.pos_imagen_tmp != "" %>
-          <h4>Solo quedan <%= @post.pos_imagen_tmp %> días.</h4><br/><br/><br/>
-        <% else %>
-          <h4>Quedan muy pocos días.</h4><br/><br/>
-        <% end %>
-        <h3>¡Anótate para recibirlo en tu email primero que nadie!</h3><br/>
-        <%= link_to '¡ Forme parte de Nuestra Comunidad !', new_contact_path(:motivo => "Opinar" +  @post.pos_titulo), remote: true, class: "btn btn-lg btn-success" %><br/><br/><br/><br/><br/><br/>
-      </div>
-      <% if logged_in?  %> <!-- && session[:user_id] == @post.contact_id -->
-        <div class="blog-div-titulo righter">
-          <h4>
-            <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
-          </h4>
-          <br/><%= link_to ' Cabecera', edit_post_path(@post), remote: true, class: "glyphicon glyphicon-edit btn btn-md btn-info" %>
         </div>
       <% end %>
     <% end %> <!-- END @post_parrafos.any? -->

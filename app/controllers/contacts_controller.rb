@@ -24,6 +24,11 @@ class ContactsController < ApplicationController
     @contact = Contact.new
     # Para saber cual fue el bottton que presionó (en cual está interesado).
     @contact.con_boton_sitio = params[:motivo]
+    if logged_in?
+      @contact.con_mail = current_contact.con_mail
+      @contact.con_nya = current_contact.con_nya
+    end
+
   end
 
   # GET /contacts/1/edit
@@ -43,22 +48,34 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     # para traerme los datos del admin y así poder enviarle el mail de aviso.
     @contact_admin = Contact.find_by con_nya: "Admin"
+    @contact_existe = Contact.find_by con_mail: @contact.con_mail
+
+    if logged_in?
+      @contact.con_mail = current_contact.con_mail
+      @contact.con_nya = current_contact.con_nya
+    end
 
     respond_to do |format|
       if @contact.save
-        if @contact_admin.con_password == "Texha"
+        @page_blog_shop = Page.where(pag_tipo: ["blog", "shop"])
+        if @page_blog_shop.any? && !@contact_existe
           ContactMailer.contact_email(@contact_admin, @contact).deliver_now
+        else
+          ContactMailer.contact_advise(@contact_admin, @contact).deliver_now
         end
-        ContactMailer.contact_advise(@contact_admin, @contact).deliver_now
         
         if @contact.con_boton_sitio.include? "ubicacion"
           # Se llama desde la página de "Direcciones", por eso no tiene que ser modal.
           format.html { redirect_to :back, notice: 'Contacto Creado.' }
           format.json { head :no_content }
-        else
+        elsif @page_blog_shop.any? && !@contact_existe
           # Tiene que ser modal.
           format.html { redirect_to @contact, notice: 'Contacto Creado.' }
           format.json { render :show, status: :created, location: @contact }
+        else @page_blog_shop.any? && !@contact_existe
+          # Tiene que ser modal.
+          format.html { redirect_to show2_path, notice: 'Contacto Creado.' }
+          format.json { render :show2, status: :created, location: @contact }
         end
       else
         format.html { render :new }
@@ -113,4 +130,5 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:con_nya, :con_nombre, :con_apellido, :profile_id, :con_telefono, :con_obs, :con_boton_sitio, :con_telefono_sn, :con_mail, :con_password, :con_password2, :con_subscribir, :con_confirmado, :con_password_confirmacion, :option_id, :canalingreso_id, :password, :password_confirmation)
     end
+
 end

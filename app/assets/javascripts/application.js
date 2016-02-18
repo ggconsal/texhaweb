@@ -38,6 +38,11 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#div-mensajes').click(function() {
+		$("#div-mensajes").addClass("hide");;
+	});
+
+
 	$(function() {  
 
 	    // cada vez que se produzca scroll en la ventana

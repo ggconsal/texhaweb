@@ -1,10 +1,14 @@
+<% if fpg_general %>
+  <% @tag_title = "Reporte de Contactos | " + fpg_general.pag_titulo %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<div class="margen-afuera-izq-1 margen-afuera-sup-3 margen-afuera-inf-3">
-  <h1>Lista de Contactos</h1>
+<div class="margen-izq-2 margen-sup-4 margen-inf-3">
+  <h1>Reporte de Contactos</h1>
 
 
-  <div class="row margen-afuera-izq-1 margen-afuera-der-1 margen-afuera-sup-2">
+  <div class="row margen-izq-2 margen-der-1 margen-sup-2">
     <% if logged_in? && 
         (@current_contact.con_nya == "Admin" || 
          @current_contact.con_nya == "Superuser") %>
@@ -47,8 +51,11 @@
         </div> 
       </table>
     <% else %>
-      <p>Debe ingresar al sistema para visualizar contactos.</p>
+      <h4>
+        Debe ser Administrador e ingresar al sistema para visualizar contactos.
+      </h4>
     <% end %>
   </div> 
 </div> 
 
+<br/><br/><br/>

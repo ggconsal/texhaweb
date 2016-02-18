@@ -41,15 +41,15 @@
         <div class="row margen-der-2">
           <div class="col-xs-12 col-sm-6">
             <div class="field">
-              <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control" %>
+              <%= f.text_field :con_nya, required: true, :placeholder => "Ingrese su Nombre...", :class=>"form-control", disabled: logged_in? %>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6">
             <div class="field">
               <% if (@contact.con_boton_sitio.include? "menu - telefono") %>
-                <%= f.text_field :con_mail, :required => true, :placeholder => "Ingrese su Teléfono...", :class=>"form-control" %>
+                <%= f.text_field :con_mail, :required => true, :placeholder => "Ingrese su Teléfono...", :class=>"form-control", disabled: logged_in? %>
               <% else %>
-                <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control" %>
+                <%= f.email_field :con_mail, :required => true, :placeholder => "Ingrese su email...", :class=>"form-control", disabled: logged_in? %>
               <% end %>
             </div>
           </div>

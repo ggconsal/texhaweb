@@ -1,45 +1,64 @@
+<% if fpg_general %>
+  <% @tag_title = "Reporte de Paginas | " + fpg_general.pag_titulo %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Pages</h1>
+<div class="margen-izq-2 margen-sup-4 margen-inf-3">
+  <h1>Reporte de Páginas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>orden</th>
-      <th>Diseño</th>
-      <th>Titulo</th>
-      <th>Pag desc</th>
-      <th>Img Horizontal</th>
-      <th>Img Vertical</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @pages.each do |page| %>
-      <tr>
-        <td><%= page.pag_nombre %></td>
-        <td><%= page.pag_tipo %></td>
-        <td><%= page.pag_orden %></td>
-        <td><%= page.pag_design %></td>
-        <td><%= page.pag_titulo %></td>
-        <td><%= page.pag_desc %></td>
-        <td>
-          <%= image_tag page.imagen_hori.url, style: "width:30%" %>
-        </td>
-        <td>
-          <%= image_tag page.imagen_vert.url, style: "width:30%" %>
-        </td>
-        <td><%= link_to 'Show', page %></td>
-        <td><%= link_to 'Edit', edit_page_path(page) %></td>
-        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="row margen-izq-2 margen-der-1 margen-sup-2">
+    <% if logged_in? && 
+        (@current_contact.con_nya == "Admin" || 
+         @current_contact.con_nya == "Superuser") %>
+      <table class="table">
+        <div class="col-sm-12">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>orden</th>
+              <th>Diseño</th>
+              <th>Titulo</th>
+              <th>Pag desc</th>
+              <th>Img Horizontal</th>
+              <th>Img Vertical</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+        </div>
+
+        <div class="col-sm-12">
+          <tbody>
+            <% @pages.each do |page| %>
+              <tr>
+                <td><%= page.pag_nombre %></td>
+                <td><%= page.pag_tipo %></td>
+                <td><%= page.pag_orden %></td>
+                <td><%= page.pag_design %></td>
+                <td><%= page.pag_titulo %></td>
+                <td><%= page.pag_desc %></td>
+                <td>
+                  <%= image_tag page.imagen_hori.url, style: "width:30%" %>
+                </td>
+                <td>
+                  <%= image_tag page.imagen_vert.url, style: "width:30%" %>
+                </td>
+                <td><%= link_to 'Show', page %></td>
+                <td><%= link_to 'Edit', edit_page_path(page) %></td>
+                <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </div>
+      </table>
+    <% else %>
+      <h4>
+        Debe ser Administrador e ingresar al sistema para visualizar la configuración.
+      </h4>
     <% end %>
-  </tbody>
-</table>
+  </div> 
+</div> 
 
-<br>
-
-<%= link_to 'New Page', new_page_path %>
+<br/><br/><br/>
