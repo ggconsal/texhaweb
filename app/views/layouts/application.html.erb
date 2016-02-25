@@ -14,6 +14,8 @@
   <meta property="og:description" content="<%= @tag_descr %>"/>
   <meta itemprop="description" content="<%= @tag_descr %>"/>
   <meta property="og:image" content="<%= @tag_image %>" />
+  <meta property="og:image:width" content="450"/>
+  <meta property="og:image:height" content="298"/>
   <meta itemprop="image" content="<%= @tag_image %>" />
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="<%= @tag_fecha || '2015-10-10T09:16:24+00:00' %>"/>
@@ -237,12 +239,12 @@
               </li>
               <% if @menu_blog2 != "" %>
                 <li>
-                  <%= link_to @menu_blog2, blog_path(categ: "comovendermas") %>
+                  <%= link_to @menu_blog2, blog_path(categ: "como-vender-mas") %>
                 </li>
               <% end %>
               <% if @menu_blog3 != "" %>
                 <li>
-                  <%= link_to @menu_blog3, blog_path(categ: "mejorarmisitio") %>
+                  <%= link_to @menu_blog3, blog_path(categ: "mejorar-mi-sitio") %>
                 </li>
               <% end %>
               <li class="divider"></li>
@@ -252,12 +254,22 @@
                 <%= link_to @menu_ubicacion, ubicacion_path %>
               </li>
             <% end %>
-            <li>
-              <%= link_to 'Consultas', new_contact_path(:motivo => "menu - Contacto"), remote: true %>
-            </li>
-            <li>
-              <%= link_to '¿Te llamamos?', new_contact_path(:motivo => "menu - telefono"), remote: true %>
-            </li>
+
+            <% if fpg_blog_shop.any? %>
+              <li>
+                <%= link_to 'Consultas', new_contact_path(:motivo => "menu - Consultas"), remote: true %>
+              </li>
+              <li>
+                <%= link_to 'Pedidos', new_contact_path(:motivo => "menu - Pedidos"), remote: true %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to 'Consultas', new_contact_path(:motivo => "menu - Contacto"), remote: true %>
+              </li>
+              <li>
+                <%= link_to '¿Te llamamos?', new_contact_path(:motivo => "menu - telefono"), remote: true %>
+              </li>
+            <% end %>
 
             <% if logged_in? %>
               <li class="divider"></li>
@@ -269,6 +281,11 @@
               </li>
               <li>
                 <%= link_to "Salir del Sistema", logout_path, method: "delete" %>
+              </li>
+            <% elsif fpg_blog_shop.any? %>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Ingresar al Sistema', login_path %>
               </li>
             <% end %>
           </ul>

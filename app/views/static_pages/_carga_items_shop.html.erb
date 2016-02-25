@@ -97,7 +97,7 @@
                   <% if fpg_redes && fpg_redes.any? %>
                     <div class="compartdir texto-a-derecha margen-inf-1 margen-der-1">
                       <!-- mostrar logos de redes para compartir -->
-                      <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + post.id.to_s + "&ret=login" %>
+                      <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?post=" + post.id.to_s %>
                       <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
                       <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + post.id.to_s + "&text=" + post.pos_titulo %>
 

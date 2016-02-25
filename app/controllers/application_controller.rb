@@ -32,6 +32,9 @@ class ApplicationController < ActionController::Base
     @tmp_contacto = Page.find_by pag_nombre: "contacto"
   end
 
+  def fpg_blog_shop
+    @tmp_blog_shop = Page.where(pag_tipo: ["blog", "shop"])
+  end
 
   helper_method :paginas
   helper_method :fpg_menu
@@ -39,5 +42,6 @@ class ApplicationController < ActionController::Base
   helper_method :fpg_direc
   helper_method :fpg_redes
   helper_method :fpg_contacto
+  helper_method :fpg_blog_shop
 
 end
