@@ -6,13 +6,15 @@ class PostParrafosController < ApplicationController
   # GET /post_parrafos.json
   def index
     #@post_parrafos = PostParrafo.all
-    if params[:post]
-      @post = Post.find(params[:post])
+    if params[:item]
+      @vPostid = params[:item][0, 5]
+      @post = Post.find(@vPostid)
     end
-    @post_parrafos = PostParrafo.where("post_id = ? and par_imagen_tmp <> 'imagen'", params[:post])
-    @post_images = PostParrafo.where("post_id = ? and par_imagen_tmp = 'imagen'", params[:post])
-    @post_comments = PostComment.where("post_id = ?", params[:post])
-    @post_rels = PostRel.where("post_id = ?", params[:post])
+
+    @post_parrafos = PostParrafo.where("post_id = ? and par_imagen_tmp <> 'imagen'", @vPostid)
+    @post_images = PostParrafo.where("post_id = ? and par_imagen_tmp = 'imagen'", @vPostid)
+    @post_comments = PostComment.where("post_id = ?", @vPostid)
+    @post_rels = PostRel.where("post_id = ?", @vPostid)
 
     if @post_images.empty?
       @cant_images = 0
@@ -29,14 +31,14 @@ class PostParrafosController < ApplicationController
   # GET /post_parrafos/new
   def new
     @post_parrafo = PostParrafo.new
-    @post_parrafo.post_id = params[:post]
-    @post = Post.find(params[:post])
+    @post_parrafo.post_id = @vPostid
+    @post = Post.find(@vPostid)
   end
 
   # GET /post_parrafos/1/edit
   def edit
-    @post_parrafo.post_id = params[:post]
-    @post = Post.find(params[:post])
+    @post_parrafo.post_id = @vPostid
+    @post = Post.find(@vPostid)
   end
 
   # POST /post_parrafos

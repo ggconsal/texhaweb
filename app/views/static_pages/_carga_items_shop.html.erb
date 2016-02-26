@@ -84,8 +84,8 @@
                   <% end %>
                   <% if (post.pos_boton_destino && 
                           (post.pos_boton_destino.include? "pagina")) %>
-                    <div class="texto-a-derecha margen-sup-2 margen-der-1">
-                      <%= link_to post.pos_boton_desc, detallar_path(item: post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post.id), class: @estilo_boton %>
+                    <div class="texto-a-derecha margen-sup-2 margen-der-1 margen-inf-1">
+                      <%= link_to post.pos_boton_desc, detallar_path(item: post.id.to_s.rjust(5, '0') + post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post.id), class: @estilo_boton %>
                     </div>
                   <% elsif (post.pos_boton_destino &&
                              (post.pos_boton_destino.include? "contacto")) %>
@@ -95,13 +95,13 @@
                     </div>
                   <% end %>
                   <% if fpg_redes && fpg_redes.any? %>
-                    <div class="compartdir texto-a-derecha margen-inf-1 margen-der-1">
+                    <div class="compartir texto-a-derecha margen-inf-1 margen-der-1">
                       <!-- mostrar logos de redes para compartir -->
-                      <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?post=" + post.id.to_s %>
-                      <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + post.id.to_s + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
-                      <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&post=" + post.id.to_s + "&text=" + post.pos_titulo %>
+                      <% @share_facebook = "https://www.facebook.com/sharer/sharer.php?u=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.id.to_s.rjust(5, '0') + post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") %>
+                      <% @share_linkedin = "https://www.linkedin.com/shareArticle?mini=true&url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.id.to_s.rjust(5, '0') + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&title=" + post.pos_titulo + "&summary=" + post.pos_intro + "&source=" + "#{request.protocol}#{request.host_with_port}" %>
+                      <% @share_twitter = "https://twitter.com/intent/tweet?url=" + "#{request.protocol}#{request.host_with_port}" + "/detallar?item=" + post.id.to_s.rjust(5, '0') + post.pos_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-") + "&text=" + post.pos_titulo %>
 
-                      <h5 style="font-size: 17px; font-weight: bold; color: #444;">
+                      <h5>
                         Compartir en: 
                       </h5>
 

@@ -40,6 +40,7 @@ $(document).ready(function(){
 
 	$('#div-mensajes').click(function() {
 		$("#div-mensajes").addClass("hide");;
+        location.reload();
 	});
 
 
