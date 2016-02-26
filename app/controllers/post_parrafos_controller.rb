@@ -11,6 +11,11 @@ class PostParrafosController < ApplicationController
       @post = Post.find(@vPostid)
     end
 
+    if params[:post]
+      @vPostid = params[:post]
+      @post = Post.find(@vPostid)
+    end
+
     @post_parrafos = PostParrafo.where("post_id = ? and par_imagen_tmp <> 'imagen'", @vPostid)
     @post_images = PostParrafo.where("post_id = ? and par_imagen_tmp = 'imagen'", @vPostid)
     @post_comments = PostComment.where("post_id = ?", @vPostid)
@@ -30,6 +35,10 @@ class PostParrafosController < ApplicationController
 
   # GET /post_parrafos/new
   def new
+    if params[:post]
+      @vPostid = params[:post]
+    end
+
     @post_parrafo = PostParrafo.new
     @post_parrafo.post_id = @vPostid
     @post = Post.find(@vPostid)
@@ -37,6 +46,10 @@ class PostParrafosController < ApplicationController
 
   # GET /post_parrafos/1/edit
   def edit
+    if params[:post]
+      @vPostid = params[:post]
+    end
+
     @post_parrafo.post_id = @vPostid
     @post = Post.find(@vPostid)
   end

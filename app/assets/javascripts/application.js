@@ -40,7 +40,20 @@ $(document).ready(function(){
 
 	$('#div-mensajes').click(function() {
 		$("#div-mensajes").addClass("hide");;
-        location.reload();
+
+		if (!$('#product-modal').hasClass('in')){
+			location.reload();
+		};
+
+	});
+
+	$('#div-mensajes2').click(function() {
+		$("#div-mensajes2").addClass("hide");;
+
+		if (!$('#product-modal').hasClass('in')){
+			location.reload();
+		};
+
 	});
 
 
