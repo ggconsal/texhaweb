@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  get 'page_error' => 'pages#show2'
+
   resources :pages
 
   get 'static_pages/formapag'

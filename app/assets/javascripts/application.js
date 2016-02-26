@@ -42,6 +42,7 @@ $(document).ready(function(){
 		$("#div-mensajes").addClass("hide");;
 
 		if (!$('#product-modal').hasClass('in')){
+		// pregunta si la modal está "hide".
 			location.reload();
 		};
 
@@ -51,6 +52,7 @@ $(document).ready(function(){
 		$("#div-mensajes2").addClass("hide");;
 
 		if (!$('#product-modal').hasClass('in')){
+		// pregunta si la modal está "hide".
 			location.reload();
 		};
 

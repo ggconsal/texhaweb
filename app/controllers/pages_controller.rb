@@ -42,8 +42,12 @@ class PagesController < ApplicationController
         format.js {render inline: "location.reload();" }
         #format.json { render :show, status: :created, location: @page }
       else
-        format.html { render :new }
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
         format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.js   { render json: @page.errors, status: :unprocessable_entity }
+
+        #format.html { render :new }
+        #format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,8 +63,12 @@ class PagesController < ApplicationController
         format.js {render inline: "location.reload();" }
         #format.json { render :show, status: :ok, location: @page }
       else
-        format.html { render :edit }
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
         format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.js   { render json: @page.errors, status: :unprocessable_entity }
+
+        #format.html { render :edit }
+        #format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end

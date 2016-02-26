@@ -11,10 +11,17 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :post_links
 
   has_attached_file :imagen_big, default_url: "Missing.png"
-  validates_attachment_content_type :imagen_big, :content_type => /\Aimage\/.*\Z/
+  #validates_attachment_content_type :imagen_big, :content_type => /\Aimage\/.*\Z/
+  validates_attachment :imagen_big, # presence: true,
+                     content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+                     size: { in: 0..40.kilobytes }
 
   has_attached_file :imagen_big_v, default_url: "Missing.png"
-  validates_attachment_content_type :imagen_big_v, :content_type => /\Aimage\/.*\Z/
+  #validates_attachment_content_type :imagen_big_v, :content_type => /\Aimage\/.*\Z/
+  validates_attachment :imagen_big_v, # presence: true,
+                     content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+                     size: { in: 0..40.kilobytes }
+
 
   before_save :calculate_results_post
 

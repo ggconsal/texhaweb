@@ -111,6 +111,7 @@
                   <% if @page.imagen_hori.exists? %>
                     <%= image_tag @page.imagen_hori.url, style: "width:70%" %>
                   <% end %>
+                  <p><br/><u>Importante</u>: tamaño máximo de 40 Kbs.</p>
                   <%= f.file_field :imagen_hori, :class=>"btn btn-info" %>
                 </div>
               </div>
@@ -128,6 +129,7 @@
                   <% if @page.imagen_hori.exists? %>
                     <%= image_tag @page.imagen_hori.url, style: "width:70%" %>
                   <% end %>
+                  <p><br/><u>Importante</u>: tamaño máximo de 40 Kbs.</p>
                   <%= f.file_field :imagen_hori, :class=>"btn btn-info" %>
                 </div>
               </div>
@@ -212,6 +214,7 @@
                     <%= image_tag @page.imagen_hori.url, style: "width:70%" %>
                   <% end %>
                   Foto Horizontal
+                  <p><br/><u>Importante</u>: tamaño máximo de 140 Kbs.</p>
                   <%= f.file_field :imagen_hori, :class=>"btn btn-info" %>
                   <%= f.text_field :pag_estilo_headerh, :placeholder => "Ingrese el estilo Horizontal...", :class=>"form-control" %>
                 </div>
@@ -225,6 +228,7 @@
                     <%= image_tag @page.imagen_vert.url, style: "width:70%" %>
                   <% end %>
                   Foto Vertical
+                  <p><br/><u>Importante</u>: tamaño máximo de 140 Kbs.</p>
                   <%= f.file_field :imagen_vert, :class=>"btn btn-info" %>
                   <%= f.text_field :pag_estilo_headerv, :placeholder => "Ingrese el estilo Vertical...", :class=>"form-control" %>
                 </div>

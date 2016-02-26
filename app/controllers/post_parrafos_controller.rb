@@ -67,6 +67,10 @@ class PostParrafosController < ApplicationController
 #        format.html { redirect_to @post_parrafo, notice: 'Post parrafo was successfully created.' }
 #        format.json { render :show, status: :created, location: @post_parrafo }
 #        format.json { head :no_content }
+      else
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
+        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
+        format.js   { render json: @post_parrafo.errors, status: :unprocessable_entity }
       end
     end
 
@@ -92,6 +96,10 @@ class PostParrafosController < ApplicationController
 #        format.html { redirect_to @post_parrafo, notice: 'Post was successfully updated.' }
 #        format.json { render :show, status: :ok, location: @post_parrafo }
         #format.json { head :no_content }
+      else
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
+        format.json { render json: @post_parrafo.errors, status: :unprocessable_entity }
+        format.js   { render json: @post_parrafo.errors, status: :unprocessable_entity }
       end
     end
 

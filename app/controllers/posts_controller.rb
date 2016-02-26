@@ -41,6 +41,10 @@ class PostsController < ApplicationController
         format.json { render :show, status: :created, location: @post }
         format.js {render inline: "location.reload();" }
         #format.json { head :no_content }
+      else
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js   { render json: @post.errors, status: :unprocessable_entity }
       end
     end
 
@@ -64,6 +68,24 @@ class PostsController < ApplicationController
         format.json { render :back, status: :created, location: @post }
         format.js {render inline: "location.reload();" }
         #format.json { head :no_content }
+      else
+        format.html { redirect_to :back, notice: 'Imagen con tamaño incorrecto.' }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js   { render json: @post.errors, status: :unprocessable_entity }
+
+        #format.json { render :show, status: :created, location: @post }
+        #format.js {render :show }
+
+        #format.html { redirect_to show_path }
+        #format.json { render json: @post.errors, status: :unprocessable_entity }
+        #format.js   { render json: @post.errors, status: :unprocessable_entity }
+        
+        #flash.now[:danger] = 'No está Registrado.  Por favor revise su casilla de email y siga los instrucciones.'
+        #render 'new'
+        
+        #format.html { redirect_to :back, notice: 'Post was successfully created.' }
+        #format.json { render :back, status: :created, location: @post }
+        #format.js {render inline: "location.reload();" }
       end
     end
   end
