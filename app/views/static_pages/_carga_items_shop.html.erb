@@ -47,10 +47,12 @@
               </div>
 
               <div class="<%= post.pos_estilo %>">
-                <% if post.pos_simbolo != "" %>
-                  <span class="glyphicon <%= post.pos_simbolo %>"> </span>
-                <% end %>
-                <h3><%== post.pos_titulo %></h3>
+                <h3>
+                  <% if post.pos_simbolo != "" %>
+                    <span class="<%= post.pos_simbolo %>"> </span>
+                  <% end %>
+                  <%== post.pos_titulo %>
+                </h3>
                 <% if post.pos_subtitulo != "" %>
                   <h4> <!-- subtitulo  -->
                     <%== post.pos_subtitulo %>

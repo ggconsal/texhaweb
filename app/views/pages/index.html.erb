@@ -45,8 +45,7 @@
                 <td>
                   <%= image_tag page.imagen_vert.url, style: "width:30%" %>
                 </td>
-                <td><%= link_to 'Show', page %></td>
-                <td><%= link_to 'Edit', edit_page_path(page) %></td>
+                <td><%= link_to 'Modif', edit_page_path(id: page.id), remote: true %></td>
                 <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>

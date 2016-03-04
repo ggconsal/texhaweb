@@ -94,7 +94,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @new_post = @post.dup
 
-    @new_post.pos_intro = ""
+    #@new_post.pos_intro = ""
     @new_post.pos_section = 0
     @new_post.pos_titulo = 'Copia de "' + @new_post.pos_titulo + '"'
 

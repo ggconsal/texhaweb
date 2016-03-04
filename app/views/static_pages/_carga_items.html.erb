@@ -3,7 +3,7 @@
 
   <!--  TODOS MENOS "HOME"  ************* -->
   <% if @page.pag_tipo != "home" %>
-    <div class="col-xs-12 margen-sup-2 margen-inf-3">
+    <div class="col-xs-12 margen-sup-2 margen-inf-3 margen-izq-0 margen-der-0">
   <% end %>
 
     <% if @page && @posts %>
@@ -46,7 +46,7 @@
                 <% end %>
               <% end %>
             <% end %>
-            <div class="row margen-afuera-der-0 margen-afuera-izq-0 margen-der-2 margen-izq-2">
+            <div class="row margen-afuera-der-0 margen-afuera-izq-0">
           <% end %>
 
           <% @section_ant = post.pos_section.to_int %>

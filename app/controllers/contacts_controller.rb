@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.where(["con_nya <> ?", "Superuser"])
+    @contacts = Contact.where(["con_nya <> ?", "Superuser"]).order(created_at: :desc)
   end
 
   # GET /contacts/1
