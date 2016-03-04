@@ -19,7 +19,7 @@
     <div class="blog-div-post2 col-xs-12">
   <% end %>
 
-    <% if @post_parrafos.any? %>
+    <% if true %> <!-- if @post_parrafos.any? -->
 
       <% if @post.pos_tipo.include? "shop" %>
         <%= render "header_shop" %>
@@ -29,9 +29,16 @@
         <%= render "header_info" %>
       <% end %>
 
-      <% if @post.pos_tipo == "blog" %>
+      <% if (@post.pos_tipo.include? "shop") ||
+        (@post.pos_tipo.include? "blog") %>
         <div id="introduccion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <h3>Introducción: </h3>
+          <h3>
+            <% if (@post.pos_tipo.include? "shop") %>
+              Descripción General: 
+            <% elsif (@post.pos_tipo.include? "blog") %>
+              Introducción: 
+            <% end %>
+          </h3>
           <p>
             <%== @post.pos_intro %>
             <% if logged_in? && session[:user_id] == @post.contact_id %>
