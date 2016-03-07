@@ -29,24 +29,18 @@
         <%= render "header_info" %>
       <% end %>
 
-      <% if (@post.pos_tipo.include? "shop") ||
-        (@post.pos_tipo.include? "blog") %>
-        <div id="introduccion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
-          <h3>
-            <% if (@post.pos_tipo.include? "shop") %>
-              Descripción General: 
-            <% elsif (@post.pos_tipo.include? "blog") %>
-              Introducción: 
-            <% end %>
-          </h3>
-          <p>
-            <%== @post.pos_intro %>
-            <% if logged_in? && session[:user_id] == @post.contact_id %>
-              <div class="righter">
-                <h4> <%= link_to " Intro", edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
-              </div>
-            <% end %>
-          </p>
+      <% if (@post.pos_tipo.include? "blog") ||
+            (@post.pos_tipo.include? "shop") %>
+        <div class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
+          <% if logged_in? && session[:user_id] == @post.contact_id %>
+            <div class="righter">
+              <h4> 
+                <%= link_to new_post_parrafo_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
+                    <span class="glyphicon glyphicon-plus-sign"></span> Agregar un Párrafo
+                <% end %>
+              </h4>
+            </div>
+          <% end %>
         </div>
       <% end %>
 
@@ -71,8 +65,8 @@
             <p>
               <%== post_parrafo.par_texto %>
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit", title: 'Modificar Item', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> - 
+                <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign", title: 'Borrar Item', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> ]
               <% end %>
             </p>
             <!-- Viñetas del Parrafo, si hay -->
@@ -86,8 +80,8 @@
                     <% end %>
                     <%== bullet.ppb_texto %>
                     <% if logged_in? && session[:user_id] == @post.contact_id %>
-                      [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                      <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign" %> ]
+                      [ <%= link_to ' ', edit_post_parrafo_bullet_path(bullet, parrafo: bullet.post_parrafo_id), remote: true, class: "glyphicon glyphicon-edit", title: 'Modificar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> - 
+                      <%= link_to ' ', post_parrafo_bullet_path(id: bullet.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar la Viñeta?'}, class: "glyphicon glyphicon-remove-sign", title: 'Borrar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> ]
                     <% end %>
                   </li>
                 <% end %>
@@ -95,7 +89,10 @@
             <% end %>
             <% if logged_in? && session[:user_id] == @post.contact_id %>
               <div class="righter">
-                <h4><br/> <%= link_to ' Viñeta', new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-md btn-info" %></h4><br/>
+                <h4><br/> 
+                  <%= link_to new_post_parrafo_bullet_path(parrafo: post_parrafo.id), remote: true, class: "btn btn-md btn-info" do %>
+                      <span class="glyphicon glyphicon-plus-sign"></span> Agregar una Viñeta
+                  <% end %>
               </div>
             <% end %>
           </div>
@@ -107,8 +104,8 @@
             <p>
               <%== post_parrafo.par_texto %>
               <% if logged_in? && session[:user_id] == @post.contact_id %>
-                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                [ <%= link_to ' ', edit_post_parrafo_path(post_parrafo, post: @post.id), remote: true, class: "glyphicon glyphicon-edit", title: 'Modificar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> - 
+                <%= link_to ' ', post_parrafo_path(id: post_parrafo.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Párrafo?' }, class: "glyphicon glyphicon-remove-sign", title: 'Borrar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> ]
               <% end %>
             </p>
             <div class="centered">
@@ -122,21 +119,16 @@
         </div>
       <% end %>
 
-      <% if @post.pos_tipo == "blog" %>
+      <% if (@post.pos_tipo.include? "blog") %>
         <div id="conclusion" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
           <h3>Conclusión: </h3>
           <p>
             <%== @post.pos_conclusion %> <br/>
-            <% if logged_in? && session[:user_id] == @post.contact_id %>
-              <div class="righter">
-                <h4> <%= link_to ' Conclusión', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-edit btn btn-lg btn-info" %></h4>
-              </div>
-            <% end %>
           </p>
         </div>
       <% end %>
 
-      <% if @post.pos_tipo == "blog" %>
+      <% if (@post.pos_tipo.include? "blog") %>
         <div id="links" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
           <% if @post.post_links.any? %> 
             <h3>Links Externos con más Información:</h3>
@@ -144,8 +136,8 @@
               <p>
                 > <%= link_to post_link.pli_titulo, "http://#{post_link.pli_url}", :target => '_blank' %>
                 <% if logged_in? && session[:user_id] == @post.contact_id %>
-                  [ <%= link_to ' ', edit_post_link_path(post_link, post: @post.id),remote: true, class: "glyphicon glyphicon-edit" %> - 
-                  <%= link_to ' ', post_link_path(id: post_link.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Link?'}, class: "glyphicon glyphicon-remove-sign" %> ]
+                  [ <%= link_to ' ', edit_post_link_path(post_link, post: @post.id),remote: true, class: "glyphicon glyphicon-edit", title: 'Modificar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> - 
+                  <%= link_to ' ', post_link_path(id: post_link.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Link?'}, class: "glyphicon glyphicon-remove-sign", title: 'Borrar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> ]
                 <% end %>
               </p>
             <% end %>
@@ -162,7 +154,8 @@
         </div>
       <% end %>
 
-      <% if @post.pos_tipo == "blog" %>
+      <% if (@post.pos_tipo.include? "shop") ||
+            (@post.pos_tipo.include? "blog") %>
         <div id="relacionados" class="blog-div-texto col-xs-12 col-sm-10 col-sm-offset-1">
           <% if @post.post_rels.any? %> 
             <h3>Artículos Relacionados:</h3>
@@ -170,8 +163,8 @@
               <p>
                 <%= link_to post_rel.pre_titulo, detallar_path(item: post_rel.pli_url.rjust(5, '0') + post_rel.pre_titulo.downcase.gsub("ñ","n").gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: post_rel.pli_url.to_i) %> 
                 <% if logged_in? && session[:user_id] == @post.contact_id %>
-                  [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit" %> - 
-                  <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign" %> ]
+                  [ <%= link_to ' ', edit_post_rel_path(post_rel, post: @post.id), remote: true, class: "glyphicon glyphicon-edit", title: 'Modificar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> - 
+                  <%= link_to ' ', post_rel_path(id: post_rel.id, postdel: @post.id), method: :delete, data: { confirm: '¿Está Seguro de Borrar el Artículo Relacionado?' }, class: "glyphicon glyphicon-remove-sign", title: 'Borrar', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %> ]
                 <% end %>
               </p>
             <% end %>
@@ -180,7 +173,7 @@
             <div class="righter">
               <h4> 
                 <%= link_to new_post_rel_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
-                    <span class="glyphicon glyphicon-plus-sign"></span> Artículos Relacionados
+                    <span class="glyphicon glyphicon-plus-sign"></span> Agregar Artículo Relacionado
                 <% end %>
               </h4><br/>
             </div>
@@ -309,7 +302,6 @@
           <h4>
             <% if @post_parrafos.any? %>
               <% if @post.pos_tipo == "blog" %>
-                <%= link_to "Introducción", detallar_path(item: @post.id.to_s.rjust(5, '0') + @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "introduccion"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
                 <% if @post.post_rels.any? %> 
                   <%= link_to "Artículos Relacionados", detallar_path(item: @post.id.to_s.rjust(5, '0') + @post.pos_titulo.downcase.gsub("á","a").gsub("é","e").gsub("í","i").gsub("ó","o").gsub("ú","u").gsub(/\W/,"-"), post: @post.id, anchor: "relacionados"), class: "btn btn-warning blog-bot-categoria mov-suave" %> 
                 <% end %>

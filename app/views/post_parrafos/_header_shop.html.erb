@@ -1,10 +1,10 @@
 
       <div class="col-xs-12 col-sm-7">
-        <div class="blog-div-foto-lg">
+        <div class="blog-div-foto-lg margen-inf-1">
           <% if @post_images.any? %>
            <% @image_count = 0 %>
 
-            <div id="myCarousel" class="carousel slide indi-shop"> <!--  data-ride="carousel"  -->
+            <div id="myCarousel" class="carousel slide indi-shop margen-sup-3"> <!--  data-ride="carousel"  -->
               <ol class="carousel-indicators"> <!-- Indicators -->
                 <% i = 0 %>
 
@@ -37,11 +37,6 @@
                       <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
                     <% else %>
                       <%= image_tag(@post.imagen_big_file_name, class: "img-responsive") %>
-                    <% end %>
-                    <% if logged_in? && session[:user_id] == @post.contact_id %>
-                      <div class="righter">
-                        <br/><%= link_to ' Imagen', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
-                      </div>
                     <% end %>
                   </div>
                 </div>
@@ -94,17 +89,13 @@
             </div>
           <% else %>
 
-            <% if ENV["herokuapp"] == "NO" %>
-              <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
-            <% else %>
-              <%= image_tag(@post.imagen_big_file_name, class: "img-responsive") %>
-            <% end %>
-            <% if logged_in? && session[:user_id] == @post.contact_id %>
-              <div class="righter">
-                <br/><%= link_to ' Imagen', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
-              </div>
-            <% end %>
-
+            <div class="blog-pic-shop margen-sup-3"> 
+              <% if ENV["herokuapp"] == "NO" %>
+                <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
+              <% else %>
+                <%= image_tag(@post.imagen_big_file_name, class: "img-responsive") %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -141,13 +132,25 @@
         <% end %>
         <div class="col-xs-10 centered margen-izq-2" style="background-color: #ddd;">
           <h3>Realiza tu pedido:</h3>
-          <div class="row margen-sup-1">
+          <div class="">
             <%= link_to "Pedido Directo", new_contact_path(:motivo => @post.pos_titulo), remote: true, class: "btn btn-primary pedido-shop" %>
           </div>
           <% if fpg_redes != nil %>
-            <div class="row margen-izq-2 margen-sup-1">
+            <% if fpg_redes.count == 1 %>
+              <div class="row margen-izq-6 margen-sup-1 margen-inf-1">
+            <% elsif fpg_redes.count == 2 %>
+              <div class="row margen-izq-4 margen-sup-1 margen-inf-1">
+            <% else %>
+              <div class="row margen-izq-2 margen-sup-1 margen-inf-1">
+            <% end %>
               <% fpg_redes.each do |config| %>
-                <div class="logo-redes-shop">
+                <% if fpg_redes.count == 1 %>
+                  <div class="logo-redes-shop1">
+                <% elsif fpg_redes.count == 2 %>
+                  <div class="logo-redes-shop2">
+                <% else  %>
+                  <div class="logo-redes-shop3">
+                <% end %>
                   <%= link_to image_tag(config.imagen_hori.url), config.pag_menu, target: "_blank", :class=>"img-responsive img-ppal" %>
                 </div>
               <% end %>
@@ -155,12 +158,5 @@
           <% end %>
         </div>
 
-        <% if logged_in? && session[:user_id] == @post.contact_id %>
-          <div class="righter">
-            <h4>
-              <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
-            </h4>
-          </div>
-        <% end %>
       </div>
 

@@ -5,11 +5,4 @@
 	<% end %>
     <div class="divider"></div>
 	<h4><%== @post.pos_intro %></h4>
-	<% if logged_in? && session[:user_id] == @post.contact_id %>
-      <div class="righter">
-        <h4>
-          <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
-        </h4>
-      </div>
-    <% end %>
 </div>

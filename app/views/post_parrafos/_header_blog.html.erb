@@ -2,23 +2,11 @@
         <h1>
           <%== @post.pos_titulo %>
         </h1>
-        <% if logged_in? && session[:user_id] == @post.contact_id %>
-          <div class="righter">
-            <h4>
-              <%= link_to ' Párrafo', new_post_parrafo_path(post: @post.id), remote: true, class: "glyphicon glyphicon-plus-sign btn btn-lg btn-info" %><br/>
-            </h4>
-          </div>
-        <% end %>
         <div class="blog-div-foto-lg">
           <% if ENV["herokuapp"] == "NO" %>
             <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
           <% else %>
             <%= image_tag(@post.imagen_big_file_name, class: "img-responsive") %>
-          <% end %>
-          <% if logged_in? && session[:user_id] == @post.contact_id %>
-            <div class="righter">
-              <br/><%= link_to ' Imagen', edit_post_path(@post, pagina: "blog"), remote: true, class: "glyphicon glyphicon-retweet btn btn-md btn-info" %>
-            </div>
           <% end %>
         </div>
       </div>
