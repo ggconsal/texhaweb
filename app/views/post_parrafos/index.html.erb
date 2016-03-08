@@ -56,11 +56,16 @@
             <h3><%== post_parrafo.par_titulo %></h3>
             <% if post_parrafo.imagen_small.url != "Missing.png" &&
                   post_parrafo.par_imagen_tmp != "std-s-img" %>
-              <% if ENV["herokuapp"] == "NO" %>
-                <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
-              <% else %>
-                <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
-              <% end %>
+              <div class="gallery-item">
+                <% if ENV["herokuapp"] == "NO" %>
+                  <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
+                <% else %>
+                  <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
+                <% end %>
+                <div class="overlay">
+                  <%= image_tag post_parrafo.imagen_small.url %> 
+                </div>
+              </div>
             <% end %>
             <p>
               <%== post_parrafo.par_texto %>
@@ -173,7 +178,7 @@
             <div class="righter">
               <h4> 
                 <%= link_to new_post_rel_path(post: @post.id), remote: true, class: "btn btn-md btn-info" do %>
-                    <span class="glyphicon glyphicon-plus-sign"></span> Agregar Artículo Relacionado
+                    <span class="glyphicon glyphicon-plus-sign"></span> Agregar Artículo Relacionados
                 <% end %>
               </h4><br/>
             </div>
