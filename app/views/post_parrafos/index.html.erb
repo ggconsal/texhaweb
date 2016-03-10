@@ -57,14 +57,7 @@
             <% if post_parrafo.imagen_small.url != "Missing.png" &&
                   post_parrafo.par_imagen_tmp != "std-s-img" %>
               <div class="gallery-item">
-                <% if ENV["herokuapp"] == "NO" %>
-                  <%= image_tag post_parrafo.imagen_small.url, class: "img-responsive blog-pic-post" %>
-                <% else %>
-                  <%= image_tag post_parrafo.imagen_small_file_name, class: "img-responsive blog-pic-post" %>
-                <% end %>
-                <div class="overlay">
-                  <%= image_tag post_parrafo.imagen_small.url %> 
-                </div>
+                <%= link_to image_tag(post_parrafo.imagen_small.url), post_parrafo.imagen_small.url, target: "_blank", :class=>"img-responsive blog-pic-post" %>
               </div>
             <% end %>
             <p>

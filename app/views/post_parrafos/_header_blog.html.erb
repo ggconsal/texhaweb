@@ -2,6 +2,9 @@
         <h1>
           <%== @post.pos_titulo %>
         </h1>
+        <h4>
+          <%== @post.pos_intro %><br/><br/>
+        </h4>
         <div class="blog-div-foto-lg">
           <% if ENV["herokuapp"] == "NO" %>
             <%= image_tag(@post.imagen_big.url, class: "img-responsive") %>
