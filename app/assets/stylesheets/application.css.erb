@@ -469,31 +469,55 @@ html h5 {
 	margin-bottom: 3%;
 }
 
-.carousel-sm {
-	position: static;
-	background-color: transparent;
-	color: #07145C;
-	border-radius: 20%;
+.carousel-azul h1, .carousel-azul h2 {
+	color: #1F7ECB; 
 }
 
-.carousel-sm h1 {
-	font-weight: bolder;
+.carousel-blanco h1, .carousel-blanco h2 {
 	color: #D0D6DA; 
 }
 
-.carousel-sm h1 span {
-	color: #566068;
+.carousel-gris h1, .carousel-gris h2 {
+	color: #566068; 
+}
+
+.carousel-rojo h1, .carousel-rojo h2 {
+	color: #C32020; 
+}
+
+.carousel-naranja h1, .carousel-naranja h2 {
+	color: #D68C20; 
+}
+
+.carousel-iluminado h1 {
+    text-shadow: 3px -4px 4px #ddd, -1px 4px 4px #ddd;
+}
+
+.carousel-iluminado h2 {
+    text-shadow: -1px 2px 2px #ddd;
+}
+
+.carousel-azul h1 span, .carousel-blanco h1 span, .carousel-gris h1 span {
     text-shadow: 3px -4px 4px #ddd, -1px 4px 4px #ddd;
 	font-weight: bold;
 }
 
-.carousel-sm h1 i {
-	font-size: 30px;
+.carousel-gris h1, .carousel-blanco h1, .carousel-azul h1, .carousel-naranja h1, .carousel-rojo h1,
+.carousel-gris h2, .carousel-blanco h2, .carousel-azul h2, .carousel-naranja h2, .carousel-rojo h2 {
+	font-weight: bolder;
 }
 
-.carousel-sm h2 {
-	color: #D0D6DA;
-	margin-bottom: 3%;
+.carousel-home10 {
+	top:10%;
+}
+.carousel-sm {
+	position: static;
+	background-color: transparent;
+	border-radius: 20%;
+}
+
+.carousel-sm h1 i {
+	font-size: 30px;
 }
 
 .carousel-control {
@@ -591,6 +615,45 @@ html h5 {
 	color: #fff;
 }
 
+.menu-ppal-light2 {
+	background-color: #fff;
+	border-color: #F4F1F8;
+	opacity: .8;
+	height: 55px;
+	font-size: 16px;
+	width: 100%;
+}
+
+.menu-ppal-light2 .navbar-nav > li > a {
+	padding-top: 18px;
+    color: #333;
+	background-color: #fff;/*C5C3C8*/
+}
+
+.menu-ppal-light2 .navbar-nav > li > a:hover {
+  color: #fff;
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.menu-ppal-light2 .navbar-nav .open .dropdown-menu {
+	background-color: #fff;
+}
+
+.menu-ppal-light2 .navbar-nav .open .dropdown-menu > li > a {
+	color: #000;
+    margin-bottom: 10px;
+}
+
+.menu-ppal-light2 .navbar-nav .open .dropdown-menu > li > a:hover {
+	background-color: #333;
+	color: #fff;
+}
+
+.logo-0 {
+	padding: 1px;
+}
+
 .logo-1 {
 	padding: 1px;
 }
@@ -639,8 +702,28 @@ html h5 {
 	width: 130px;
 }
 
+.logo-pic-140 img {
+	width: 140px;
+}
+
 .logo-pic-150 img {
 	width: 150px;
+}
+
+.logo-opacity-9 {
+	opacity: .9;
+}
+
+.logo-opacity-8 {
+	opacity: .8;
+}
+
+.logo-opacity-7 {
+	opacity: .7;
+}
+
+.logo-opacity-6 {
+	opacity: .6;
 }
 
 .navbar-right {
@@ -1681,6 +1764,10 @@ section#about .about-item:hover h3 {
 }
 
 @media (orientation: portrait) {
+	.carousel-sm {
+		top: 0%;
+	}
+
 	.img-ppal {
 		height: 100%;
 	}
